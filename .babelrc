@@ -1,0 +1,14 @@
+{
+  "presets": ["es2015"],
+  "plugins": [
+    ["transform-runtime", {}],
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "transform-es2015-spread"
+  ],
+  "env": {
+    "development": {
+      "plugins": []
+    }
+  }
+}
