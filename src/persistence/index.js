@@ -1,10 +1,16 @@
+// Replace with dependency injection
+// in later iteration.
+import config from '../config';
+
+// console.log(config.get('mysql'));
+
 const connection = {
   client: 'mysql',
   connection: {
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'mysql',
+    host: config.get('mysql.host'),
+    user: config.get('mysql.user'),
+    password: config.get('mysql.pass'),
+    database: config.get('mysql.database'),
   }
 };
 
