@@ -1,2 +1,2 @@
 #Schema folder
-save your database and image from workbench in this folder
+save database model and image from workbench in this folder

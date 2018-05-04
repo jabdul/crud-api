@@ -4,7 +4,7 @@ const connection = {
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'wastecollectiondb',
+    database: 'mysql',
   }
 };
 

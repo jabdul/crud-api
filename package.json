@@ -1,5 +1,5 @@
 {
-  "name": "@craftturf/auth",
+  "name": "microservice-boilerplate",
   "version": "0.0.1",
   "description": "A microservice for api",
   "main": "lib/index.js",

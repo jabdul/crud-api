@@ -1,2 +1,2 @@
 #dump folder
-your data definition file should be place in this folder.
+database dump file should be place in this folder
