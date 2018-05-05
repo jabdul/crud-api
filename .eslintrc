@@ -1,0 +1,26 @@
+{
+  "extends": "eslint:recommended",
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "plugins": [
+    "eslint-plugin-import",
+    "import",
+    "jest",
+  ],
+  "globals": {
+    "Promise": true,
+    "sandbox": true
+  },
+  "rules": {
+    "comma-dangle": 0,
+    "new-cap": [2, {
+      "capIsNewExceptions": ["Immutable.Map"]
+    }],
+    "quotes": [2, "single"],
+    "strict": 0,
+    "import/no-extraneous-dependencies": [error, { devDependencies: true }]
+  }
+}
