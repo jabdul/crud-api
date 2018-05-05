@@ -2,8 +2,6 @@
 // in later iteration.
 import config from '../config';
 
-// console.log(config.get('mysql'));
-
 const connection = {
   client: 'mysql',
   connection: {

@@ -2,8 +2,6 @@ import mysqlDb, { close } from './';
 
 import config from '../config';
 
-// console.log(config.get('mysql'));
-
 describe('mysqlDb', () => {
   describe('.connect', () => {
     it('connects to mysql database', async () => {
@@ -16,7 +14,7 @@ describe('mysqlDb', () => {
           database: config.get('mysql.database'),
         }
       });
-      const actual = await db.schema.hasTable('proc');
+      const actual = await db.schema.hasTable('user');
 
       expect(actual).toBe(true);
       // node process won't exit while sockets are still connected
