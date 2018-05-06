@@ -2,6 +2,12 @@
 // in later iteration.
 import config from '../config';
 
+// export const schema = client => ({
+//   user: {
+//     findAll: async () => await client.select().tabel('user'),
+//   }
+// });
+
 const connection = {
   client: 'mysql',
   connection: {
