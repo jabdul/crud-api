@@ -4,6 +4,9 @@
   "description": "A microservice boilerplate",
   "main": "lib/index.js",
   "scripts": {
+    "build": "babel src -d lib --ignore *.test*.js",
+    "dev": "nodemon --delay 250ms --exec NODE_ENV=development babel-node -- src/index.js",
+    "clean:build": "rimraf build/dist",
     "lint": "eslint src",
     "start": "node lib/index.js",
     "test": "jest --config jest/test.config.json",
@@ -37,6 +40,8 @@
     "precommit-hook-eslint": "^3.0.0"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "hapi": "^17.4.0",
     "knex": "^0.14.4",
     "mysql": "^2.15.0",
     "ramda": "^0.25.0"
