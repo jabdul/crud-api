@@ -14,7 +14,7 @@ describe('mysqlDb', () => {
           database: config.get('mysql.database'),
         }
       });
-      const actual = await db.schema.hasTable('user');
+      const actual = await db.schema.hasTable('users');
 
       expect(actual).toBe(true);
       // node process won't exit while sockets are still connected

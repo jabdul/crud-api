@@ -1,12 +1,16 @@
 // Replace with dependency injection
 // in later iteration.
-import config from '../config';
+import config from '../../config';
 
-// export const schema = client => ({
-//   user: {
-//     findAll: async () => await client.select().tabel('user'),
-//   }
-// });
+export const schema = client => ({
+  users: {
+    create: async (params = {}) => {
+      const p = { ...params };
+      console.log(client);
+      await client.table('users').insert(p).returning('*');
+    },
+  }
+});
 
 const connection = {
   client: 'mysql',
