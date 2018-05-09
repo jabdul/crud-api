@@ -4,10 +4,12 @@ import config from '../../config';
 
 export const schema = client => ({
   users: {
-    create: async (params = {}) => {
-      const p = { ...params };
-      console.log(client);
-      await client.table('users').insert(p).returning('*');
+    create: async () => {
+      return await client.table('users').insert({
+        uuid: 'oyureq-qeyr-qlejh-qerjh',
+        firstname: 'Abiodun',
+        lastname: 'Abdul'
+      }).returning('*');
     },
   }
 });

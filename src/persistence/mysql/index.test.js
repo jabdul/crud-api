@@ -1,6 +1,6 @@
 import mysqlDb, { close } from './';
 
-import config from '../config';
+import config from '../../config';
 
 describe('mysqlDb', () => {
   describe('.connect', () => {

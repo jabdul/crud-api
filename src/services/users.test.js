@@ -1,17 +1,17 @@
 import services from './';
 
 describe('Services: users', () => {
-  describe('.findAll', () => {
+  describe('.create', () => {
     const db = {
       users: {
-        findAll: jest.fn().mockReturnValue('All users'),
+        create: jest.fn().mockReturnValue([1]),
       }
     };
     const users = services(db).users;
 
-    it('returns all users', async () => {
-      const actual = await users.findAll();
-      expect(actual).toBe('All users');
+    it('returns record id of newly created user', async () => {
+      const actual = await users.create();
+      expect(actual).toEqual([1]);
     });
   });
 });
