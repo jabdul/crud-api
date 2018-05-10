@@ -7,6 +7,22 @@ const config = convict({
     default: 'development',
     env: 'NODE_ENV',
   },
+  server: {
+    hostname: {
+      doc: 'Microservice hostname',
+      format: String,
+      default: 'localhost',
+      env: 'HOSTNAME',
+      arg: 'hostname',
+    },
+    port: {
+      doc: 'Microservice port',
+      format: 'port',
+      default: 4015,
+      env: 'PORT',
+      arg: 'port',
+    },
+  },
   mysql: {
     host: {
       doc: 'MySQL Server hostname',

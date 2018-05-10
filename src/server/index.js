@@ -4,32 +4,27 @@ import { compose } from 'ramda';
 import dbConnect, { schema } from '../persistence/mysql';
 import initServices from '../services';
 import routes from '../routes';
-
 import config from '../config';
 
-const dbClient = dbConnect({
-  client: 'mysql',
-  connection: {
-    host: config.get('mysql.host'),
-    user: config.get('mysql.user'),
-    password: config.get('mysql.pass'),
-    database: config.get('mysql.database'),
-  }
-});
+export default (async function start() {
+  const app = new Hapi.Server({
+    host: config.get('server.hostname'),
+    port: config.get('server.port'),
+    debug: { request: ['error'] },
+  });
 
-const services = compose(initServices, schema)(dbClient);
+  process.on('unhandledRejection', error => {
+    app.log(['error'], error);
+    process.exit(1);
+  });
 
-const app = new Hapi.Server({
-  host: 'localhost',
-  port: 4010,
-  debug: { request: ['error'] },
-});
+  const services = compose(initServices, schema, dbConnect)(config);
 
-async function start() {
   try {
     routes().map(async route => await app.route(route({
-    services,
-  })));
+      services,
+      config,
+    })));
 
     await app.start();
     console.log('Server running at:', app.info.uri); // eslint-disable-line
@@ -37,11 +32,4 @@ async function start() {
     app.log(['error'], error);
     process.exit(1);
   }
-}
-
-process.on('unhandledRejection', error => {
-  app.log(['error'], error);
-  process.exit(1);
-});
-
-start();
+})();

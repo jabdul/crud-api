@@ -1,6 +1,4 @@
-// Replace with dependency injection
-// in later iteration.
-import config from '../../config';
+import connect from './connect';
 
 export const schema = client => ({
   users: {
@@ -14,16 +12,6 @@ export const schema = client => ({
   }
 });
 
-const connection = {
-  client: 'mysql',
-  connection: {
-    host: config.get('mysql.host'),
-    user: config.get('mysql.user'),
-    password: config.get('mysql.pass'),
-    database: config.get('mysql.database'),
-  }
-};
-
 export const close = knex => knex.destroy();
 
-export default (connect = connection) => require('knex')(connect);
+export default config => require('knex')(connect(config));
