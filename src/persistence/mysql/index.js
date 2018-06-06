@@ -1,14 +1,9 @@
 import connect from './connect';
+import createUser from './queries/createUser';
 
 export const schema = client => ({
   users: {
-    create: async () => {
-      return await client.table('users').insert({
-        uuid: 'oyureq-qeyr-qlejh-qerjh',
-        firstname: 'Abiodun',
-        lastname: 'Abdul'
-      }).returning('*');
-    },
+    create: async payload => await createUser({ client, payload }),
   }
 });
 

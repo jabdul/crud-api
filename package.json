@@ -11,8 +11,7 @@
     "pretest": "yarn lint",
     "start": "node lib/index.js",
     "test": "jest --config jest/test.config.json",
-    "test:watch": "jest --watch",
-    "validate": "npm ls"
+    "test:watch": "yarn test --watch"
   },
   "pre-commit": [
     "test"

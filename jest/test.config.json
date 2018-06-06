@@ -1,7 +1,6 @@
 {
-  "moduleFileExtensions": [
-    "js"
-  ],
+  "moduleFileExtensions": ["js"],
+  "moduleDirectories": ["node_modules"],
   "testRegex": ".*\\.test\\.js$",
   "collectCoverageFrom": [
     "src/**/*.js"
