@@ -1,10 +1,10 @@
 import Hapi from 'hapi';
 import { compose } from 'ramda';
 
-import dbConnect, { schema } from '../persistence/mysql';
-import initServices from '../services';
-import routes from '../routes';
-import config from '../config';
+import dbConnect, { schema } from './persistence/mysql';
+import initServices from './services';
+import routes from './routes';
+import config from './config';
 
 export default (async function start() {
   const app = new Hapi.Server({
