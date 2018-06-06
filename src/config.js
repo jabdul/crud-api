@@ -1,3 +1,4 @@
+require('dotenv').config();
 import convict from 'convict';
 
 const config = convict({
