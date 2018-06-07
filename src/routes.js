@@ -1,4 +1,4 @@
-import createUser from './users/users';
+import createUser from './users/routes';
 
 export default () => ([
   createUser,

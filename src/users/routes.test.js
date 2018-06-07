@@ -1,4 +1,4 @@
-import create from './users';
+import create from './routes';
 
 describe('Routes: users', () => {
   const services = {

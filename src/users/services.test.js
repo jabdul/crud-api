@@ -1,4 +1,4 @@
-import services from '../';
+import services from '../services';
 
 describe('Services: users', () => {
   describe('.create', () => {
