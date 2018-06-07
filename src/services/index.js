@@ -1,4 +1,4 @@
-import users from './users';
+import users from './users/users';
 
 export default db => ({
   users: users(db),

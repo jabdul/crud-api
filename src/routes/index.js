@@ -1,5 +1,5 @@
-import createNewUser from './users';
+import createUser from './users/users';
 
 export default () => ([
-  createNewUser,
+  createUser,
 ]);
