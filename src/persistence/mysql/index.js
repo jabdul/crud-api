@@ -1,11 +1,7 @@
 import connect from './connect';
-import createUser from './queries/createUser';
+import queries from './queries';
 
-export const schema = client => ({
-  users: {
-    create: async payload => await createUser({ client, payload }),
-  }
-});
+export const schema = client => queries(client);
 
 export const close = knex => knex.destroy();
 
