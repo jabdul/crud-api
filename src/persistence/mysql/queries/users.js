@@ -7,5 +7,5 @@ const create = async ({ client, payload }) => {
 };
 
 export default client => ({
-  create: async payload => await create({ client, payload }),
+  create: async ({ payload, config }) => await create({ client, payload, config }),
 });

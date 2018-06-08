@@ -3,6 +3,7 @@ import { compose } from 'ramda';
 
 import env from './config';
 import dbConnect, { schema } from './persistence/mysql';
+// import dbConnect, { schema } from './persistence/mongo';
 import initServices from './services';
 import routes from './routes';
 

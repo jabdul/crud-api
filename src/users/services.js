@@ -1,10 +1,10 @@
 import uuid from 'uuid';
 
-const create = async (db, payload) => {
+const create = async ({ db, payload, config }) => {
   const uid = uuid();
-  return await db.users.create({ ...payload, uuid: uid });
+  return await db.users.create({ payload: { ...payload, uuid: uid }, config });
 };
 
 export default db => ({
-  create: async payload => await create(db, payload),
+  create: async ({ payload, config }) => await create({ db, payload, config }),
 });

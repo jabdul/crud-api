@@ -13,15 +13,15 @@ const config = convict({
       doc: 'Microservice hostname',
       format: String,
       default: 'localhost',
-      env: 'HOSTNAME',
-      arg: 'hostname',
+      env: 'SERVER_HOSTNAME',
+      arg: 'server-hostname',
     },
     port: {
       doc: 'Microservice port',
       format: 'port',
       default: 4015,
-      env: 'PORT',
-      arg: 'port',
+      env: 'SERVER_PORT',
+      arg: 'server-port',
     },
   },
   mysql: {
@@ -54,6 +54,36 @@ const config = convict({
       arg: 'mysql-pass',
     }
   },
+  mongo: {
+    host: {
+      doc: 'Mongo server hostname',
+      format: String,
+      default: 'mongodb://localhost:27017',
+      env: 'MONGO_CONNECT',
+      arg: 'mongo-connect',
+    },
+    database: {
+      doc: 'Mongo database',
+      format: String,
+      default: '',
+      env: 'MONGO_DB',
+      arg: 'mongo-db',
+    },
+    user: {
+      doc: 'Mongo client username',
+      format: String,
+      default: 'user',
+      env: 'MONGO_USER',
+      arg: 'mongo-user',
+    },
+    pass: {
+      doc: 'Mongo client password',
+      format: String,
+      default: 'password',
+      env: 'MONGO_PASS',
+      arg: 'mongo-pass',
+    }
+  }
 });
 
 export default config;
