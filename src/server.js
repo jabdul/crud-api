@@ -19,6 +19,12 @@ export default (async function start() {
     process.exit(1);
   });
 
+  app.events.on('log', (event, tags) => {
+    if (tags.error) {
+      console.log(`Server error: ${event.error ? event.error.message : 'unknown'}`); // eslint-disable-line
+    }
+  });
+
   const services = compose(initServices, schema, dbConnect)(env);
 
   try {

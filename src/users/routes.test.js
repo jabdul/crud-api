@@ -1,37 +1,42 @@
-import create from './routes';
+import create, { ROUTE_NAME } from './routes';
 
-describe('Routes: users', () => {
+describe(`Routes: ${ROUTE_NAME}`, () => {
   const services = {
     users: {
       create: jest.fn().mockReturnValue('Thanks for opening account Mr Abiodun Abdul!!!'),
     }
   };
 
-  describe('POST /users/', () => {
+  describe(`POST /${ROUTE_NAME}/`, () => {
     const router = create({ services });
     const responseData = 'Thanks for opening account Mr Abiodun Abdul!!!';
     const statusCode = 201;
+    const contentType = 'application/hal+json';
     let mockRequest = null;
     let mockResponse = null;
     let mockData = null;
     let mockStatusCode = null;
+    let mockContentType = null;
 
     beforeEach(() => {
       mockData = jest.fn();
       mockStatusCode = jest.fn();
+      mockContentType = jest.fn();
 
       mockResponse = {
         response: mockData,
-        code: mockStatusCode
+        code: mockStatusCode,
+        type: mockContentType,
       };
       mockData.mockImplementation(() => mockResponse);
       mockStatusCode.mockImplementation(() => mockResponse);
+      mockContentType.mockImplementation(() => mockResponse);
       mockRequest = { log: jest.fn() };
     });
 
-    it('sets HTTP method POST on \'/users/\' path', () => {
+    it(`sets HTTP method POST on /${ROUTE_NAME}/ path`, () => {
       expect(router.method).toBe('POST');
-      expect(router.path).toBe('/users/');
+      expect(router.path).toBe(`/${ROUTE_NAME}/`);
     });
 
     it('sets validation on request payload', () => {
@@ -45,6 +50,11 @@ describe('Routes: users', () => {
       expect(mockStatusCode.mock.calls[0][0]).toBe(statusCode);
     });
 
+    it(`sets response HTTP header Content-Type to ${contentType} on success`, async () => {
+      await router.handler(mockRequest, mockResponse);
+      expect(mockContentType.mock.calls[0][0]).toBe(contentType);
+    });
+
     it('returns response data on success', async () => {
       await router.handler(mockRequest, mockResponse);
       expect(mockData.mock.calls[0][0]).toBe(responseData);
@@ -52,7 +62,7 @@ describe('Routes: users', () => {
 
     it('logs tagged request', async () => {
       await router.handler(mockRequest, mockResponse);
-      expect(mockRequest.log.mock.calls[0][0]).toEqual(['users']);
+      expect(mockRequest.log.mock.calls[0][0]).toEqual([`/${ROUTE_NAME}/`]);
     });
   });
 });

@@ -1,5 +1,7 @@
 import Joi from 'joi';
 
+export const ROUTE_NAME = 'users';
+
 const options = {
   log: { collect: true },
   validate: {
@@ -10,12 +12,15 @@ const options = {
   },
 };
 
-export default ({ services: { users }, config }) => ({
+export default ({ services, config }) => ({
   method: 'POST',
-  path: '/users/',
+  path: `/${ROUTE_NAME}/`,
   options,
   handler: async (request, h) => {
-    request.log(['users'], 'Create new user');
-    return h.response(await users.create({ payload: request.payload, config })).code(201);
+    request.log([`/${ROUTE_NAME}/`], 'Create new user');
+    return h.response(await services[ROUTE_NAME]
+      .create({ payload: request.payload, config }))
+      .code(201)
+      .type('application/hal+json');
   }
 });

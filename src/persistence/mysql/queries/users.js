@@ -1,9 +1,11 @@
 const create = async ({ client, payload }) => {
-  return await client.table('users').insert({
+  const result = await client.table('users').insert({
     uuid: payload.uuid,
     firstname: payload.firstname,
     lastname: payload.lastname
   }).returning('*');
+
+  return (result.length && Number.isFinite(result[0]));
 };
 
 export default client => ({
