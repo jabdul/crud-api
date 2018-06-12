@@ -34,6 +34,12 @@ describe('Routes: users', () => {
       expect(router.path).toBe('/users/');
     });
 
+    it('sets validation on request payload', () => {
+      const payload = router.options.validate.payload;
+      expect(payload.firstname).toBeDefined();
+      expect(payload.lastname).toBeDefined();
+    });
+
     it(`sets response HTTP status code to ${statusCode} on success`, async () => {
       await router.handler(mockRequest, mockResponse);
       expect(mockStatusCode.mock.calls[0][0]).toBe(statusCode);
