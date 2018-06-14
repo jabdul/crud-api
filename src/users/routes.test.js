@@ -6,9 +6,19 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
       create: jest.fn().mockReturnValue('Thanks for opening account Mr Abiodun Abdul!!!'),
     }
   };
+  const validate = {
+    string: jest.fn(),
+    min: jest.fn(),
+    max: jest.fn(),
+    required: jest.fn(),
+  }
+  validate.string.mockImplementation(() => validate);
+  validate.min.mockImplementation(() => validate);
+  validate.max.mockImplementation(() => validate);
+  validate.required.mockImplementation(() => validate);
 
   describe(`POST /${ROUTE_NAME}/`, () => {
-    const router = create({ services });
+    const router = create({ services, validate });
     const responseData = 'Thanks for opening account Mr Abiodun Abdul!!!';
     const statusCode = 201;
     const contentType = 'application/hal+json';

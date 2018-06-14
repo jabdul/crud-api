@@ -1,15 +1,15 @@
-import uuid from 'uuid';
-import halson from 'halson';
-
-const create = async ({ db, payload, config }) => {
+const create = async ({ db, payload, config, uuid, json, log }) => {
   const uid = uuid();
   const result = await db.users.create({ payload: { ...payload, uuid: uid }, config });
 
-  if (!result) throw Error('Could not create record');
+  if (!result) {
+    log(['users', 'error'], 'Could not create record');
+    throw Error('Could not create record');
+  }
 
-  return halson({}).addLink('self', `/users/${uid}`);
+  return json({}).addLink('self', `/users/${uid}`);
 };
 
 export default db => ({
-  create: async ({ payload, config }) => await create({ db, payload, config }),
+  create: async ({ payload, config, uuid, json, log }) => await create({ db, payload, config, uuid, json, log }),
 });

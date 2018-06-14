@@ -1,5 +1,8 @@
 import Hapi from 'hapi';
 import { compose } from 'ramda';
+import Joi from 'joi';
+import uuid from 'uuid';
+import halson from 'halson';
 
 import env from './config';
 import dbConnect, { schema } from './persistence/mysql';
@@ -31,6 +34,9 @@ export default (async function start() {
     routes().map(async route => await app.route(route({
       services,
       config: env,
+      validate: Joi,
+      uuid,
+      json: halson,
     })));
 
     await app.start();
