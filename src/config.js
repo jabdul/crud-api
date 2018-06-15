@@ -12,7 +12,7 @@ const config = convict({
     hostname: {
       doc: 'Microservice hostname',
       format: String,
-      default: 'localhost',
+      default: '127.0.0.1',
       env: 'SERVER_HOSTNAME',
       arg: 'server-hostname',
     },
@@ -22,6 +22,13 @@ const config = convict({
       default: 4015,
       env: 'SERVER_PORT',
       arg: 'server-port',
+    },
+    db: {
+      doc: 'Microservice database',
+      format: String,
+      default: 'mysql',
+      env: 'SERVER_DB',
+      arg: 'server-db',
     },
   },
   mysql: {
@@ -58,7 +65,7 @@ const config = convict({
     host: {
       doc: 'Mongo server hostname',
       format: String,
-      default: 'mongodb://localhost:27017',
+      default: 'mongodb://127.0.0.1:27017',
       env: 'MONGO_CONNECT',
       arg: 'mongo-connect',
     },

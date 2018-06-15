@@ -1,10 +1,10 @@
-const create = async ({ db, payload, config, uuid, json, log }) => {
+const create = async ({ db, payload, config, uuid, json/*, log */ }) => {
   const uid = uuid();
   const result = await db.users.create({ payload: { ...payload, uuid: uid }, config });
 
   if (!result) {
-    log(['users', 'error'], 'Could not create record');
-    throw Error('Could not create record');
+    // log(['users', 'error', 'database'], result);
+    throw Error(result);
   }
 
   return json({}).addLink('self', `/users/${uid}`);
