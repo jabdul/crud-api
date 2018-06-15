@@ -5,8 +5,8 @@ import uuid from 'uuid';
 import halson from 'halson';
 
 import env from './config';
-// import dbConnect, { schema } from './persistence/mysql';
-import dbConnect, { schema } from './persistence/mongoose';
+import dbConnect, { schema } from './persistence/mysql';
+// import dbConnect, { schema } from './persistence/mongoose';
 import initServices from './services';
 import routes from './routes';
 
