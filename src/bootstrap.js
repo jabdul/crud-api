@@ -16,7 +16,7 @@ server({
     },
     info: {
       title: 'Microservice CRUD API Server',
-      description: 'Powered by node, hapi, joi, hapi-swaggered, hapi-swaggered-ui and swagger-ui',
+      description: 'Powering Craft Turf\'s microservice projects',
       version: '0.0.1'
     }
   },

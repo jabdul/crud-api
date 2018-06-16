@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import Hapi from 'hapi';
 import { compose } from 'ramda';
 import Joi from 'joi';
@@ -7,6 +9,7 @@ import swaggered from 'hapi-swaggered';
 import swaggeredUI from 'hapi-swaggered-ui';
 import vision from 'vision';
 import inert from 'inert';
+import requireHttps from 'hapi-require-https';
 
 export default async function start({
   dbConnect,
@@ -14,12 +17,17 @@ export default async function start({
   config,
   routes,
   services,
-  swaggerOptions,
-  swaggerUiOptions,
+  swaggerOptions = {},
+  swaggerUiOptions = {},
 }) {
+  const tls = {
+    key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
+    cert: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsCert'))),
+  };
   const app = new Hapi.Server({
     host: config.get('server.hostname'),
     port: config.get('server.port'),
+    tls,
     debug: { request: ['error'] },
   });
 
@@ -38,7 +46,8 @@ export default async function start({
     inert,
     vision,
     { plugin: swaggered, options: swaggerOptions },
-    { plugin: swaggeredUI, options: swaggerUiOptions }
+    { plugin: swaggeredUI, options: swaggerUiOptions },
+    { plugin: requireHttps, options: {} }
   ]);
 
   const serve = compose(services, schema, dbConnect)(config);

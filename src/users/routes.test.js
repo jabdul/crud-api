@@ -17,7 +17,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
   validate.max.mockImplementation(() => validate);
   validate.required.mockImplementation(() => validate);
 
-  describe(`POST /${ROUTE_NAME}/`, () => {
+  describe(`POST /${ROUTE_NAME}`, () => {
     const router = create({ services, validate });
     const responseData = 'Thanks for opening account Mr Abiodun Abdul!!!';
     const statusCode = 201;
@@ -44,9 +44,9 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
       mockRequest = { log: jest.fn() };
     });
 
-    it(`sets HTTP method POST on /${ROUTE_NAME}/ path`, () => {
+    it(`sets HTTP method POST on /${ROUTE_NAME} path`, () => {
       expect(router.method).toBe('POST');
-      expect(router.path).toBe(`/${ROUTE_NAME}/`);
+      expect(router.path).toBe(`/${ROUTE_NAME}`);
     });
 
     it('sets validation on request payload', () => {
@@ -72,7 +72,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
 
     it('logs tagged request', async () => {
       await router.handler(mockRequest, mockResponse);
-      expect(mockRequest.log.mock.calls[0][0]).toEqual([`/${ROUTE_NAME}/`]);
+      expect(mockRequest.log.mock.calls[0][0]).toEqual([`/${ROUTE_NAME}`]);
     });
   });
 });

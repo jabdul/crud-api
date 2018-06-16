@@ -46,6 +46,7 @@
     "eslint-plugin-jest": "^21.15.0",
     "flow-bin": "^0.73.0",
     "flow-typed": "^2.4.0",
+    "hapi-require-https": "^3.0.0",
     "hapi-swaggered": "^3.0.2",
     "hapi-swaggered-ui": "^3.0.2",
     "inert": "^5.1.0",

@@ -6,7 +6,7 @@ const options = {
 
 export default ({ services, config, validate, uuid, json }) => ({
   method: 'POST',
-  path: `/${ROUTE_NAME}/`,
+  path: `/${ROUTE_NAME}`,
   options: {
     ...options, validate: {
       payload: {
@@ -17,7 +17,7 @@ export default ({ services, config, validate, uuid, json }) => ({
     tags: ['api'],
   },
   handler: async (request, h) => {
-    request.log([`/${ROUTE_NAME}/`], 'Create new user');
+    request.log([`/${ROUTE_NAME}`], 'Create new user');
     return h.response(await services[ROUTE_NAME]
       .create({ payload: request.payload, config, uuid, json, log: request.log }))
       .code(201)
