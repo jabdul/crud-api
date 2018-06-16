@@ -9,5 +9,22 @@ server({
   schema: mongooseSchema,
   config,
   routes,
-  services
+  services,
+  swaggerOptions: {
+    tags: {
+      'users': 'Operation for handling user records'
+    },
+    info: {
+      title: 'Microservice CRUD API Server',
+      description: 'Powered by node, hapi, joi, hapi-swaggered, hapi-swaggered-ui and swagger-ui',
+      version: '0.0.1'
+    }
+  },
+  swaggerUiOptions: {
+    title: 'Example API',
+    path: '/docs',
+    swaggerOptions: {
+      validatorUrl: null
+    }
+  },
 });

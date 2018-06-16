@@ -16,7 +16,8 @@
     "pretest": "yarn lint",
     "start": "node lib/index.js",
     "test": "jest --config jest/test.config.json",
-    "test:watch": "yarn test --watch"
+    "test:watch": "yarn test --watch",
+    "validate": "npm ls"
   },
   "pre-commit": [
     "lint",
@@ -45,9 +46,13 @@
     "eslint-plugin-jest": "^21.15.0",
     "flow-bin": "^0.73.0",
     "flow-typed": "^2.4.0",
+    "hapi-swaggered": "^3.0.2",
+    "hapi-swaggered-ui": "^3.0.2",
+    "inert": "^5.1.0",
     "jest": "^17.0.3",
     "nodemon": "^1.11.0",
-    "precommit-hook-eslint": "^3.0.0"
+    "precommit-hook-eslint": "^3.0.0",
+    "vision": "^5.3.3"
   },
   "dependencies": {
     "halson": "^3.0.0",

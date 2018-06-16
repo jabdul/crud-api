@@ -3,6 +3,10 @@ import { compose } from 'ramda';
 import Joi from 'joi';
 import uuid from 'uuid';
 import halson from 'halson';
+import swaggered from 'hapi-swaggered';
+import swaggeredUI from 'hapi-swaggered-ui';
+import vision from 'vision';
+import inert from 'inert';
 
 export default async function start({
   dbConnect,
@@ -10,6 +14,8 @@ export default async function start({
   config,
   routes,
   services,
+  swaggerOptions,
+  swaggerUiOptions,
 }) {
   const app = new Hapi.Server({
     host: config.get('server.hostname'),
@@ -27,6 +33,13 @@ export default async function start({
       console.log(`Server error: ${event.error ? event.error.message : 'unknown'}`); // eslint-disable-line
     }
   });
+
+  await app.register([
+    inert,
+    vision,
+    { plugin: swaggered, options: swaggerOptions },
+    { plugin: swaggeredUI, options: swaggerUiOptions }
+  ]);
 
   const serve = compose(services, schema, dbConnect)(config);
 
