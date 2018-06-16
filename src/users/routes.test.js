@@ -1,3 +1,5 @@
+import type { JestMockT } from 'jest';
+
 import create, { ROUTE_NAME } from './routes';
 
 describe(`Routes: ${ROUTE_NAME}`, () => {
@@ -22,11 +24,11 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
     const responseData = 'Thanks for opening account Mr Abiodun Abdul!!!';
     const statusCode = 201;
     const contentType = 'application/hal+json';
-    let mockRequest = null;
+    let mockRequest: { log: JestMockT } = { log : null };
     let mockResponse = null;
-    let mockData = null;
-    let mockStatusCode = null;
-    let mockContentType = null;
+    let mockData: JestMockT = null;
+    let mockStatusCode: JestMockT = null;
+    let mockContentType: JestMockT = null;
 
     beforeEach(() => {
       mockData = jest.fn();

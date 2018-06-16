@@ -6,6 +6,7 @@
 
 [libs]
 flow-typed
+./definitions/
 
 [lints]
 
