@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src -d lib --ignore *.test*.js",
+    "bootstrap": "nodemon --delay 250ms --exec NODE_ENV=development babel-node -- src/bootstrap.js",
     "dev": "nodemon --delay 250ms --exec NODE_ENV=development babel-node -- src/index.js",
     "clean": "concurrently 'rimraf node_modules' 'rimraf lib/*'",
     "flow": "flow check --all",

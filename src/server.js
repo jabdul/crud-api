@@ -4,16 +4,16 @@ import Joi from 'joi';
 import uuid from 'uuid';
 import halson from 'halson';
 
-import env from './config';
-import dbConnect, { schema } from './persistence/mysql';
-// import dbConnect, { schema } from './persistence/mongoose';
-import initServices from './services';
-import routes from './routes';
-
-export default (async function start() {
+export default async function start({
+  dbConnect,
+  schema,
+  config,
+  routes,
+  services,
+}) {
   const app = new Hapi.Server({
-    host: env.get('server.hostname'),
-    port: env.get('server.port'),
+    host: config.get('server.hostname'),
+    port: config.get('server.port'),
     debug: { request: ['error'] },
   });
 
@@ -28,12 +28,12 @@ export default (async function start() {
     }
   });
 
-  const services = compose(initServices, schema, dbConnect)(env);
+  const serve = compose(services, schema, dbConnect)(config);
 
   try {
     routes().map(async route => await app.route(route({
-      services,
-      config: env,
+      services: serve,
+      config,
       validate: Joi,
       uuid,
       json: halson,
@@ -45,4 +45,4 @@ export default (async function start() {
     app.log(['error'], error);
     process.exit(1);
   }
-})();
+};
