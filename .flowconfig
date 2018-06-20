@@ -1,0 +1,16 @@
+[ignore]
+.*/node_modules/.*
+.*/lib/.*
+
+[include]
+
+[libs]
+flow-typed
+./definitions/
+
+[lints]
+
+[options]
+all=true
+
+[strict]
