@@ -1,5 +1,5 @@
 {
-  "name": "microservice-boilerplate",
+  "name": "@ctt/crud-api",
   "version": "0.0.1",
   "description": "A microservice boilerplate",
   "main": "lib/index.js",
