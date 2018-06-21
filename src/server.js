@@ -38,7 +38,7 @@ export default async function start({
 
   app.events.on('log', (event, tags) => {
     if (tags.error) {
-      console.log(`Server error: ${event.error ? event.error.message : 'unknown'}`); // eslint-disable-line
+      console.log(`Server error: ${event.error ? event.error.stack : 'unknown'}`); // eslint-disable-line
     }
   });
 
