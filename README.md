@@ -62,6 +62,8 @@ MYSQL_DB=mydb
 MONGO_DB=mydb
 ```
 
+You can console log `process.env` to find out available environment variables. You can also inspect the imported `config` object from `@ctt/crud-api`.
+
 ## APIs
 
 Details of each of the exposed APIs will now be explained.
