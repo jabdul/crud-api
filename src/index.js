@@ -1,4 +1,5 @@
-import env from './config';
+import _ from './env'; // eslint-disable-line no-unused-vars
+import setupConfig, { conf as env } from './config';
 import server from './server';
 import mysqlConnect from './persistence/mysql';
 import mongooseConnect from './persistence/mongoose';
@@ -15,7 +16,7 @@ module.exports = {
   }) => await server({
     dbConnect,
     schema,
-    config,
+    config: setupConfig(config),
     routes,
     services,
     swaggerOptions,
