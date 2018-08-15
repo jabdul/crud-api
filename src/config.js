@@ -1,7 +1,6 @@
-require('dotenv').config();
 import convict from 'convict';
 
-const config = convict({
+export const conf = {
   env: {
     doc: 'The application environment',
     format: ['development', 'test', 'production'],
@@ -112,6 +111,6 @@ const config = convict({
       arg: 'mongo-pass',
     }
   }
-});
+};
 
-export default config;
+export default appConfig => convict({ ...conf, ...appConfig });
