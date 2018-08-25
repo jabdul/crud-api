@@ -13,6 +13,9 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
     min: jest.fn(),
     max: jest.fn(),
     required: jest.fn(),
+    object: jest.fn().mockImplementation(() => ({
+      unknown: jest.fn().mockReturnValue({})
+    })),
   }
   validate.string.mockImplementation(() => validate);
   validate.min.mockImplementation(() => validate);

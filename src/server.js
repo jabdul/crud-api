@@ -17,8 +17,13 @@ export default async function start({
   config,
   routes,
   services,
+  plugins = [],
+  postRegisterHook = () => {},
   swaggerOptions = {},
   swaggerUiOptions = {},
+}: {
+  routes: () => Array<({}) => mixed>,
+  plugins: Array<mixed>,
 }) {
   const tls = {
     key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
@@ -42,13 +47,15 @@ export default async function start({
     }
   });
 
-  await app.register([
+  await app.register([...[
     inert,
     vision,
     { plugin: swaggered, options: swaggerOptions },
     { plugin: swaggeredUI, options: swaggerUiOptions },
     { plugin: requireHttps, options: {} }
-  ]);
+  ], ...plugins]);
+
+  await postRegisterHook.call(this, app);
 
   const serve = compose(services, schema, dbConnect)(config);
 
