@@ -108,6 +108,7 @@ export default client => ({
 });
 ```
 
+
 ### routes
 
 [HapiJs](https://hapijs.com/tutorials/routing?lang=en_US) is the core building block of this module. All routing and handling of client requests are managed by handlers defined.
@@ -156,6 +157,30 @@ Find out more about the passed in features:
 - A HAL+JSON resource object creator using [halson](https://github.com/seznam/halson)
 - [uuid](https://github.com/kelektiv/node-uuid), a universal unique id generator
 
+
+### plugins
+
+Prior to routes, HapiJs custom plugins can be loaded. In the following example the [hapi-auth-jwt2](https://github.com/dwyl/hapi-auth-jwt2) plugin module is configured as follows:
+
+```js
+import hapiAuthJwt2 from 'hapi-auth-jwt2';
+
+server({
+  ...
+  plugins: [{ plugin: hapiAuthJwt2, options: {} }],
+  postRegisterHook: async app => {
+    app.auth.strategy('jwt', 'jwt', {
+      key: 'NeverShareYourSecret',
+      validate: await validate,
+      verifyOptions: { algorithms: [ 'HS256' ] }
+    });
+    
+    app.auth.default('jwt');
+  },
+  ...
+});
+```
+Notice the `postRegisterHook`, you can define a post plugin registration hook to be executed before the routes are loaded.
 
 ### services
 

@@ -11,6 +11,8 @@ module.exports = {
     config,
     routes,
     services,
+    plugins,
+    postRegisterHook,
     swaggerOptions,
     swaggerUiOptions,
   }) => await server({
@@ -19,6 +21,8 @@ module.exports = {
     config: setupConfig(config),
     routes,
     services,
+    plugins,
+    postRegisterHook,
     swaggerOptions,
     swaggerUiOptions,
   }),
