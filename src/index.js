@@ -9,6 +9,7 @@ module.exports = {
     dbConnect,
     schema,
     config,
+    configOptions,
     routes,
     services,
     plugins,
@@ -18,7 +19,7 @@ module.exports = {
   }) => await server({
     dbConnect,
     schema,
-    config: setupConfig(config),
+    config: setupConfig(config, configOptions),
     routes,
     services,
     plugins,
