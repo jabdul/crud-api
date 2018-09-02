@@ -15,6 +15,9 @@ server({
   dbConnect: mongooseConnect,
   schema: mongooseSchema,
   config: env,
+  configOptions: {
+    dbConnectOptions: { useNewUrlParser: true }
+  },
   routes,
   services,
   plugins: [{ plugin: hapiAuthJwt2, options: {} }],
