@@ -51,6 +51,15 @@ export const conf = {
       arg: 'server-db',
     },
   },
+  db: {
+    dump: {
+      doc: 'Mongodb data seed and dump path',
+      format: String,
+      default: 'dump',
+      env: 'DB_SEED',
+      arg: 'db-seed',
+    },
+  },
   mysql: {
     host: {
       doc: 'MySQL Server hostname',
@@ -110,7 +119,25 @@ export const conf = {
       env: 'MONGO_PASS',
       arg: 'mongo-pass',
     }
-  }
+  },
+  jwt: {
+    secret: {
+      doc: 'JWT secret key',
+      format: String,
+      default: '',
+      env: 'JWT_SECRET',
+      arg: 'jwt-secret',
+    },
+    expires: {
+      doc: 'JWT expiry in seconds',
+      format: Number,
+      default: 86400, // one day
+      env: 'JWT_EXPIRES',
+      arg: 'jwt-expires',
+    },
+  },
 };
 
-export default (appConfig, options={}) => convict({ ...conf, ...appConfig }).load(options);
+export default (appConfig, configFiles, options={}) => convict({ ...conf, ...appConfig })
+  .load(options)
+  .loadFile(configFiles);

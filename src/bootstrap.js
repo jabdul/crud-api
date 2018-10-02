@@ -1,3 +1,4 @@
+import path from 'path';
 import hapiAuthJwt2 from 'hapi-auth-jwt2';
 import { server, mysqlConnect, mongooseConnect } from './'; // eslint-disable-line no-unused-vars
 // import { schema as mysqlSchema } from './persistence/mysql';
@@ -15,6 +16,7 @@ server({
   dbConnect: mongooseConnect,
   schema: mongooseSchema,
   config: env,
+  configFiles: [path.resolve(__dirname, `../config/${String(process.env.NODE_ENV)}.json`)],
   configOptions: {
     dbConnectOptions: { useNewUrlParser: true }
   },
@@ -49,4 +51,23 @@ server({
       validatorUrl: null
     }
   },
+  loggerOptions: {
+    ops: {
+      interval: 1000
+    },
+    reporters: {
+      console: [{
+        module: 'good-squeeze',
+        name: 'Squeeze',
+        args: [{
+          log: '*',
+          response: '*',
+          error: '*',
+          request: { include: ['hapi'], exclude: 'sensitive' }
+        }]
+      }, {
+        module: 'good-console'
+      }, 'stdout'],
+    },
+  }
 });
