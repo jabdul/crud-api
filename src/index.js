@@ -10,6 +10,7 @@ module.exports = {
     schema,
     config,
     configOptions,
+    configFiles = [],
     routes,
     services,
     plugins,
@@ -19,7 +20,7 @@ module.exports = {
   }) => await server({
     dbConnect,
     schema,
-    config: setupConfig(config, configOptions),
+    config: setupConfig(config, configFiles, configOptions),
     routes,
     services,
     plugins,
