@@ -59,7 +59,12 @@ server({
       console: [{
         module: 'good-squeeze',
         name: 'Squeeze',
-        args: [{ log: '*', response: '*', error: '*' }]
+        args: [{
+          log: '*',
+          response: '*',
+          error: '*',
+          request: { include: ['hapi'], exclude: 'sensitive' }
+        }]
       }, {
         module: 'good-console'
       }, 'stdout'],

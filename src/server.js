@@ -35,7 +35,10 @@ export default async function start({
     host: config.get('server.hostname'),
     port: config.get('server.port'),
     tls,
-    debug: { request: ['error'] },
+    debug: {
+      request: ['error', 'info', 'warn'],
+      log: ['error', 'info', 'warn'],
+    },
   });
 
   process.on('unhandledRejection', error => {
@@ -45,7 +48,7 @@ export default async function start({
 
   app.events.on('log', (event, tags) => {
     if (tags.error) {
-      console.log(`Server error: ${event.error ? event.error.stack : 'unknown'}`); // eslint-disable-line
+      console.log(`Server error: ${event.error ? event.error.stack : 'unknown'}`); // eslint-disable-line no-console
     }
   });
 
