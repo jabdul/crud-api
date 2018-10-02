@@ -17,6 +17,7 @@ module.exports = {
     postRegisterHook,
     swaggerOptions,
     swaggerUiOptions,
+    loggerOptions,
   }) => await server({
     dbConnect,
     schema,
@@ -27,6 +28,7 @@ module.exports = {
     postRegisterHook,
     swaggerOptions,
     swaggerUiOptions,
+    loggerOptions,
   }),
   mysqlConnect,
   mongooseConnect,

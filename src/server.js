@@ -10,6 +10,7 @@ import swaggeredUI from 'hapi-swaggered-ui';
 import vision from 'vision';
 import inert from 'inert';
 import requireHttps from 'hapi-require-https';
+import good from 'good';
 
 export default async function start({
   dbConnect,
@@ -21,6 +22,7 @@ export default async function start({
   postRegisterHook = () => {},
   swaggerOptions = {},
   swaggerUiOptions = {},
+  loggerOptions = {}
 }: {
   routes: () => Array<({}) => mixed>,
   plugins: Array<mixed>,
@@ -52,6 +54,7 @@ export default async function start({
     vision,
     { plugin: swaggered, options: swaggerOptions },
     { plugin: swaggeredUI, options: swaggerUiOptions },
+    { plugin: good, options: loggerOptions },
     { plugin: requireHttps, options: {} }
   ], ...plugins]);
 
@@ -69,7 +72,7 @@ export default async function start({
     })));
 
     await app.start();
-    console.log('Server running at:', app.info.uri); // eslint-disable-line
+    console.info('Server running at:', app.info.uri); // eslint-disable-line
   } catch(error) {
     app.log(['error'], error);
     process.exit(1);

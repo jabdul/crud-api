@@ -10,6 +10,7 @@ export default ({ services, config, validate, uuid, json }) => ({
   path: `/${ROUTE_NAME}`,
   options: {
     ...options, validate: {
+      failAction: async (request, h, err) => err,
       headers: validate.object({
         authorization: validate.string().required(),
         // 'host': validate.string().optional(),
