@@ -18,7 +18,7 @@ server({
   config: env,
   configFiles: [path.resolve(__dirname, `../config/${String(process.env.NODE_ENV)}.json`)],
   configOptions: {
-    dbConnectOptions: { useNewUrlParser: true }
+    dbConnectOptions: { useNewUrlParser: true, useFindAndModify: false }
   },
   routes,
   services,
