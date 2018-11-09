@@ -65,7 +65,7 @@
     "hapi-swaggered-ui": "3.0.2",
     "joi": "13.4.0",
     "knex": "0.14.4",
-    "mongoose": "5.2.10",
+    "mongoose": "5.3.4",
     "mysql": "2.15.0",
     "ramda": "0.25.0",
     "uuid": "3.2.1"
