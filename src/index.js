@@ -8,6 +8,7 @@ module.exports = {
   server: async({
     dbConnect,
     schema,
+    serverOptions,
     config,
     configOptions,
     configFiles = [],
@@ -21,6 +22,7 @@ module.exports = {
   }) => await server({
     dbConnect,
     schema,
+    serverOptions,
     config: setupConfig(config, configFiles, configOptions),
     routes,
     services,

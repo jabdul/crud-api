@@ -22,12 +22,13 @@ export default async function start({
   postRegisterHook = () => {},
   swaggerOptions = {},
   swaggerUiOptions = {},
-  loggerOptions = {}
+  loggerOptions = {},
+  serverOptions = {},
 }: {
   routes: () => Array<({}) => mixed>,
   plugins: Array<mixed>,
 }) {
-  const tls = {
+  const tls = config.get('server.secure') && {
     key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
     cert: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsCert'))),
   };
@@ -39,6 +40,7 @@ export default async function start({
       request: ['error', 'info', 'warn'],
       log: ['error', 'info', 'warn'],
     },
+    ...serverOptions,
   });
 
   process.on('unhandledRejection', error => {
