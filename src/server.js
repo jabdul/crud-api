@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import Hapi from 'hapi';
+import Hapi from '@hapi/hapi';
 import { compose } from 'ramda';
 import Joi from 'joi';
 import uuid from 'uuid';
