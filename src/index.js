@@ -1,6 +1,6 @@
 import _ from './env'; // eslint-disable-line no-unused-vars
 import setupConfig, { conf as env } from './config';
-import server from './server';
+import server, { hapiServer } from './server';
 import mysqlConnect from './persistence/mysql';
 import mongooseConnect from './persistence/mongoose';
 
@@ -19,21 +19,20 @@ module.exports = {
     swaggerOptions,
     swaggerUiOptions,
     loggerOptions,
-  }) => (await server({
-      dbConnect,
-      schema,
-      serverOptions,
-      config: setupConfig(config, configFiles, configOptions),
-      routes,
-      services,
-      plugins,
-      postRegisterHook,
-      swaggerOptions,
-      swaggerUiOptions,
-      loggerOptions,
-    })).start(),
+  }) => await server({
+    dbConnect,
+    schema,
+    serverOptions,
+    config: setupConfig(config, configFiles, configOptions),
+    routes,
+    services,
+    plugins,
+    postRegisterHook,
+    swaggerOptions,
+    swaggerUiOptions,
+    loggerOptions,
+  }),
   mysqlConnect,
   mongooseConnect,
   config: env,
 };
-
