@@ -12,7 +12,8 @@ const validate = async (/* payload, request*/) => {
   return { isValid: true };
 };
 
-server({
+const init = async () => {
+  const app = await server({
   dbConnect: mongooseConnect,
   schema: mongooseSchema,
   config: env,
@@ -71,3 +72,9 @@ server({
     },
   }
 });
+
+  
+  await app.start()
+}
+
+init()
