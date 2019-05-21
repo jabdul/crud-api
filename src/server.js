@@ -76,7 +76,7 @@ export default async function start({
       json: halson,
     })));
 
-    console.info('Server running at:', app.info.uri); // eslint-disable-line
+    console.info('Server setup completed...', 'Start the server.'); // eslint-disable-line
     return app;
   } catch(error) {
     app.log(['error'], error);
