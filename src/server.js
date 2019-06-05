@@ -68,6 +68,18 @@ export default async function start({
   const serve = compose(services, schema, dbConnect)(config);
 
   try {
+    app.method({
+      name: 'services',
+      method: () => serve,
+      options: {}
+    });
+
+    app.method({
+      name: 'config',
+      method: () => config,
+      options: {}
+    });
+
     routes().map(async route => await app.route(route({
       services: serve,
       config,
@@ -76,7 +88,7 @@ export default async function start({
       json: halson,
     })));
 
-    console.info('Server setup completed...', 'Start the server.'); // eslint-disable-line
+    console.info('Server setup completed...'); // eslint-disable-line
     return app;
   } catch(error) {
     app.log(['error'], error);
