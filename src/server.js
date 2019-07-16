@@ -80,6 +80,12 @@ export default async function start({
       options: {}
     });
 
+    app.method({
+      name: 'json',
+      method: () => halson,
+      options: {}
+    });
+
     routes().map(async route => await app.route(route({
       services: serve,
       config,
