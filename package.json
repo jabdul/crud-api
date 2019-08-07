@@ -31,7 +31,7 @@
   "devDependencies": {
     "babel-cli": "6.4.5",
     "babel-core": "6.4.5",
-    "babel-eslint": "6.1.2",
+    "babel-eslint": "8.1.1",
     "babel-jest": "17.0.2",
     "babel-plugin-transform-class-properties": "6.4.0",
     "babel-plugin-transform-es2015-spread": "6.8.0",
@@ -42,7 +42,7 @@
     "babel-preset-es2015": "6.3.13",
     "babel-preset-flow": "6.23.0",
     "concurrently": "3.5.1",
-    "eslint": "3.12.0",
+    "eslint": "4.18.2",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jest": "21.15.0",
     "flow-bin": "0.73.0",
@@ -55,13 +55,13 @@
     "vision": "5.3.3"
   },
   "dependencies": {
+    "@hapi/hapi": "17.9.0",
     "convict": "4.3.1",
     "dotenv": "6.0.0",
     "good": "8.1.1",
     "good-console": "7.1.0",
     "good-squeeze": "5.1.0",
     "halson": "3.0.0",
-    "@hapi/hapi": "17.9.0",
     "hapi-require-https": "3.0.0",
     "hapi-swaggered": "3.0.2",
     "hapi-swaggered-ui": "3.0.2",

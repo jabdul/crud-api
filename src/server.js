@@ -100,4 +100,4 @@ export default async function start({
     app.log(['error'], error);
     process.exit(1);
   }
-};
+}
