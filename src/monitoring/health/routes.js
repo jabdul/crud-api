@@ -1,4 +1,4 @@
-export const ROUTE_NAME = 'monitoring/health';
+export const ROUTE_NAME = 'monitoring/healthz';
 
 const options = {
   log: { collect: true },
