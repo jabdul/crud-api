@@ -74,6 +74,7 @@ const init = async () => {
   });
 
   await app.start();
+  console.log(`App runninng on ${app.info.uri}`) // eslint-disable-line
 }
 
 init();
