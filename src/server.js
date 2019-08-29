@@ -12,6 +12,8 @@ import inert from 'inert';
 import requireHttps from 'hapi-require-https';
 import good from 'good';
 
+import checkApplicationHealth from './monitoring/health/routes';
+
 export default async function start({
   dbConnect,
   schema,
@@ -86,7 +88,7 @@ export default async function start({
       options: {}
     });
 
-    routes().map(async route => await app.route(route({
+    [checkApplicationHealth, ...routes()].map(async route => await app.route(route({
       services: serve,
       config,
       validate: Joi,
