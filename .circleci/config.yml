@@ -1,0 +1,83 @@
+aliases:
+  - &restore_pkg_cache
+    keys:
+      - v1-node-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+      - v1-node-{{ arch }}-{{ .Branch }}-
+      - v1-node-{{ arch }}-
+  
+  - &save_pkg_cache
+    key: v1-node-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+    paths:
+      - node_modules
+  
+  - &yarn_install
+    name: Install packages
+    command: yarn install
+  
+  
+  - &attach_workspace
+    attach_workspace:
+      at: ~/crud-api
+  
+  - &dependencies
+    - checkout
+    - *attach_workspace
+    - restore_cache: *restore_pkg_cache
+    - run: *yarn_install
+    - save_cache: *save_pkg_cache
+    - persist_to_workspace:
+        root: .
+        paths:
+         - node_modules
+  
+  - &build_image
+    working_directory: ~/crud-api
+    docker:
+      - image: circleci/node:lts
+          
+
+version: 2
+jobs:
+  build:
+    <<: *build_image
+
+    # parallelism: 2
+    steps: *dependencies
+  
+  lint:
+    <<: *build_image
+
+    steps: 
+      - *dependencies
+
+      - run:
+         name: Analyze code for smells
+         command: yarn lint
+
+      - store_test_results:
+          path: ./reports/
+      - store_artifacts:
+          path: ./reports
+  
+  test:
+    <<: *build_image
+
+    steps: 
+      - *dependencies
+
+      - run:
+         name: Analyze code for smells
+         command: yarn lint
+
+      - store_test_results:
+          path: ./reports/
+      - store_artifacts:
+          path: ./reports
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - lint
+      - test
