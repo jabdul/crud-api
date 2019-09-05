@@ -49,8 +49,8 @@ aliases:
         paths:
          - node_modules
     - run:
-      name: Analyze code for smells
-      command: yarn lint
+        name: Analyze code for smells
+        command: yarn lint
     - *store_coverage_results
     - *store_coverage_artifacts
   
@@ -65,8 +65,8 @@ aliases:
         paths:
          - node_modules
     - run:
-      name: Running test
-      command: yarn test
+        name: Running test
+        command: yarn test
     - *store_coverage_results
     - *store_coverage_artifacts
 
