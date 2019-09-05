@@ -18,6 +18,8 @@ aliases:
   - &store_coverage_results
     - store_test_results:
       path: ./reports/
+
+  - &store_coverage_artifacts
     - store_artifacts:
       path: ./reports
   
@@ -37,18 +39,36 @@ aliases:
          - node_modules
   
   - &lint_steps
-    - <: *dependencies
+    - checkout
+    - *attach_workspace
+    - restore_cache: *restore_pkg_cache
+    - run: *yarn_install
+    - save_cache: *save_pkg_cache
+    - persist_to_workspace:
+        root: .
+        paths:
+         - node_modules
     - run:
       name: Analyze code for smells
       command: yarn lint
-    - <: *store_coverage_results
+    - *store_coverage_results
+    - *store_coverage_artifacts
   
   - &test_steps
-    - <: *dependencies
+    - checkout
+    - *attach_workspace
+    - restore_cache: *restore_pkg_cache
+    - run: *yarn_install
+    - save_cache: *save_pkg_cache
+    - persist_to_workspace:
+        root: .
+        paths:
+         - node_modules
     - run:
       name: Running test
       command: yarn test
-    - <: *store_coverage_results
+    - *store_coverage_results
+    - *store_coverage_artifacts
 
   
   - &build_image
@@ -68,14 +88,12 @@ jobs:
   lint:
     <<: *build_image
 
-    steps: 
-    - <: *lint_steps
+    steps: *lint_steps
   
   test:
     <<: *build_image
 
-    steps: 
-    - <: *test_steps
+    steps: *test_steps
 
 workflows:
   version: 2
