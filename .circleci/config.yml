@@ -68,12 +68,14 @@ jobs:
   lint:
     <<: *build_image
 
-    steps: *lint_steps
+    steps: 
+      <<: *lint_steps
   
   test:
     <<: *build_image
 
-    steps: *test_steps
+    steps: 
+      <<: *test_steps
 
 workflows:
   version: 2
