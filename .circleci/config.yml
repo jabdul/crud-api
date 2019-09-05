@@ -37,20 +37,18 @@ aliases:
          - node_modules
   
   - &lint_steps
-    steps:
-      - <: *dependencies
-      - run:
-        name: Analyze code for smells
-        command: yarn lint
-      - <: *store_coverage_results
+    - <: *dependencies
+    - run:
+      name: Analyze code for smells
+      command: yarn lint
+    - <: *store_coverage_results
   
   - &test_steps
-    steps:
-      - <: *dependencies
-      - run:
-        name: Running test
-        command: yarn test
-      - <: *store_coverage_results
+    - <: *dependencies
+    - run:
+      name: Running test
+      command: yarn test
+    - <: *store_coverage_results
 
   
   - &build_image
@@ -70,12 +68,14 @@ jobs:
   lint:
     <<: *build_image
 
-    <<: *lint_steps
+    steps: 
+    - <: *lint_steps
   
   test:
     <<: *build_image
 
-    <<: *test_steps
+    steps: 
+    - <: *test_steps
 
 workflows:
   version: 2
