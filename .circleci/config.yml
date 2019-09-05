@@ -75,30 +75,37 @@ aliases:
     working_directory: ~/crud-api
     docker:
       - image: circleci/node:lts
+
+  - &builder
+    - "Build"
           
 
 version: 2
+workflows:
+  version: 2
+  {{ .Branch }}:
+    jobs:
+      - "Build"
+      - "Linting":
+          requires: *builder
+      - "Tests":
+          requires: *builder
+         
+         
 jobs:
-  build:
+  "Build":
     <<: *build_image
 
     # parallelism: 2
     steps: *dependencies
   
-  lint:
+  "Linting":
     <<: *build_image
 
     steps: *lint_steps
   
-  test:
+  "Tests":
     <<: *build_image
 
     steps: *test_steps
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - lint
-      - test
+ 
