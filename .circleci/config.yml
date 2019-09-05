@@ -54,21 +54,21 @@ jobs:
     <<: *build_image
 
     steps: 
-      - run: *dependencies
+      - *dependencies
       - run:
         name: Analyze code for smells
         command: yarn lint
-      - run: *store_coverage_results
+      - *store_coverage_results
   
   test:
     <<: *build_image
 
     steps: 
-      - run: *dependencies
+      - *dependencies
       - run:
         name: Running test
         command: yarn lint
-      - run: *store_coverage_results
+      - *store_coverage_results
 
 workflows:
   version: 2
