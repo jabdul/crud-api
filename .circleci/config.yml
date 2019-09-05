@@ -83,7 +83,7 @@ aliases:
 version: 2
 workflows:
   version: 2
-  {{ .Branch }}:
+  "{{ .Branch }}":
     jobs:
       - "Build"
       - "Linting":
@@ -91,7 +91,7 @@ workflows:
       - "Tests":
           requires: *builder
          
-         
+
 jobs:
   "Build":
     <<: *build_image
