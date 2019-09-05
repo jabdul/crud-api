@@ -36,6 +36,21 @@ aliases:
         paths:
          - node_modules
   
+  - &lint_steps
+    - *dependencies
+    - run:
+      name: Analyze code for smells
+      command: yarn lint
+    - *store_coverage_results
+  
+  - &test_steps
+    - *dependencies
+    - run:
+      name: Running test
+      command: yarn test
+    - *store_coverage_results
+
+  
   - &build_image
     working_directory: ~/crud-api
     docker:
@@ -53,22 +68,12 @@ jobs:
   lint:
     <<: *build_image
 
-    steps: 
-      - *dependencies
-      - run:
-        name: Analyze code for smells
-        command: yarn lint
-      - *store_coverage_results
+    steps: *lint_steps
   
   test:
     <<: *build_image
 
-    steps: 
-      - *dependencies
-      - run:
-        name: Running test
-        command: yarn lint
-      - *store_coverage_results
+    steps: *test_steps
 
 workflows:
   version: 2
