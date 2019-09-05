@@ -6,6 +6,7 @@ aliases:
       - v1-node-{{ arch }}-
   
   - &save_pkg_cache
+    name: Saving package cache
     key: v1-node-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
     paths:
       - node_modules
@@ -14,6 +15,11 @@ aliases:
     name: Install packages
     command: yarn install
   
+  - &store_coverage_results
+    - store_test_results:
+      path: ./reports/
+    - store_artifacts:
+      path: ./reports
   
   - &attach_workspace
     attach_workspace:
@@ -48,31 +54,21 @@ jobs:
     <<: *build_image
 
     steps: 
-      - *dependencies
-
+      - <<: *dependencies
       - run:
-         name: Analyze code for smells
-         command: yarn lint
-
-      - store_test_results:
-          path: ./reports/
-      - store_artifacts:
-          path: ./reports
+        name: Analyze code for smells
+        command: yarn lint
+      - <<: *store_coverage_results
   
   test:
     <<: *build_image
 
     steps: 
-      - *dependencies
-
+      - <<: *dependencies
       - run:
-         name: Analyze code for smells
-         command: yarn lint
-
-      - store_test_results:
-          path: ./reports/
-      - store_artifacts:
-          path: ./reports
+        name: Running test
+        command: yarn lint
+      - <<: *store_coverage_results
 
 workflows:
   version: 2
