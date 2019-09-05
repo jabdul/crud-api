@@ -42,7 +42,7 @@ aliases:
       - run:
         name: Analyze code for smells
         command: yarn lint
-      - *store_coverage_results
+      - <: *store_coverage_results
   
   - &test_steps
     steps:
@@ -50,7 +50,7 @@ aliases:
       - run:
         name: Running test
         command: yarn test
-      - *store_coverage_results
+      - <: *store_coverage_results
 
   
   - &build_image
