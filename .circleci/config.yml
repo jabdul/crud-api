@@ -16,12 +16,12 @@ aliases:
     command: yarn install
   
   - &store_coverage_results
-    - store_test_results:
-      path: ./reports/
+    store_test_results:
+    path: ./reports
 
   - &store_coverage_artifacts
-    - store_artifacts:
-      path: ./reports
+    store_artifacts:
+    path: ./reports
   
   - &attach_workspace
     attach_workspace:
