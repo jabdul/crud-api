@@ -67,7 +67,8 @@ export default async function start({
 
   await postRegisterHook.call(this, app);
 
-  const serve = compose(services, schema, dbConnect)(config);
+  app.db = dbConnect(config);
+  const serve = compose(services, schema)(app.db);
 
   try {
     app.method({
