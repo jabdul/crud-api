@@ -50,6 +50,7 @@
     "hapi-auth-jwt2": "8.1.0",
     "inert": "5.1.0",
     "jest": "17.0.3",
+    "jest-junit": "10.0.0",
     "nodemon": "1.11.0",
     "precommit-hook-eslint": "3.0.0",
     "vision": "5.3.3"
