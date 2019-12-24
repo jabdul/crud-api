@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/jabdul/crud-api.svg?style=svg)](https://circleci.com/gh/jabdul/crud-api)
+
 # crud-api
 A CRUD microservice module exposing key features of a RESTful API as injected dependencies.
 
