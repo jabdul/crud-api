@@ -43,7 +43,7 @@ aliases:
     - *attach_workspace
     - run:
         name: Analyze code for smells
-        command: yarn lint
+        command: yarn lint:ci
     - *store_coverage_results
     - *store_coverage_artifacts
   
@@ -52,7 +52,7 @@ aliases:
     - *attach_workspace
     - run:
         name: Running test
-        command: yarn test
+        command: yarn test:ci
     - *store_coverage_results
     - *store_coverage_artifacts
 
