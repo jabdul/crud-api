@@ -30,6 +30,10 @@
   "files": [
     "lib"
   ],
+  "jest-junit": {
+    "outputDirectory": "./test/reports/junit",
+    "outputName": "./js-test-results.xml"
+  },
   "devDependencies": {
     "babel-cli": "6.4.5",
     "babel-core": "6.4.5",
