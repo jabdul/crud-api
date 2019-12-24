@@ -19,7 +19,7 @@
     "pretest": "yarn lint",
     "start": "node lib/index.js",
     "test": "jest",
-    "test:ci": "jest --coverage --runInBand --reporters=default --reporters=jest-junit",
+    "test:ci": "jest --coverage --runInBand --reporters=default --reporters=jest-junit --coverageReporters=text-lcov | coveralls",
     "test:watch": "yarn test --watch",
     "validate": "npm ls"
   },
