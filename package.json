@@ -19,6 +19,7 @@
     "pretest": "yarn lint",
     "start": "node lib/index.js",
     "test": "jest --config jest/test.config.json",
+    "test:ci": "jest --config jest/test.config.json --coverage --runInBand --reporters=default --reporters=jest-junit",
     "test:watch": "yarn test --watch",
     "validate": "npm ls"
   },
