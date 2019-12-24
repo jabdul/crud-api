@@ -41,13 +41,6 @@ aliases:
   - &lint_steps
     - checkout
     - *attach_workspace
-    - restore_cache: *restore_pkg_cache
-    - run: *yarn_install
-    - save_cache: *save_pkg_cache
-    - persist_to_workspace:
-        root: .
-        paths:
-         - node_modules
     - run:
         name: Analyze code for smells
         command: yarn lint
@@ -57,13 +50,6 @@ aliases:
   - &test_steps
     - checkout
     - *attach_workspace
-    - restore_cache: *restore_pkg_cache
-    - run: *yarn_install
-    - save_cache: *save_pkg_cache
-    - persist_to_workspace:
-        root: .
-        paths:
-         - node_modules
     - run:
         name: Running test
         command: yarn test
