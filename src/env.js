@@ -1,2 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config({ silent: true });
+
+if (process.env.NODE_ENV !== 'test') {
+  dotenv.config({ silent: true });
+}
