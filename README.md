@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/jabdul/crud-api.svg?style=svg)](https://circleci.com/gh/jabdul/crud-api)
+[![Coverage Status](https://coveralls.io/repos/github/jabdul/crud-api/badge.svg?branch=master)](https://coveralls.io/github/jabdul/crud-api?branch=master)
+
 # crud-api
 A CRUD microservice module exposing key features of a RESTful API as injected dependencies.
 

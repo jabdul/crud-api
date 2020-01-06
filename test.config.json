@@ -5,6 +5,8 @@
   "collectCoverageFrom": [
     "src/**/*.js"
   ],
+  "reporters": ["default", "jest-junit"],
+  "testResultsProcessor": "jest-junit",
   "coverageThreshold": {
     "global": {
       "branches": 100,

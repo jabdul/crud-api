@@ -13,11 +13,13 @@
     "flow": "flow check --all",
     "flow:dep": "flow-typed install || exit 0",
     "lint": "eslint src",
+    "lint:ci": "eslint src --format junit -o test/reports/junit/js-lint-results.xml",
     "postinstall": "[ \"$NODE_ENV\" == production ] && exit 0; yarn flow:dep;",
     "prepublish": "NODE_ENV=production yarn build",
     "pretest": "yarn lint",
     "start": "node lib/index.js",
-    "test": "jest --config jest/test.config.json",
+    "test": "jest",
+    "test:ci": "jest --coverage --runInBand --reporters=default --reporters=jest-junit --coverageReporters=text-lcov | coveralls",
     "test:watch": "yarn test --watch",
     "validate": "npm ls"
   },
@@ -28,6 +30,10 @@
   "files": [
     "lib"
   ],
+  "jest-junit": {
+    "outputDirectory": "./test/reports/junit",
+    "outputName": "./js-test-results.xml"
+  },
   "devDependencies": {
     "babel-cli": "6.4.5",
     "babel-core": "6.4.5",
@@ -42,6 +48,7 @@
     "babel-preset-es2015": "6.3.13",
     "babel-preset-flow": "6.23.0",
     "concurrently": "3.5.1",
+    "coveralls": "3.0.9",
     "eslint": "4.18.2",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jest": "21.15.0",
@@ -49,7 +56,8 @@
     "flow-typed": "2.4.0",
     "hapi-auth-jwt2": "8.1.0",
     "inert": "5.1.0",
-    "jest": "17.0.3",
+    "jest": "23.5.0",
+    "jest-junit": "10.0.0",
     "nodemon": "1.11.0",
     "precommit-hook-eslint": "3.0.0",
     "vision": "5.3.3"
