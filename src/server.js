@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import Hapi from '@hapi/hapi';
-import { compose } from 'ramda';
 import Joi from 'joi';
 import uuid from 'uuid';
 import halson from 'halson';
@@ -68,7 +67,8 @@ export default async function start({
   await postRegisterHook.call(this, app);
 
   app.db = dbConnect(config);
-  const serve = compose(services, schema)(app.db);
+  app.schema = schema(app.db);
+  const serve = services(app.schema);
 
   try {
     app.method({
