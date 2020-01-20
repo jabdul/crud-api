@@ -146,8 +146,8 @@ export const conf = {
 };
 
 
-const loadConfig = (appConfig, configFiles, options={}) => {
-  const config = convict({ ...conf, ...(appConfig || {}) }).load(options)
+const loadConfig = (appConfig={}, configFiles, options={}) => {
+  const config = convict({ ...conf, ...appConfig }).load(options)
   return configFiles ? config.loadFile(configFiles) : config;
 }
 
