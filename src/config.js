@@ -145,6 +145,10 @@ export const conf = {
   },
 };
 
-export default (appConfig, configFiles, options={}) => convict({ ...conf, ...appConfig })
+export const baseConfig = loadConfig({}, conf);
+
+const loadConfig = (appConfig, configFiles, options={}) => convict({ ...conf, ...appConfig })
   .load(options)
   .loadFile(configFiles);
+
+export default loadConfig;
