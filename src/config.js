@@ -108,7 +108,7 @@ export const conf = {
     database: {
       doc: 'Mongo database',
       format: String,
-      default: '',
+      default: 'crud-api',
       env: 'MONGO_DB',
       arg: 'mongo-db',
     },
