@@ -29,12 +29,12 @@ describe('Users queries', () => {
       const payload = await factory.attrs('User', { firstname: undefined });
 
       try {
-          await expect(
-            await (async () => userQueries.create({ payload }))(),
-          ).resolves.toThrow();
-        } catch (e) {
-          expect(e.message).toMatch(/`firstname` is required/);
-        }
+        await expect(
+          await (async () => userQueries.create({ payload }))(),
+        ).resolves.toThrow();
+      } catch (e) {
+        expect(e.message).toMatch(/`firstname` is required/);
+      }
 
     })
   })
