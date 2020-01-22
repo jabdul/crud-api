@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
+import uuid from 'uuid';
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
- uuid: String,
+ uuid: { type: String, default: uuid.v4 },
  firstname: String,
  lastname: String,
  created: { type: Date, default: Date.now }
