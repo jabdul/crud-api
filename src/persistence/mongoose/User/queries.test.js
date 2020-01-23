@@ -32,8 +32,12 @@ describe('Users queries', () => {
         await expect(
           await (async () => userQueries.create({ payload }))(),
         ).resolves.toThrow();
-      } catch (e) {
-        expect(e.message).toMatch(/`firstname` is required/);
+      } catch ({ errors, name, message }) {
+        expect(name).toBe('ValidationError');
+        expect(message).toMatch(/`firstname` is required/);
+        expect(errors).toHaveProperty('firstname')
+        expect(errors['firstname']['path']).toBe('firstname');
+        expect(errors['firstname']['kind']).toBe('required');
       }
 
     })
