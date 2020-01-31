@@ -1939,6 +1939,11 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
+database-cleaner@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/database-cleaner/-/database-cleaner-1.3.0.tgz#306c0015bd2eb968d08a6be6a24fe52dd91fd656"
+  integrity sha512-WZaUioWrKPkeBzWWKSuPalO48dIfsnuY+IEkYghUr2czRwFdw8LXdehE5+VH2GrQdSnmPnvYDZ1QGwNCMs8pPA==
+
 date-fns@^1.23.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
