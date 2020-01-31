@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
+import uuid from 'uuid';
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
- uuid: String,
- firstname: String,
- lastname: String,
+ uuid: { type: String, default: uuid.v4 },
+ firstname: { type: String, required: true },
+ lastname: { type: String, required: true },
  created: { type: Date, default: Date.now }
 });
 
