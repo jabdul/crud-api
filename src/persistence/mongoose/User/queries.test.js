@@ -42,4 +42,14 @@ describe('Users queries', () => {
 
     })
   })
+
+  describe('findall', () => {
+    it('can find all users', async () => {
+      const users = await factory.createMany('User', 5); // eslint-disable-line no-unused-vars
+
+      const findAllUsers = await userQueries.findAll();
+      expect(findAllUsers).toBeDefined()
+      expect(findAllUsers.length).toBe(5)
+    });
+  })
 })

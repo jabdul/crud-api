@@ -77,6 +77,7 @@
     "joi": "13.4.0",
     "knex": "0.19.5",
     "mongoose": "5.3.4",
+    "mongoose-paginate": "5.0.3",
     "mysql": "2.15.0",
     "ramda": "0.25.0",
     "uuid": "3.2.1"
