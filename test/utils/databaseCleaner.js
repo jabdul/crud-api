@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import Cleaner from 'database-cleaner';
 
-console.log("Hello");
-var dbCleaner = dbCleaner || new Cleaner('mongodb');
+var dbCleaner = new Cleaner('mongodb');
 
 
 afterEach(done => {

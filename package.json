@@ -56,7 +56,7 @@
     "flow-typed": "2.4.0",
     "hapi-auth-jwt2": "8.1.0",
     "inert": "5.1.0",
-    "jest": "25.1.0",
+    "jest": "24.9.0",
     "jest-junit": "10.0.0",
     "nodemon": "1.11.0",
     "precommit-hook-eslint": "3.0.0",
