@@ -10,38 +10,38 @@ let userQueries = queries(db); // eslint-disable-line no-unused-vars
 
 describe('Users queries', () => {
 
-  // describe('create', () => {
-  //   it('can create a user', async () => {
-  //     const payload = await factory.attrs('User');
+  describe('create', () => {
+    it('can create a user', async () => {
+      const payload = await factory.attrs('User');
 
-  //     const user = await userQueries.create({ payload });
+      const user = await userQueries.create({ payload });
 
-  //     expect(user).toBeDefined()
+      expect(user).toBeDefined()
 
-  //     expect(user).toHaveProperty('firstname')
-  //     expect(user).toHaveProperty('lastname')
-  //     expect(user).toHaveProperty('uuid')
-  //     expect(user['firstname']).toEqual(payload['firstname'])
-  //     expect(user['lastname']).toEqual(payload['lastname'])
-  //   });
+      expect(user).toHaveProperty('firstname')
+      expect(user).toHaveProperty('lastname')
+      expect(user).toHaveProperty('uuid')
+      expect(user['firstname']).toEqual(payload['firstname'])
+      expect(user['lastname']).toEqual(payload['lastname'])
+    });
 
-  //   it('cannot create a user', async () => {
-  //     const payload = await factory.attrs('User', { firstname: undefined });
+    it('cannot create a user', async () => {
+      const payload = await factory.attrs('User', { firstname: undefined });
 
-  //     try {
-  //       await expect(
-  //         await (async () => userQueries.create({ payload }))(),
-  //       ).resolves.toThrow();
-  //     } catch ({ errors, name, message }) {
-  //       expect(name).toBe('ValidationError');
-  //       expect(message).toMatch(/`firstname` is required/);
-  //       expect(errors).toHaveProperty('firstname')
-  //       expect(errors['firstname']['path']).toBe('firstname');
-  //       expect(errors['firstname']['kind']).toBe('required');
-  //     }
+      try {
+        await expect(
+          await (async () => userQueries.create({ payload }))(),
+        ).resolves.toThrow();
+      } catch ({ errors, name, message }) {
+        expect(name).toBe('ValidationError');
+        expect(message).toMatch(/`firstname` is required/);
+        expect(errors).toHaveProperty('firstname')
+        expect(errors['firstname']['path']).toBe('firstname');
+        expect(errors['firstname']['kind']).toBe('required');
+      }
 
-  //   })
-  // })
+    })
+  })
 
   describe('findById', () => {
     it('can find a single user', async () => {
@@ -61,47 +61,43 @@ describe('Users queries', () => {
       const payload = '02117187-a5d5-4681-b087-8b4b337d5b8d';
       const res = await userQueries.findById({ uuid: payload });
       expect(res).toBe(null);
-    })
+      console.log('********', res); // eslint-disable-line
 
-    it.only('should find a user with an valid uuid', async () => {
-      const payload = '02117187-a5d5-4681-b087-8b4b337d5b8d';
-      const res = await userQueries.findById({ uuid: payload });
-      expect(res).not.toBe(null);
     })
   })
 
-  describe('updateById', () => {
-    it('update a single user', async () => {
-      const user = await factory.create('User');
-      const updateUser = await userQueries.updateById({ payload: user.uuid });
-      console.log('%%%%%%%%%%%%%', updateUser); // eslint-disable-line
+  // describe('updateById', () => {
+  //   it('update a single user', async () => {
+  //     const user = await factory.create('User');
+  //     const updateUser = await userQueries.updateById({ payload: user.uuid });
+  //     console.log('%%%%%%%%%%%%%', updateUser); // eslint-disable-line
 
-      expect(updateUser).toBeDefined()
-      expect(updateUser).toHaveProperty('uuid')
-      // expect(user['uuid']).toEqual(payload['uuid'])
-      // expect(user['meta.updated']).toEqual(payload['meta.updated'])
+  //     expect(updateUser).toBeDefined()
+  //     expect(updateUser).toHaveProperty('uuid')
+  //     // expect(user['uuid']).toEqual(payload['uuid'])
+  //     // expect(user['meta.updated']).toEqual(payload['meta.updated'])
 
-    });
+  //   });
 
-    //   it('cannot update user by uuid', async () => {
-    //     const payload = await factory.attrs('User', { 'meta.active': false });
+  //   //   it('cannot update user by uuid', async () => {
+  //   //     const payload = await factory.attrs('User', { 'meta.active': false });
 
-    //     await expect(userQueries.updateById({ payload })).rejects.toThrow(new Error(`user update failed`))
+  //   //     await expect(userQueries.updateById({ payload })).rejects.toThrow(new Error(`user update failed`))
 
-    //     // try {
-    //     // await expect(
-    //     // await (async () => userQueries.updateById({ payload }))(),
+  //   //     // try {
+  //   //     // await expect(
+  //   //     // await (async () => userQueries.updateById({ payload }))(),
 
-    //     // ).resolves.toThrow();
-    //     // } catch ({ errors, message }) {
-    //     //       // console.log(message); // eslint-disable-line no-unused-vars
-    //     //       // expect(name).toBe('undefined');
-    //     //       // expect(message).toMatch(/'uuid' Not Found/)
-    //     //       // expect(errors).toHaveProperty('payload.uuid');
-    //     //       expect(errors['uuid']['path']).toBe('uuid');
-    //     //       expect(errors['uuid']['kind']).toBe('required');
-    //     // }
-    //     // })
-  }
-  )
+  //   //     // ).resolves.toThrow();
+  //   //     // } catch ({ errors, message }) {
+  //   //     //       // console.log(message); // eslint-disable-line no-unused-vars
+  //   //     //       // expect(name).toBe('undefined');
+  //   //     //       // expect(message).toMatch(/'uuid' Not Found/)
+  //   //     //       // expect(errors).toHaveProperty('payload.uuid');
+  //   //     //       expect(errors['uuid']['path']).toBe('uuid');
+  //   //     //       expect(errors['uuid']['kind']).toBe('required');
+  //   //     // }
+  //   //     // })
+  // }
+  // )
 });
