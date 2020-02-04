@@ -57,7 +57,7 @@ describe('Users queries', () => {
       expect(findUser['meta.active']).toEqual(user['meta.active'])
     });
 
-    it.only('should not find a user with an invalid uuid', async () => {
+    it('should not find a user with an invalid uuid', async () => {
       const payload = '02117187-a5d5-4681-b087-8b4b337d5b8d';
       const res = await userQueries.findById({ uuid: payload });
       expect(res).toBe(null);
@@ -66,38 +66,43 @@ describe('Users queries', () => {
     })
   })
 
-  // describe('updateById', () => {
-  //   it('update a single user', async () => {
-  //     const user = await factory.create('User');
-  //     const updateUser = await userQueries.updateById({ payload: user.uuid });
-  //     console.log('%%%%%%%%%%%%%', updateUser); // eslint-disable-line
+  describe('updateById', () => {
+    it.only('update a single user', async () => {
+      const user = await factory.create('User');
+      console.log(user); // eslint-disable-line
 
-  //     expect(updateUser).toBeDefined()
-  //     expect(updateUser).toHaveProperty('uuid')
-  //     // expect(user['uuid']).toEqual(payload['uuid'])
-  //     // expect(user['meta.updated']).toEqual(payload['meta.updated'])
+      const updateUser = await userQueries.updateById({ payload: user.uuid });
+      console.log('%%%%%%%%%%%%%', updateUser); // eslint-disable-line
 
-  //   });
+      expect(updateUser).toBeDefined()
+      expect(updateUser).toHaveProperty('nModified');
+      expect(updateUser).toHaveProperty('n');
+      expect(updateUser).toHaveProperty('ok');
+      expect(updateUser).toHaveProperty('ok');
+      expect(updateUser['nModified']).toEqual(1);
+      expect(updateUser['n']).toEqual(1);
+      expect(updateUser['ok']).toEqual(1);
+    });
 
-  //   //   it('cannot update user by uuid', async () => {
-  //   //     const payload = await factory.attrs('User', { 'meta.active': false });
+    //   it('cannot update user by uuid', async () => {
+    //     const payload = await factory.attrs('User', { 'meta.active': false });
 
-  //   //     await expect(userQueries.updateById({ payload })).rejects.toThrow(new Error(`user update failed`))
+    //     await expect(userQueries.updateById({ payload })).rejects.toThrow(new Error(`user update failed`))
 
-  //   //     // try {
-  //   //     // await expect(
-  //   //     // await (async () => userQueries.updateById({ payload }))(),
+    //     // try {
+    //     // await expect(
+    //     // await (async () => userQueries.updateById({ payload }))(),
 
-  //   //     // ).resolves.toThrow();
-  //   //     // } catch ({ errors, message }) {
-  //   //     //       // console.log(message); // eslint-disable-line no-unused-vars
-  //   //     //       // expect(name).toBe('undefined');
-  //   //     //       // expect(message).toMatch(/'uuid' Not Found/)
-  //   //     //       // expect(errors).toHaveProperty('payload.uuid');
-  //   //     //       expect(errors['uuid']['path']).toBe('uuid');
-  //   //     //       expect(errors['uuid']['kind']).toBe('required');
-  //   //     // }
-  //   //     // })
-  // }
-  // )
+    //     // ).resolves.toThrow();
+    //     // } catch ({ errors, message }) {
+    //     //       // console.log(message); // eslint-disable-line no-unused-vars
+    //     //       // expect(name).toBe('undefined');
+    //     //       // expect(message).toMatch(/'uuid' Not Found/)
+    //     //       // expect(errors).toHaveProperty('payload.uuid');
+    //     //       expect(errors['uuid']['path']).toBe('uuid');
+    //     //       expect(errors['uuid']['kind']).toBe('required');
+    //     // }
+    //     // })
+  }
+  )
 });
