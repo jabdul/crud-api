@@ -7,6 +7,8 @@ import { schema as mongooseSchema } from './persistence/mongoose';
 import routes from './routes';
 import services from './services';
 
+import _ from './env'; // eslint-disable-line no-unused-vars
+
 const validate = async (/* payload, request*/) => {
   // Apply validation check here...
   return { isValid: true };

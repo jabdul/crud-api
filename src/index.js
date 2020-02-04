@@ -1,4 +1,3 @@
-import _ from './env'; // eslint-disable-line no-unused-vars
 import setupConfig, { baseConfig as env } from './config';
 import server from './server';
 import mysqlConnect from './persistence/mysql';
