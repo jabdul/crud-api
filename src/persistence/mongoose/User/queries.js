@@ -3,9 +3,11 @@ import User from './model';
 const create = async ({ payload }) => {
   const user = new User();
 
-  user.uuid = payload.uuid;
-  user.firstname = payload.firstname;
-  user.lastname = payload.lastname;
+  const { uuid, firstname, lastname, meta } = payload;
+  user.uuid = uuid;
+  user.firstname = firstname;
+  user.lastname = lastname;
+  user.meta = meta
 
   return await user.save();
 };

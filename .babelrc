@@ -1,11 +1,15 @@
 {
-  "presets": ["es2015", "flow"],
+  "presets": [
+      ["@babel/preset-env", {
+          "targets": {
+            "node": "current"
+          }
+      }],
+    "@babel/preset-flow"
+  ],
   "plugins": [
-    ["transform-runtime", {}],
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "transform-es2015-spread",
-    "transform-flow-strip-types"
+    ["@babel/plugin-transform-runtime", {}],
+    "@babel/plugin-transform-flow-strip-types"
   ],
   "env": {
     "development": {
