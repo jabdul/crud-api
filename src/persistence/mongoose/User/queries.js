@@ -14,7 +14,10 @@ const create = async ({ payload }) => {
   return await user.save();
 };
 
-const findById = async ({ payload }) => User.findOne({ uuid: payload });
+const findById = async ({ payload }) => User.findOne(
+  { uuid: payload },
+  // console.log('@@@@@@@@@@@@', { payload }) // eslint-disable-line
+);
 
 const updateById = async ({ payload }) => User.updateOne(
   { uuid: payload },
