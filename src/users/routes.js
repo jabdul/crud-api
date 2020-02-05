@@ -2,7 +2,7 @@ export const ROUTE_NAME = 'users';
 
 const options = {
   log: { collect: true },
-  auth: 'jwt',
+  auth: false,
 };
 
 export default ({ services, config, validate, uuid, json }) => ({
@@ -10,9 +10,9 @@ export default ({ services, config, validate, uuid, json }) => ({
   path: `/${ROUTE_NAME}`,
   options: {
     ...options, validate: {
-      failAction: async (request, h, err) => err,
+      failAction: async (request, h, err) => console.log(err), // eslint-disable-line
       headers: validate.object({
-        authorization: validate.string().required(),
+        authorization: validate.string().optional(),
         // 'host': validate.string().optional(),
         // 'accept-encoding': validate.string().optional(),
         // 'connection': validate.string().optional(),
