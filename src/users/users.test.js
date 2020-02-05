@@ -7,6 +7,8 @@ import { ROUTE_NAME } from './routes';
 let app = null;
 const url =  `/${ROUTE_NAME}`
 
+const parsedResponse = ({ payload }) => JSON.parse(payload);
+
 describe('Users', () => {
   beforeAll(async () => {
     app = await application();
@@ -15,7 +17,7 @@ describe('Users', () => {
 
   describe('Create', () => {
     it('Create User', async () => {
-      const payload = await factory.attrs('User', { meta: null });
+      const payload = await factory.attrs('User');
       const response = await app.inject({
         method: 'POST',
         url,
@@ -23,7 +25,11 @@ describe('Users', () => {
       });
 
       expect(response.statusCode).toBe(201);
-      console.log(response) // eslint-disable-line no-console
+      expect(response.statusMessage).toBe('Created');
+      expect(response.headers['content-type']).toEqual('application/hal+json');
+
+      const body = parsedResponse(response)
+      console.log(body)// eslint-disable-line no-console
     })
   })
 });

@@ -10,7 +10,7 @@ export default ({ services, config, validate, uuid, json }) => ({
   path: `/${ROUTE_NAME}`,
   options: {
     ...options, validate: {
-      failAction: async (request, h, err) => console.log(err), // eslint-disable-line
+      failAction: async (request, h, err) => err, // eslint-disable-line
       headers: validate.object({
         authorization: validate.string().optional(),
         // 'host': validate.string().optional(),
@@ -24,6 +24,9 @@ export default ({ services, config, validate, uuid, json }) => ({
       payload: {
         firstname: validate.string().min(2).max(64).required(),
         lastname: validate.string().min(2).max(64),
+        meta: validate.object({
+          active: validate.boolean(),
+        })
       },
     },
     tags: ['api'],
