@@ -1,4 +1,9 @@
 aliases:
+  - &wait_for_mongo
+    run:
+      name: Wait for MongoDB
+      command: dockerize -wait tcp://localhost:27017 -timeout 1m
+      
   - &restore_pkg_cache
     keys:
       - v1-node-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
@@ -56,11 +61,6 @@ aliases:
         command: yarn test:ci
     - *store_coverage_results
     - *store_coverage_artifacts
-
-  - &wait_for_mongo
-    run:
-      name: Wait for MongoDB
-      command: dockerize -wait tcp://localhost:27017 -timeout 1m
 
   
   - &build_image
