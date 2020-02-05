@@ -12,6 +12,8 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
     string: jest.fn(),
     min: jest.fn(),
     max: jest.fn(),
+    optional: jest.fn(),
+    boolean: jest.fn(),
     required: jest.fn(),
     object: jest.fn().mockImplementation(() => ({
       unknown: jest.fn().mockReturnValue({})
@@ -21,6 +23,8 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
   validate.min.mockImplementation(() => validate);
   validate.max.mockImplementation(() => validate);
   validate.required.mockImplementation(() => validate);
+  validate.optional.mockImplementation(() => validate);
+  validate.boolean.mockImplementation(() => validate);
 
   describe(`POST /${ROUTE_NAME}`, () => {
     const router = create({ services, validate });

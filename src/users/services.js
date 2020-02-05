@@ -6,8 +6,11 @@ const create = async ({ db, payload, config, uuid, json/*, log */ }) => {
     // log(['users', 'error', 'database'], result);
     throw Error(result);
   }
+  // const {
+  //   firstnam, last
+  // }
 
-  return json({}).addLink('self', `/users/${uid}`);
+  return json(result._doc).addLink('self', `/users/${uid}`);
 };
 
 export default db => ({
