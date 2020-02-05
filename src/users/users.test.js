@@ -1,5 +1,6 @@
 import application from '../bootstrap';
 import { factory } from 'factory-girl';
+// import mongoose from 'mongoose';
 
 import UserFactory from '../../test/factories/user'; // eslint-disable-line no-unused-vars
 import { ROUTE_NAME } from './routes';
@@ -14,6 +15,11 @@ describe('Users', () => {
     app = await application();
     await app.start();
   });
+
+  afterAll(async () => {
+    await app.stop({ timeout: 100 });
+    await app.db.close();
+  })
 
   describe('Create', () => {
     it('Create User', async () => {
