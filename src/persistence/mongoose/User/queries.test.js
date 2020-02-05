@@ -47,7 +47,6 @@ describe('Users queries', () => {
     it('can find a single user', async () => {
       const user = await factory.create('User');
       const findUser = await userQueries.findById({ payload: user.uuid });
-      // console.log('!!!!!!!!', findUser); // eslint-disable-line
 
       expect(findUser).toBeDefined();
       expect(findUser).toHaveProperty('uuid'); // eslint-disable-line
@@ -58,21 +57,17 @@ describe('Users queries', () => {
     });
 
     it('should not find a user with an invalid uuid', async () => {
-      const payload = '02117187-a5d5-4681-b087-8b4b337d5b8d';
-      const res = await userQueries.findById({ uuid: payload });
+      const uuid = '02117187-a5d5-4681-b087-8b4b337d5b8d';
+      const res = await userQueries.findById({ payload: uuid });
       expect(res).toBe(null);
-      console.log('********', res); // eslint-disable-line
 
     })
   })
 
   describe('updateById', () => {
-    it.only('update a single user', async () => {
+    it('update a single user', async () => {
       const user = await factory.create('User');
-      console.log(user); // eslint-disable-line
-
       const updateUser = await userQueries.updateById({ payload: user.uuid });
-      console.log('%%%%%%%%%%%%%', updateUser); // eslint-disable-line
 
       expect(updateUser).toBeDefined()
       expect(updateUser).toHaveProperty('nModified');
@@ -84,25 +79,13 @@ describe('Users queries', () => {
       expect(updateUser['ok']).toEqual(1);
     });
 
-    //   it('cannot update user by uuid', async () => {
-    //     const payload = await factory.attrs('User', { 'meta.active': false });
-
-    //     await expect(userQueries.updateById({ payload })).rejects.toThrow(new Error(`user update failed`))
-
-    //     // try {
-    //     // await expect(
-    //     // await (async () => userQueries.updateById({ payload }))(),
-
-    //     // ).resolves.toThrow();
-    //     // } catch ({ errors, message }) {
-    //     //       // console.log(message); // eslint-disable-line no-unused-vars
-    //     //       // expect(name).toBe('undefined');
-    //     //       // expect(message).toMatch(/'uuid' Not Found/)
-    //     //       // expect(errors).toHaveProperty('payload.uuid');
-    //     //       expect(errors['uuid']['path']).toBe('uuid');
-    //     //       expect(errors['uuid']['kind']).toBe('required');
-    //     // }
-    //     // })
+    it('should not update a user with an invalid uuid', async () => {
+      const uuid = '02117187-a5d5-4681-b087-8b4b337d5b8d';
+      const res = await userQueries.updateById({ payload: uuid });
+      expect(res['n']).toEqual(0)
+      expect(res['nModified']).toEqual(0)
+      expect(res['ok']).toEqual(1)
+    })
   }
   )
 });
