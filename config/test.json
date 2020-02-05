@@ -1,0 +1,13 @@
+{
+  "server": {
+    "tlsCert": "../certs/service.crt",
+    "tlsKey": "../certs/service.key",
+    "tlsCa": ""
+  },
+  "mongo": {
+    "host": "mongodb://127.0.0.1:27017",
+    "database": "crud-api",
+    "user": "user",
+    "pass": "password"
+  }
+}

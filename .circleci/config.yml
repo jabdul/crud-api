@@ -1,4 +1,9 @@
 aliases:
+  - &wait_for_mongo
+    run:
+      name: Wait for MongoDB
+      command: dockerize -wait tcp://localhost:27017 -timeout 1m
+      
   - &restore_pkg_cache
     keys:
       - v1-node-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
@@ -49,6 +54,7 @@ aliases:
   
   - &test_steps
     - checkout
+    - *wait_for_mongo
     - *attach_workspace
     - run:
         name: Running test
@@ -61,6 +67,7 @@ aliases:
     working_directory: ~/crud-api
     docker:
       - image: circleci/node:lts
+      - image: circleci/mongo:4.0.9-ram
 
   - &builder
     - "Build"

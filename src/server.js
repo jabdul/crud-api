@@ -97,7 +97,8 @@ export default async function start({
       json: halson,
     })));
 
-    console.info('Server setup completed...'); // eslint-disable-line
+    // Not needed in test env
+    process.env.NODE_ENV !== 'test' && console.info('Server setup completed...'); // eslint-disable-line
     return app;
   } catch(error) {
     app.log(['error'], error);
