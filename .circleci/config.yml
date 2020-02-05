@@ -49,6 +49,7 @@ aliases:
   
   - &test_steps
     - checkout
+    - *wait_for_mongo
     - *attach_workspace
     - run:
         name: Running test
@@ -56,11 +57,17 @@ aliases:
     - *store_coverage_results
     - *store_coverage_artifacts
 
+  - &wait_for_mongo
+    run:
+      name: Wait for MongoDB
+      command: dockerize -wait tcp://localhost:27017 -timeout 1m
+
   
   - &build_image
     working_directory: ~/crud-api
     docker:
       - image: circleci/node:lts
+      - image: circleci/mongo:4.0.9-ram
 
   - &builder
     - "Build"
