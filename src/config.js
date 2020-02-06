@@ -156,7 +156,7 @@ const loadConfig = (appConfig={}, configFiles, options={}) => convictLoader({
 });
 
 const convictLoader = ({ appConfig = null, base = null, configFiles = null, options = {}}) => {
-  const config = convict({ ...(appConfig || {}), ...(base || {}) }).options(options)
+  const config = convict({ ...(appConfig || {}), ...(base || {}) }).load(options)
   return configFiles ? config.loadFile(configFiles) : config;
 }
 
