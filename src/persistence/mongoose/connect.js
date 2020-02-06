@@ -4,11 +4,13 @@ export default async (Mongoose, config) => {
       ...config.get('dbConnectOptions'), ...{ useNewUrlParser: true }
     } : { useNewUrlParser: true }
     return await Mongoose.connect(`${config.get('mongo.host')}`, {
-      ...{ dbName: `${config.get('mongo.database')}
-      ${process.env.NODE_ENV != 'production' ? ('_' + process.env.NODE_ENV) : ''}` },
+      ...{
+        dbName: `${config.get('mongo.database')}${process.env.NODE_ENV !== 'production' ?
+          ('_' + process.env.NODE_ENV) : ''}`
+      },
       ...dbConnectOptions
     });
-  } catch(error) {
+  } catch (error) {
     throw error;
   }
 }
