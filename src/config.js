@@ -1,7 +1,7 @@
 import convict from 'convict';
 
 
-const testConfig = {
+const mongoConfig = {
   mongo: {
     host: {
       doc: 'Mongo server hostname',
@@ -147,7 +147,7 @@ export const conf = {
       arg: 'jwt-expires',
     },
   },
-  ...testConfig,
+  ...mongoConfig,
 };
 
 
@@ -160,6 +160,6 @@ const convictLoader = ({ appConfig = null, base = null, configFiles = null, opti
   return configFiles ? config.loadFile(configFiles) : config;
 }
 
-export const baseConfig = convictLoader({ base: testConfig });
+export const dbConfig = convictLoader({ base: mongoConfig });
 
 export default loadConfig;
