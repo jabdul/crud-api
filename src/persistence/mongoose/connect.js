@@ -5,8 +5,10 @@ export default async (Mongoose, config) => {
     } : { useNewUrlParser: true }
     return await Mongoose.connect(`${config.get('mongo.host')}`, {
       ...{
-        dbName: `${config.get('mongo.database')}${process.env.NODE_ENV !== 'production' ?
-          ('_' + process.env.NODE_ENV) : ''}`
+        dbName: `${config.has('mongo.database') ?
+          config.get('mongo.database') :
+          config.get('service.name')}${process.env.NODE_ENV !== 'production' ?
+            ('_' + process.env.NODE_ENV) : ''}`
       },
       ...dbConnectOptions
     });
