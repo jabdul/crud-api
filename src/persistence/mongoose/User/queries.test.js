@@ -46,11 +46,15 @@ describe('Users queries', () => {
   describe('findById', () => {
     it('can find a single user', async () => {
       const user = await factory.create('User');
-      const findUser = await userQueries.findById({ payload: user.uuid });
+      // console.log('@@@@@@@', user); // eslint-disable-line
+
+      const findUser = await userQueries.findById({ payload: { uuid: user.uuid } });
+
+      // console.log('PAYLOAD', { payload: user.uuid }, findUser); // eslint-disable-line
 
       expect(findUser).toBeDefined();
       expect(findUser).toHaveProperty('uuid'); // eslint-disable-line
-      expect(findUser['uuid']).toEqual(user['uuid']);
+      expect(findUser.uuid['uuid']).toEqual(user.uuid['uuid']);
       expect(findUser['firstname']).toEqual(user['firstname']);
       expect(findUser['lastname']).toEqual(user['lastname']);
       expect(findUser['meta.active']).toEqual(user['meta.active'])
@@ -58,7 +62,8 @@ describe('Users queries', () => {
 
     it('should not find a user with an invalid uuid', async () => {
       const uuid = '02117187-a5d5-4681-b087-8b4b337d5b8d';
-      const res = await userQueries.findById({ payload: uuid });
+      const res = await userQueries.findById({ payload: { uuid: uuid } });
+      console.log('%%%%%%%%%%', uuid, res); // eslint-disable-line
       expect(res).toBe(null);
 
     })
