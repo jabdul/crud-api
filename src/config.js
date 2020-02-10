@@ -1,5 +1,39 @@
 import convict from 'convict';
 
+
+const mongoConfig = {
+  mongo: {
+    host: {
+      doc: 'Mongo server hostname',
+      format: String,
+      default: 'mongodb://127.0.0.1:27017',
+      env: 'MONGO_CONNECT',
+      arg: 'mongo-connect',
+    },
+    database: {
+      doc: 'Mongo database',
+      format: String,
+      default: 'crud-api',
+      env: 'MONGO_DB',
+      arg: 'mongo-db',
+    },
+    user: {
+      doc: 'Mongo client username',
+      format: String,
+      default: 'user',
+      env: 'MONGO_USER',
+      arg: 'mongo-user',
+    },
+    pass: {
+      doc: 'Mongo client password',
+      format: String,
+      default: 'password',
+      env: 'MONGO_PASS',
+      arg: 'mongo-pass',
+    }
+  }
+};
+
 export const conf = {
   env: {
     doc: 'The application environment',
@@ -97,36 +131,6 @@ export const conf = {
       arg: 'mysql-pass',
     }
   },
-  mongo: {
-    host: {
-      doc: 'Mongo server hostname',
-      format: String,
-      default: 'mongodb://127.0.0.1:27017',
-      env: 'MONGO_CONNECT',
-      arg: 'mongo-connect',
-    },
-    database: {
-      doc: 'Mongo database',
-      format: String,
-      default: 'crud-api',
-      env: 'MONGO_DB',
-      arg: 'mongo-db',
-    },
-    user: {
-      doc: 'Mongo client username',
-      format: String,
-      default: 'user',
-      env: 'MONGO_USER',
-      arg: 'mongo-user',
-    },
-    pass: {
-      doc: 'Mongo client password',
-      format: String,
-      default: 'password',
-      env: 'MONGO_PASS',
-      arg: 'mongo-pass',
-    }
-  },
   jwt: {
     secret: {
       doc: 'JWT secret key',
@@ -143,14 +147,19 @@ export const conf = {
       arg: 'jwt-expires',
     },
   },
+  ...mongoConfig,
 };
 
 
-const loadConfig = (appConfig={}, configFiles, options={}) => {
-  const config = convict({ ...conf, ...appConfig }).load(options)
+const loadConfig = (appConfig={}, configFiles, options={}) => convictLoader({ 
+  appConfig, configFiles, base: conf, options 
+});
+
+const convictLoader = ({ appConfig = null, base = null, configFiles = null, options = {}}) => {
+  const config = convict({ ...(appConfig || {}), ...(base || {}) }).load(options)
   return configFiles ? config.loadFile(configFiles) : config;
 }
 
-export const baseConfig = loadConfig();
+export const dbConfig = convictLoader({ base: mongoConfig });
 
 export default loadConfig;

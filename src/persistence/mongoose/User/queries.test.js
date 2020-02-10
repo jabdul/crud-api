@@ -3,7 +3,7 @@ import { factory } from 'factory-girl';
 import UserFactory from '../../../../test/factories/user'; // eslint-disable-line no-unused-vars
 import queries from './queries'
 
-import { mongooseConnect, config } from '../../../index';
+import { mongooseConnect, dbConfig as config } from '../../../index';
 
 const db = mongooseConnect(config);
 let userQueries = queries(db); // eslint-disable-line no-unused-vars

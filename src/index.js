@@ -1,4 +1,4 @@
-import setupConfig, { baseConfig as env } from './config';
+import setupConfig, { conf as env, dbConfig } from './config';
 import server from './server';
 import mysqlConnect from './persistence/mysql';
 import mongooseConnect from './persistence/mongoose';
@@ -34,4 +34,5 @@ module.exports = {
   mysqlConnect,
   mongooseConnect,
   config: env,
+  dbConfig,
 };
