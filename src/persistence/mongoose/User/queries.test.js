@@ -50,7 +50,7 @@ describe('Users queries', () => {
       const findUser = await userQueries.findById({ payload: { uuid: user.uuid } });
 
       expect(findUser).toBeDefined();
-      expect(findUser).toHaveProperty('uuid'); // eslint-disable-line
+      expect(findUser).toHaveProperty('uuid');
       expect(findUser.uuid['uuid']).toEqual(user.uuid['uuid']);
       expect(findUser['firstname']).toEqual(user['firstname']);
       expect(findUser['lastname']).toEqual(user['lastname']);
@@ -69,15 +69,16 @@ describe('Users queries', () => {
     it('update a single user', async () => {
       const user = await factory.create('User');
       const updateUser = await userQueries.updateById({ payload: user.uuid });
+      const findOneUser = await userQueries.findById({ payload: { uuid: user.uuid } })
 
       expect(updateUser).toBeDefined()
       expect(updateUser).toHaveProperty('nModified');
       expect(updateUser).toHaveProperty('n');
       expect(updateUser).toHaveProperty('ok');
-      expect(updateUser).toHaveProperty('ok');
       expect(updateUser['nModified']).toEqual(1);
       expect(updateUser['n']).toEqual(1);
       expect(updateUser['ok']).toEqual(1);
+      expect(findOneUser.meta).toHaveProperty('updated');
     });
 
     it('should not update a user with an invalid uuid', async () => {
