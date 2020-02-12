@@ -69,7 +69,6 @@ describe('Users queries', () => {
     it('update a single user', async () => {
       const user = await factory.create('User');
       const updateUser = await userQueries.updateById({ payload: { uuid: user.uuid, firstname: 'Micah', lastname: 'Joel' } });
-      const findOneUser = await userQueries.findById({ payload: { uuid: user.uuid } })
 
       expect(updateUser).toBeDefined()
       expect(updateUser).toHaveProperty('nModified');
@@ -78,17 +77,35 @@ describe('Users queries', () => {
       expect(updateUser['nModified']).toEqual(1);
       expect(updateUser['n']).toEqual(1);
       expect(updateUser['ok']).toEqual(1);
+
+      const findOneUser = await userQueries.findById({ payload: { uuid: user.uuid } });
+
+      expect(findOneUser).toBeDefined()
+      expect(findOneUser).toHaveProperty('firstname');
+      expect(findOneUser).toHaveProperty('lastname');
+      expect(findOneUser).toHaveProperty('uuid');
+      expect(findOneUser.meta).toHaveProperty('active');
       expect(findOneUser.meta).toHaveProperty('updated');
     });
 
     it('should not update a user with an invalid uuid', async () => {
-      const uuid = '02117187-a5d5-4681-b087-8b4b337d5b8d';
-      const findOneUser = await userQueries.findById({ payload: { uuid: uuid } })
-      const res = await userQueries.updateById({ payload: { uuid: uuid } });
+      const user = await factory.create('User');
 
+      expect(user).toBeDefined()
+      expect(user).toHaveProperty('firstname');
+      expect(user).toHaveProperty('lastname');
+      expect(user).toHaveProperty('uuid');
+      expect(user.meta).toHaveProperty('active');
+
+      const uuid = '02117187-a5d5-4681-b087-8b4b337d5b8d';
+
+      const res = await userQueries.updateById({ payload: { uuid: uuid } });
       expect(res['n']).toEqual(0)
       expect(res['nModified']).toEqual(0)
       expect(res['ok']).toEqual(1)
+
+      const findOneUser = await userQueries.findById({ payload: { uuid: uuid } });
+
       expect(findOneUser).toBeNull()
     })
   }
