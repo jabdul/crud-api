@@ -68,7 +68,7 @@ describe('Users queries', () => {
   describe('updateById', () => {
     it('update a single user', async () => {
       const user = await factory.create('User');
-      const updateUser = await userQueries.updateById({ payload: user.uuid });
+      const updateUser = await userQueries.updateById({ payload: { uuid: user.uuid, firstname: 'Micah', lastname: 'Joel' } });
       const findOneUser = await userQueries.findById({ payload: { uuid: user.uuid } })
 
       expect(updateUser).toBeDefined()
@@ -83,10 +83,13 @@ describe('Users queries', () => {
 
     it('should not update a user with an invalid uuid', async () => {
       const uuid = '02117187-a5d5-4681-b087-8b4b337d5b8d';
-      const res = await userQueries.updateById({ payload: uuid });
+      const findOneUser = await userQueries.findById({ payload: { uuid: uuid } })
+      const res = await userQueries.updateById({ payload: { uuid: uuid } });
+
       expect(res['n']).toEqual(0)
       expect(res['nModified']).toEqual(0)
       expect(res['ok']).toEqual(1)
+      expect(findOneUser).toBeNull()
     })
   }
   )

@@ -17,7 +17,7 @@ const create = async ({ payload }) => {
 const findById = async ({ payload }) => User.findOne({ uuid: payload.uuid });
 
 const updateById = async ({ payload }) => User.updateOne(
-  { uuid: payload },
+  { uuid: payload.uuid },
   {
     $set: {
       ...pickBy(val => val !== undefined, {
