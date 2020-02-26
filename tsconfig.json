@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "outDir": "./lib",
+    "rootDir": "./src",
+    "allowJs": true,
+    "target": "ES2017",
+    "module": "commonjs",
+    "lib": ["esnext.asynciterable", "es6", "ES2015"],
+    "baseUrl": "./"
+  },
+  "include": ["./src/**/*"],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "src/**/*.test.*",
+    "ecosystem.config.js",
+    "test"
+  ]
+}
