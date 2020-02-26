@@ -6,7 +6,7 @@
   "scripts": {
     "build": "yarn clean:build && babel src -d lib --ignore *.test*.js",
     "build:watch": "yarn run clean:build && yarn run build --watch src",
-    "bootstrap": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/bootstrap.js",
+    "bootstrap": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/bootstrap.ts",
     "dev": "nodemon --delay 250ms --exec NODE_ENV=development babel-node -- src/index.ts",
     "clean": "concurrently 'rimraf node_modules' 'rimraf lib/*'",
     "clean:build": "rm -rf lib/*",
@@ -66,6 +66,7 @@
     "nodemon": "1.11.0",
     "precommit-hook-eslint": "3.0.0",
     "ts-node": "^8.6.2",
+    "typescript": "^3.8.2",
     "vision": "5.3.3"
   },
   "dependencies": {
