@@ -6,8 +6,8 @@
   "scripts": {
     "build": "yarn clean:build && babel src -d lib --ignore *.test*.js",
     "build:watch": "yarn run clean:build && yarn run build --watch src",
-    "bootstrap": "nodemon --delay 250ms --exec NODE_ENV=development babel-node -- src/bootstrap.js",
-    "dev": "nodemon --delay 250ms --exec NODE_ENV=development babel-node -- src/index.js",
+    "bootstrap": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/bootstrap.js",
+    "dev": "nodemon --delay 250ms --exec NODE_ENV=development babel-node -- src/index.ts",
     "clean": "concurrently 'rimraf node_modules' 'rimraf lib/*'",
     "clean:build": "rm -rf lib/*",
     "flow": "flow check --all",
@@ -37,13 +37,18 @@
   "devDependencies": {
     "@babel/cli": "7.8.4",
     "@babel/core": "7.8.4",
-    "@babel/node": "7.8.4",
     "@babel/plugin-transform-flow-strip-types": "7.8.3",
     "@babel/plugin-transform-runtime": "7.8.3",
     "@babel/preset-env": "7.8.4",
     "@babel/preset-flow": "7.8.3",
     "@babel/runtime": "7.8.4",
+    "@types/hapi": "18.0.3",
     "@types/jest": "^25.1.3",
+    "@types/joi": "14.3.4",
+    "@types/mongoose": "5.7.1",
+    "@types/mongoose-paginate": "5.0.8",
+    "@typescript-eslint/eslint-plugin": "2.20.0",
+    "@typescript-eslint/parser": "2.20.0",
     "babel-eslint": "8.1.1",
     "babel-jest": "24.9.0",
     "concurrently": "3.5.1",
@@ -60,6 +65,7 @@
     "jest-junit": "10.0.0",
     "nodemon": "1.11.0",
     "precommit-hook-eslint": "3.0.0",
+    "ts-node": "^8.6.2",
     "vision": "5.3.3"
   },
   "dependencies": {
