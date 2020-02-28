@@ -1,6 +1,6 @@
 import * as path from "path";
 import hapiAuthJwt2 from "hapi-auth-jwt2";
-import { server, mysqlConnect, mongooseConnect } from "./index"; // eslint-disable-line no-unused-vars
+import { server, mongooseConnect } from "./"; // eslint-disable-line no-unused-vars
 // import { schema as mysqlSchema } from './persistence/mysql';
 import { conf as env } from "./config";
 import { schema as mongooseSchema } from "./persistence/mongoose";
@@ -80,7 +80,8 @@ const application = () =>
           "stdout"
         ]
       }
-    }
+    },
+    serverOptions: {}
   });
 
 !module.parent &&
