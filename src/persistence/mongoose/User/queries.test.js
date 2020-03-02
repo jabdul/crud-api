@@ -9,12 +9,9 @@ const db = mongooseConnect(config);
 let userQueries = queries(db); // eslint-disable-line no-unused-vars
 
 const verifyUser = user => {
-  // console.log('$$$$$$$$', user); // eslint-disable-line
-
   expect(user).toHaveProperty('firstname');
   expect(user).toHaveProperty('lastname');
   expect(user).toHaveProperty('uuid');
-  // expect(user).toHaveProperty('meta.active', true);
 };
 
 const verifyResponse = ({ user, payload }) => {
@@ -62,14 +59,11 @@ describe('Users queries', () => {
   describe('findById', () => {
     it('can find a single user', async () => {
       const user = await factory.create('User');
-      console.log('@@@@@@', user); // eslint-disable-line
-
 
       const findUser = await userQueries.findById({ payload: { uuid: user.uuid } });
 
       expect(findUser).toBeDefined();
       verifyUser(findUser);
-      console.log('@@@@@@', findUser); // eslint-disable-line
 
       verifyResponse({ user: findUser, payload: user })
     });
@@ -85,7 +79,6 @@ describe('Users queries', () => {
   describe('updateById', () => {
     it('update a single user', async () => {
       const user = await factory.create('User');
-      console.log('!!!!!!!', user); // eslint-disable-line
       const updateUser = await userQueries.updateById({ payload: { uuid: user.uuid, firstname: 'Micah', lastname: 'Joel' } });
 
       expect(updateUser).toBeDefined()
