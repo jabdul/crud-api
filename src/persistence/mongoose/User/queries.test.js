@@ -8,6 +8,22 @@ import { mongooseConnect, config } from '../../../index';
 const db = mongooseConnect(config);
 let userQueries = queries(db); // eslint-disable-line no-unused-vars
 
+const verifyUser = user => {
+  expect(user).toHaveProperty('firstname');
+  expect(user).toHaveProperty('lastname');
+  expect(user).toHaveProperty('uuid');
+  // expect(user).toHaveProperty('email');
+  // expect(user).toHaveProperty('telephone');
+};
+
+const verifyResponse = ({ user, payload }) => {
+  expect(user['firstname']).toEqual(payload['firstname']);
+  expect(user['lastname']).toEqual(payload['lastname']);
+  expect(user['uuid']).toEqual(payload['uuid']);
+  // expect(user['meta.active']).toEqual(payload['meta.active']);
+  // expect(user['telephone']).toEqual(payload['telephone']);
+};
+
 describe('Users queries', () => {
 
   describe('create', () => {
@@ -44,17 +60,14 @@ describe('Users queries', () => {
   })
 
   describe('findById', () => {
-    it('can find a single user', async () => {
+    it.only('can find a single user', async () => {
       const user = await factory.create('User');
 
       const findUser = await userQueries.findById({ payload: { uuid: user.uuid } });
 
       expect(findUser).toBeDefined();
-      expect(findUser).toHaveProperty('uuid');
-      expect(findUser.uuid['uuid']).toEqual(user.uuid['uuid']);
-      expect(findUser['firstname']).toEqual(user['firstname']);
-      expect(findUser['lastname']).toEqual(user['lastname']);
-      expect(findUser['meta.active']).toEqual(user['meta.active'])
+      verifyUser(findUser);
+      verifyResponse({ user: findUser, payload: user })
     });
 
     it('should not find a user with an invalid uuid', async () => {
