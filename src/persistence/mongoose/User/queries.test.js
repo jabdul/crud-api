@@ -12,7 +12,7 @@ const verifyUser = user => {
   expect(user).toHaveProperty('firstname');
   expect(user).toHaveProperty('lastname');
   expect(user).toHaveProperty('uuid');
-  expect(user).toHaveProperty('meta.active');
+  expect(user).toHaveProperty('meta.active', true);
 };
 
 const verifyResponse = ({ user, payload }) => {
