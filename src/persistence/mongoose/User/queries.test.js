@@ -77,7 +77,7 @@ describe('Users queries', () => {
   })
 
   describe('updateById', () => {
-    it('update a single user', async () => {
+    it.only('update a single user', async () => {
       const user = await factory.create('User');
       const updateUser = await userQueries.updateById({ payload: { uuid: user.uuid, firstname: 'Micah', lastname: 'Joel' } });
 
@@ -91,11 +91,8 @@ describe('Users queries', () => {
 
       const findOneUser = await userQueries.findById({ payload: { uuid: user.uuid } });
 
-      expect(findOneUser).toBeDefined()
-      expect(findOneUser).toHaveProperty('firstname');
-      expect(findOneUser).toHaveProperty('lastname');
-      expect(findOneUser).toHaveProperty('uuid');
-      expect(findOneUser.meta).toHaveProperty('active', true);
+      expect(findOneUser).toBeDefined();
+      verifyUser(findOneUser);
       expect(findOneUser.meta).toHaveProperty('updated');
     });
 
