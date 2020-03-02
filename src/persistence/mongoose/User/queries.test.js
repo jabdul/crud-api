@@ -12,16 +12,14 @@ const verifyUser = user => {
   expect(user).toHaveProperty('firstname');
   expect(user).toHaveProperty('lastname');
   expect(user).toHaveProperty('uuid');
-  // expect(user).toHaveProperty('email');
-  // expect(user).toHaveProperty('telephone');
+  expect(user).toHaveProperty('meta.active');
 };
 
 const verifyResponse = ({ user, payload }) => {
   expect(user['firstname']).toEqual(payload['firstname']);
   expect(user['lastname']).toEqual(payload['lastname']);
   expect(user['uuid']).toEqual(payload['uuid']);
-  // expect(user['meta.active']).toEqual(payload['meta.active']);
-  // expect(user['telephone']).toEqual(payload['telephone']);
+  expect(user['meta.active']).toEqual(payload['meta.active']);
 };
 
 describe('Users queries', () => {
@@ -60,7 +58,7 @@ describe('Users queries', () => {
   })
 
   describe('findById', () => {
-    it.only('can find a single user', async () => {
+    it('can find a single user', async () => {
       const user = await factory.create('User');
 
       const findUser = await userQueries.findById({ payload: { uuid: user.uuid } });
