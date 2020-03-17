@@ -1,12 +1,11 @@
 import { factory } from 'factory-girl';
 
-import UserFactory from '../../../../test/factories/user'; // eslint-disable-line no-unused-vars
+import _ from '../../../../test/factories/user'; // eslint-disable-line no-unused-vars
 import queries from './queries'
 
 import { mongooseConnect, dbConfig as config } from '../../../index';
 
-const db = mongooseConnect(config);
-let userQueries = queries(db); // eslint-disable-line no-unused-vars
+let db, userQueries;
 
 const verifyUser = user => {
   expect(user).toHaveProperty('firstname');
@@ -22,6 +21,14 @@ const verifyResponse = ({ user, payload }) => {
 };
 
 describe('Users queries', () => {
+  beforeAll(async () => {
+    db = await mongooseConnect(config);
+    userQueries = queries(db);
+  });
+
+  afterAll(async () => {
+    await db.disconnect();
+  });
 
   describe('create', () => {
     it('can create a user', async () => {

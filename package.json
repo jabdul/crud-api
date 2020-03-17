@@ -1,6 +1,6 @@
 {
   "name": "@ctt/crud-api",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "A microservice boilerplate",
   "main": "lib/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "prepublish": "NODE_ENV=production yarn build",
     "pretest": "yarn lint",
     "start": "node lib/index.js",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:ci": "jest --coverage --reporters=default --reporters=jest-junit --coverageReporters=text-lcov | coveralls",
     "test:watch": "yarn test --watch",
     "validate": "npm ls"
@@ -47,7 +47,6 @@
     "babel-jest": "24.9.0",
     "concurrently": "3.5.1",
     "coveralls": "3.0.9",
-    "database-cleaner": "1.3.0",
     "eslint": "4.18.2",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jest": "21.15.0",
@@ -75,7 +74,7 @@
     "hapi-swaggered-ui": "3.0.2",
     "joi": "13.4.0",
     "knex": "0.19.5",
-    "mongoose": "5.3.4",
+    "mongoose": "5.9.5",
     "mysql": "2.15.0",
     "ramda": "0.25.0",
     "uuid": "3.2.1"
