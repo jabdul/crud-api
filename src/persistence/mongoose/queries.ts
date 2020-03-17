@@ -1,5 +1,5 @@
-import users from './User/queries';
+import users from "./User/queries";
 
 export default client => ({
-  users: users(client),
+  users: users(client)
 });

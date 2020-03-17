@@ -37,4 +37,4 @@ export = {
   config: env,
   dbConfig
 };
-console.log('@@@@@@@@@', module.exports);
+console.log("@@@@@@@@@", module.exports);

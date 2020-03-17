@@ -1,5 +1,5 @@
-import users from './users/services';
+import users from "./users/services";
 
 export default db => ({
-  users: users(db),
+  users: users(db)
 });
