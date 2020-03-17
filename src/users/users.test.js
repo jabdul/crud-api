@@ -1,8 +1,7 @@
 import application from '../bootstrap';
 import { factory } from 'factory-girl';
-// import mongoose from 'mongoose';
 
-import UserFactory from '../../test/factories/user'; // eslint-disable-line no-unused-vars
+import _ from '../../test/factories/user'; // eslint-disable-line no-unused-vars
 import { ROUTE_NAME } from './routes';
 
 let app = null;
@@ -17,9 +16,10 @@ describe('Users', () => {
   });
 
   afterAll(async () => {
-    await app.stop({ timeout: 100 });
-    await app.db.close();
-  })
+    const db = await app.db;
+    await db.disconnect();
+    await app.stop({ timeout: 10 });
+  });
 
   describe('Create', () => {
     it('Create User', async () => {
@@ -46,6 +46,7 @@ describe('Users', () => {
     })
 
     it('Cannot create User', async () => {
+      
       const payload = await factory.attrs('User', { firstname: null });
       const response = await app.inject({
         method: 'POST',
