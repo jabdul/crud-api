@@ -1,11 +1,11 @@
-import type { JestMockT } from 'jest';
-
-import create, { ROUTE_NAME } from './routes';
+import create, { ROUTE_NAME } from "./routes";
 
 describe(`Routes: ${ROUTE_NAME}`, () => {
   const services = {
     users: {
-      create: jest.fn().mockReturnValue('Thanks for opening account Mr Abiodun Abdul!!!'),
+      create: jest
+        .fn()
+        .mockReturnValue("Thanks for opening account Mr Abiodun Abdul!!!")
     }
   };
   const validate = {
@@ -17,8 +17,8 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
     required: jest.fn(),
     object: jest.fn().mockImplementation(() => ({
       unknown: jest.fn().mockReturnValue({})
-    })),
-  }
+    }))
+  };
   validate.string.mockImplementation(() => validate);
   validate.min.mockImplementation(() => validate);
   validate.max.mockImplementation(() => validate);
@@ -28,14 +28,14 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
 
   describe(`POST /${ROUTE_NAME}`, () => {
     const router = create({ services, validate });
-    const responseData = 'Thanks for opening account Mr Abiodun Abdul!!!';
+    const responseData = "Thanks for opening account Mr Abiodun Abdul!!!";
     const statusCode = 201;
-    const contentType = 'application/hal+json';
-    let mockRequest: { log: JestMockT } = { log : null };
+    const contentType = "application/hal+json";
+    let mockRequest = { log: null };
     let mockResponse = null;
-    let mockData: JestMockT = null;
-    let mockStatusCode: JestMockT = null;
-    let mockContentType: JestMockT = null;
+    let mockData = null;
+    let mockStatusCode = null;
+    let mockContentType = null;
 
     beforeEach(() => {
       mockData = jest.fn();
@@ -45,7 +45,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
       mockResponse = {
         response: mockData,
         code: mockStatusCode,
-        type: mockContentType,
+        type: mockContentType
       };
       mockData.mockImplementation(() => mockResponse);
       mockStatusCode.mockImplementation(() => mockResponse);
@@ -54,11 +54,11 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
     });
 
     it(`sets HTTP method POST on /${ROUTE_NAME} path`, () => {
-      expect(router.method).toBe('POST');
+      expect(router.method).toBe("POST");
       expect(router.path).toBe(`/${ROUTE_NAME}`);
     });
 
-    it('sets validation on request payload', () => {
+    it("sets validation on request payload", () => {
       const payload = router.options.validate.payload;
       expect(payload.firstname).toBeDefined();
       expect(payload.lastname).toBeDefined();
@@ -74,12 +74,12 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
       expect(mockContentType.mock.calls[0][0]).toBe(contentType);
     });
 
-    it('returns response data on success', async () => {
+    it("returns response data on success", async () => {
       await router.handler(mockRequest, mockResponse);
       expect(mockData.mock.calls[0][0]).toBe(responseData);
     });
 
-    it('logs tagged request', async () => {
+    it("logs tagged request", async () => {
       await router.handler(mockRequest, mockResponse);
       expect(mockRequest.log.mock.calls[0][0]).toEqual([`/${ROUTE_NAME}`]);
     });

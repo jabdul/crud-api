@@ -1,3 +1,4 @@
+import { ServerRoute } from "hapi";
 export const ROUTE_NAME = "users";
 
 const options = {
@@ -5,7 +6,7 @@ const options = {
   auth: false
 };
 
-export default ({ services, config, validate, uuid, json }) => ({
+export default ({ services, config, validate, uuid, json }): ServerRoute => ({
   method: "POST",
   path: `/${ROUTE_NAME}`,
   options: {

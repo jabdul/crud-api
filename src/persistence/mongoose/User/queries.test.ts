@@ -1,19 +1,19 @@
 import { factory } from "factory-girl";
 
-import _ from "../../../../test/factories/user"; // eslint-disable-line no-unused-vars
+import _ from "../../../../test/factories/user"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import queries from "./queries";
 
 import { mongooseConnect, dbConfig as config } from "../../../index";
 
 let db, userQueries;
 
-const verifyUser = user => {
+const verifyUser = (user): void => {
   expect(user).toHaveProperty("firstname");
   expect(user).toHaveProperty("lastname");
   expect(user).toHaveProperty("uuid");
 };
 
-const verifyResponse = ({ user, payload }) => {
+const verifyResponse = ({ user, payload }): void => {
   expect(user["firstname"]).toEqual(payload["firstname"]);
   expect(user["lastname"]).toEqual(payload["lastname"]);
   expect(user["uuid"]).toEqual(payload["uuid"]);

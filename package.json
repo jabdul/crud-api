@@ -10,7 +10,7 @@
     "dev": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/index.ts",
     "clean": "concurrently 'rimraf node_modules' 'rimraf lib/*'",
     "clean:build": "rm -rf lib/*",
-    "lint": "eslint 'src/**'",
+    "lint": "eslint 'src/**/**/*.ts'",
     "lint:ci": "eslint 'src/**' --format junit -o test/reports/junit/js-lint-results.xml",
     "postinstall": "[ \"$NODE_ENV\" == production ] && exit 0; yarn clean:build;",
     "prepublish": "NODE_ENV=production yarn build",

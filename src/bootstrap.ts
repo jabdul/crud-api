@@ -7,14 +7,14 @@ import { schema as mongooseSchema } from "./persistence/mongoose";
 import routes from "./routes";
 import services from "./services";
 
-import * as _ from "./env"; // eslint-disable-line no-unused-vars
+import "./env";
 
-const validate = async (/* payload, request*/) => {
+const validate = async (/* payload, request*/): Promise<object> => {
   // Apply validation check here...
   return { isValid: true };
 };
 
-const application = () =>
+const application = (): Promise<Hapi.Server> =>
   server({
     dbConnect: mongooseConnect,
     schema: mongooseSchema,

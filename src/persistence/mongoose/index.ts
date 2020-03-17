@@ -10,4 +10,5 @@ export const close = mongo => mongo.disconnect();
 mongoose.set("useCreateIndex", true);
 mongoose.set("bufferCommands", false);
 
-export default async config => connect(mongoose, config);
+export default async (config): Promise<mongoose.Connection> =>
+  connect(mongoose, config);

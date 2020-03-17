@@ -1,4 +1,10 @@
-const create = async ({ db, payload, config, uuid, json /*, log */ }) => {
+const create = async ({
+  db,
+  payload,
+  config,
+  uuid,
+  json /*, log */
+}): Promise<JSON> => {
   const uid = uuid();
   const result = await db.users.create({
     payload: { ...payload, uuid: uid },

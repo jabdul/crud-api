@@ -1,13 +1,12 @@
 import application from "../bootstrap";
 import { factory } from "factory-girl";
 
-import _ from "../../test/factories/user"; // eslint-disable-line no-unused-vars
-import { ROUTE_NAME } from "./routes";
+import _ from "../../test/factories/user"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 let app = null;
 const url = `/${ROUTE_NAME}`;
 
-const parsedResponse = ({ payload }) => JSON.parse(payload);
+const parsedResponse = ({ payload }): JSON => JSON.parse(payload);
 
 describe("Users", () => {
   beforeAll(async () => {

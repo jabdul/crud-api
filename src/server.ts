@@ -13,22 +13,19 @@ import good from "good";
 
 import checkApplicationHealth from "./monitoring/health/routes";
 
-export default async function start({
+export default async ({
   dbConnect,
   schema,
   config,
   routes,
   services,
   plugins = [],
-  postRegisterHook = () => {},
+  postRegisterHook,
   swaggerOptions = {},
   swaggerUiOptions = {},
   loggerOptions = {},
   serverOptions = {}
-}: {
-  routes: () => Array<({}) => mixed>;
-  plugins: Array<mixed>;
-}) {
+}): Promise<Hapi.Server> => {
   const tls = config.get("server.secure") && {
     key: fs.readFileSync(path.resolve(__dirname, config.get("server.tlsKey"))),
     cert: fs.readFileSync(path.resolve(__dirname, config.get("server.tlsCert")))
@@ -114,4 +111,4 @@ export default async function start({
     app.log(["error"], error);
     process.exit(1);
   }
-}
+};

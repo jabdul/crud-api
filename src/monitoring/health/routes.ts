@@ -1,3 +1,4 @@
+import { ServerRoute } from "hapi";
 export const ROUTE_NAME = "monitoring/healthz";
 
 const options = {
@@ -5,7 +6,7 @@ const options = {
   auth: false
 };
 
-export default () => ({
+export default (): ServerRoute => ({
   method: "GET",
   path: `/${ROUTE_NAME}`,
   options: {
