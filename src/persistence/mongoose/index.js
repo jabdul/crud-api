@@ -7,4 +7,10 @@ export const schema = client => queries(client);
 
 export const close = mongo => mongo.disconnect();
 
-export default async config => await connect(mongoose, config);
+export default async config => {
+  const client = connect(new mongoose.Mongoose(), config);
+  mongoose.set("useCreateIndex", true);
+  mongoose.set('bufferCommands', false);
+  
+  return client;
+}
