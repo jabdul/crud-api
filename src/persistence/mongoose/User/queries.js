@@ -10,7 +10,7 @@ const create = async ({ payload }) => {
   user.firstname = firstname;
   user.lastname = lastname;
   user.meta = meta
-
+  
   return await user.save();
 };
 

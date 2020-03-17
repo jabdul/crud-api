@@ -35,7 +35,6 @@ describe('Users queries', () => {
       const payload = await factory.attrs('User');
 
       const user = await userQueries.create({ payload });
-      console.log(user) // eslint-disable-line no-console
 
       expect(user).toBeDefined()
 
