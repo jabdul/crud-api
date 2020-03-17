@@ -9,7 +9,7 @@ export const close = mongo => mongo.disconnect();
 
 export default async config => {
   const client = connect(new mongoose.Mongoose(), config);
-  mongoose.set("useCreateIndex", true);
+  mongoose.set('useCreateIndex', true);
   mongoose.set('bufferCommands', false);
   
   return client;
