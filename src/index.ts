@@ -20,7 +20,7 @@ export const server = async ({
   swaggerOptions,
   swaggerUiOptions,
   loggerOptions
-}): Promise<Server> =>
+}: CrudApiArgs): Promise<Server> =>
   await serverFactory({
     dbConnect,
     schema,
@@ -61,4 +61,20 @@ export interface RouteArgs extends LoggableArgs {
 
 export interface QueryArgs extends Args {
   client: any;
+}
+
+export interface CrudApiArgs {
+  services(db): object;
+  dbConnect: any;
+  schema: any;
+  serverOptions: any;
+  config: any;
+  configOptions: any;
+  configFiles: Array<string>;
+  routes(): Function[];
+  plugins: any;
+  postRegisterHook(app): Promise<void>;
+  swaggerOptions: any;
+  swaggerUiOptions: any;
+  loggerOptions: any;
 }

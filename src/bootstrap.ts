@@ -6,6 +6,7 @@ import { conf as env } from "./config";
 import { schema as mongooseSchema } from "./persistence/mongoose";
 import routes from "./routes";
 import services from "./services";
+import { Server } from "hapi";
 
 import "./env";
 
@@ -14,7 +15,7 @@ const validate = async (/* payload, request*/): Promise<object> => {
   return { isValid: true };
 };
 
-const application = (): Promise<Hapi.Server> =>
+const application = (): Promise<Server> =>
   server({
     dbConnect: mongooseConnect,
     schema: mongooseSchema,
