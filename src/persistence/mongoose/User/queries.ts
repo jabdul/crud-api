@@ -1,8 +1,9 @@
 import { pickBy, omit } from "ramda";
 
 import User from "./model";
+import { QueryArgs } from "src";
 
-const create = async ({ payload }) => {
+const create = async ({ payload }: QueryArgs) => {
   const user = new User();
 
   const { uuid, firstname, lastname, meta } = payload;
@@ -14,9 +15,10 @@ const create = async ({ payload }) => {
   return await user.save();
 };
 
-const findById = async ({ payload }) => User.findOne({ uuid: payload.uuid });
+const findById = async ({ payload }: QueryArgs) =>
+  User.findOne({ uuid: payload.uuid });
 
-const updateById = async ({ payload }) =>
+const updateById = async ({ payload }: QueryArgs) =>
   User.updateOne(
     { uuid: payload.uuid },
     {
@@ -30,10 +32,10 @@ const updateById = async ({ payload }) =>
   );
 
 export default client => ({
-  create: async ({ payload, config }) =>
+  create: async ({ payload, config }: QueryArgs) =>
     await create({ client, payload, config }),
-  findById: async ({ payload, config }) =>
+  findById: async ({ payload, config }: QueryArgs) =>
     await findById({ client, payload, config }),
-  updateById: async ({ payload, config }) =>
+  updateById: async ({ payload, config }: QueryArgs) =>
     await updateById({ client, payload, config })
 });

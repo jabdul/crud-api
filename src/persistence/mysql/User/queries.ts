@@ -1,4 +1,6 @@
-const create = async ({ client, payload }) => {
+import { QueryArgs } from "src";
+
+const create = async ({ client, payload }: QueryArgs) => {
   const result = await client
     .table("users")
     .insert({
@@ -12,6 +14,6 @@ const create = async ({ client, payload }) => {
 };
 
 export default client => ({
-  create: async ({ payload, config }) =>
+  create: async ({ payload, config }: QueryArgs) =>
     await create({ client, payload, config })
 });

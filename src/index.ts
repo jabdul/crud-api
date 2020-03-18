@@ -45,7 +45,7 @@ interface Args {
 }
 
 interface LoggableArgs extends Args {
-  uuid?: string;
+  uuid?: Function;
   json: any;
   log?: any;
 }

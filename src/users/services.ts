@@ -1,10 +1,12 @@
+import { ServiceArgs } from "src";
+
 const create = async ({
   db,
   payload,
   config,
   uuid,
   json /*, log */
-}): Promise<JSON> => {
+}: ServiceArgs): Promise<JSON> => {
   const uid = uuid();
   const result = await db.users.create({
     payload: { ...payload, uuid: uid },
@@ -23,6 +25,6 @@ const create = async ({
 };
 
 export default db => ({
-  create: async ({ payload, config, uuid, json, log }) =>
+  create: async ({ payload, config, uuid, json, log }: ServiceArgs) =>
     await create({ db, payload, config, uuid, json, log })
 });

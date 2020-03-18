@@ -1,4 +1,4 @@
-import { ServerRoute } from "hapi";
+import { ServerRoute, RouteOptions } from "hapi";
 export const ROUTE_NAME = "monitoring/healthz";
 
 const options = {
@@ -12,7 +12,7 @@ export default (): ServerRoute => ({
   options: {
     ...options,
     tags: ["api"]
-  },
+  } as RouteOptions,
   handler: async (request, h) => {
     request.log([`/${ROUTE_NAME}`], "Checking application health.");
     return h
