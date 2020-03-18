@@ -1,4 +1,4 @@
-import convict from "convict";
+import convict, { Config } from "convict";
 
 const mongoConfig = {
   mongo: {
@@ -149,25 +149,29 @@ export const conf = {
   ...mongoConfig
 };
 
-const loadConfig = (appConfig = {}, configFiles, options = {}) =>
+const convictLoader = ({
+  appConfig = null,
+  base = null,
+  configFiles = null,
+  options = {}
+}): Config<object> => {
+  const config = convict({ ...(appConfig || {}), ...(base || {}) }).load(
+    options
+  );
+  return configFiles ? config.loadFile(configFiles) : config;
+};
+
+const loadConfig = (
+  appConfig = {},
+  configFiles,
+  options = {}
+): Config<object> =>
   convictLoader({
     appConfig,
     configFiles,
     base: conf,
     options
   });
-
-const convictLoader = ({
-  appConfig = null,
-  base = null,
-  configFiles = null,
-  options = {}
-}) => {
-  const config = convict({ ...(appConfig || {}), ...(base || {}) }).load(
-    options
-  );
-  return configFiles ? config.loadFile(configFiles) : config;
-};
 
 export const dbConfig = convictLoader({ base: mongoConfig });
 

@@ -1,4 +1,6 @@
-export default config => ({
+import { Config } from "knex";
+
+export default (config): Config => ({
   client: "mysql",
   connection: {
     host: config.get("mysql.host"),
