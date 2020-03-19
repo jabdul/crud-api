@@ -4,7 +4,7 @@ import mysqlConnect from "./persistence/mysql";
 import mongooseConnect from "./persistence/mongoose";
 import Joi from "@hapi/joi";
 import { Config } from "convict";
-import { Server } from "hapi";
+import { Server, ServerOptions } from "hapi";
 import { SchemaBuilder } from "knex";
 import { Connection } from "mongoose";
 
@@ -68,9 +68,9 @@ export interface CrudApiArgs {
   services(db): object;
   dbConnect(config: Config<{}>): Promise<Connection> | SchemaBuilder;
   schema: any;
-  serverOptions: any;
-  config: any;
-  configOptions: any;
+  serverOptions: ServerOptions;
+  config: object;
+  configOptions: object;
   configFiles: Array<string>;
   routes(): Function[];
   plugins: any;
