@@ -1,4 +1,5 @@
 import { ServerRoute, RouteOptions } from "hapi";
+import { RouteArgs } from "src";
 export const ROUTE_NAME = "users";
 
 const options = {
@@ -6,7 +7,13 @@ const options = {
   auth: false
 };
 
-export default ({ services, config, validate, uuid, json }): ServerRoute => ({
+export default ({
+  services,
+  config,
+  validate,
+  uuid,
+  json
+}: RouteArgs): ServerRoute => ({
   method: "POST",
   path: `/${ROUTE_NAME}`,
   options: {

@@ -1,7 +1,8 @@
 import application from "../bootstrap";
 import { factory } from "factory-girl";
+import { ROUTE_NAME } from "./routes";
 
-import _ from "../../test/factories/user"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import "../../test/factories/user";
 
 let app = null;
 const url = `/${ROUTE_NAME}`;

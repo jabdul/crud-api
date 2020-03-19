@@ -2,7 +2,7 @@ import create, { ROUTE_NAME } from "./routes";
 
 describe(`Routes: ${ROUTE_NAME}`, () => {
   describe(`GET /${ROUTE_NAME}`, () => {
-    const router = create();
+    const router = create() as any;
     const responseData = JSON.stringify("OK");
     const statusCode = 200;
     const contentType = "application/json";

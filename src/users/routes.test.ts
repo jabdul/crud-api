@@ -27,7 +27,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
   validate.boolean.mockImplementation(() => validate);
 
   describe(`POST /${ROUTE_NAME}`, () => {
-    const router = create({ services, validate });
+    const router: any = create({ services, validate });
     const responseData = "Thanks for opening account Mr Abiodun Abdul!!!";
     const statusCode = 201;
     const contentType = "application/hal+json";

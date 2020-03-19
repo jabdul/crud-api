@@ -46,7 +46,7 @@ interface Args {
 
 interface LoggableArgs extends Args {
   uuid?: Function;
-  json: any;
+  json?: any;
   log?: any;
 }
 
@@ -55,8 +55,8 @@ export interface ServiceArgs extends LoggableArgs {
 }
 
 export interface RouteArgs extends LoggableArgs {
-  services: any;
-  validate: Joi;
+  services?: any;
+  validate?: Joi;
 }
 
 export interface QueryArgs extends Args {
