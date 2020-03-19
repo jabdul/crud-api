@@ -5,6 +5,8 @@ import mongooseConnect from "./persistence/mongoose";
 import Joi from "@hapi/joi";
 import { Config } from "convict";
 import { Server } from "hapi";
+import { SchemaBuilder } from "knex";
+import { Connection } from "mongoose";
 
 export const server = async ({
   dbConnect,
@@ -62,10 +64,9 @@ export interface RouteArgs extends LoggableArgs {
 export interface QueryArgs extends Args {
   client: any;
 }
-
 export interface CrudApiArgs {
   services(db): object;
-  dbConnect: any;
+  dbConnect(config: Config<{}>): Promise<Connection> | SchemaBuilder;
   schema: any;
   serverOptions: any;
   config: any;
