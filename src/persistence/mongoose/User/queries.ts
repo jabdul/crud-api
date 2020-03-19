@@ -1,9 +1,9 @@
 import { pickBy, omit } from "ramda";
 
-import User from "./model";
+import User, { UserI } from "./model";
 import { QueryArgs } from "src";
 
-const create = async ({ payload }: QueryArgs) => {
+const create = async ({ payload }: QueryArgs): Promise<UserI> => {
   const user = new User();
 
   const { uuid, firstname, lastname, meta } = payload;
@@ -15,10 +15,10 @@ const create = async ({ payload }: QueryArgs) => {
   return await user.save();
 };
 
-const findById = async ({ payload }: QueryArgs) =>
+const findById = async ({ payload }: QueryArgs): Promise<UserI> =>
   User.findOne({ uuid: payload.uuid });
 
-const updateById = async ({ payload }: QueryArgs) =>
+const updateById = async ({ payload }: QueryArgs): Promise<object> =>
   User.updateOne(
     { uuid: payload.uuid },
     {

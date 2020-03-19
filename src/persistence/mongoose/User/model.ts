@@ -15,7 +15,7 @@ interface UserFields {
 
 export interface UserI extends UserFields, Document {}
 
-export const MetaSchema = new mongoose.Schema(
+export const MetaSchema: Schema = new mongoose.Schema(
   {
     active: { type: Boolean, default: true },
     updated: { type: Date },

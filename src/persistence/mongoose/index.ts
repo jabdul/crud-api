@@ -5,7 +5,7 @@ import queries from "./queries";
 
 export const schema = client => queries(client);
 
-export const close = mongo => mongo.disconnect();
+export const close = (mongo): Promise<void> => mongo.disconnect();
 
 mongoose.set("useCreateIndex", true);
 mongoose.set("bufferCommands", false);

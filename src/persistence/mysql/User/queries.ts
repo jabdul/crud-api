@@ -1,6 +1,6 @@
 import { QueryArgs } from "src";
 
-const create = async ({ client, payload }: QueryArgs) => {
+const create = async ({ client, payload }: QueryArgs): Promise<boolean> => {
   const result = await client
     .table("users")
     .insert({

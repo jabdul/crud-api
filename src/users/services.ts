@@ -24,7 +24,11 @@ const create = async ({
   return json(result._doc).addLink("self", `/users/${uid}`);
 };
 
-export default db => ({
+export interface Services {
+  create({ db, payload, config, json }: ServiceArgs): Promise<JSON>;
+}
+
+export default (db): Services => ({
   create: async ({ payload, config, uuid, json, log }: ServiceArgs) =>
     await create({ db, payload, config, uuid, json, log })
 });
