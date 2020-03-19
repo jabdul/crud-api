@@ -13,7 +13,7 @@ const create = async ({ client, payload }: QueryArgs): Promise<boolean> => {
   return result.length && Number.isFinite(result[0]);
 };
 
-export default (client): any => ({
+export default (client): object => ({
   create: async ({ payload, config }: QueryArgs) =>
     await create({ client, payload, config })
 });

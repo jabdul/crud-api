@@ -31,7 +31,7 @@ const updateById = async ({ payload }: QueryArgs): Promise<object> =>
     }
   );
 
-export default (client): any => ({
+export default (client): object => ({
   create: async ({ payload, config }: QueryArgs) =>
     await create({ client, payload, config }),
   findById: async ({ payload, config }: QueryArgs) =>
