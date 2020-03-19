@@ -11,7 +11,7 @@
     "clean": "concurrently 'rimraf node_modules' 'rimraf lib/*'",
     "clean:build": "rm -rf lib/*",
     "lint": "eslint 'src/**/**/*.ts'",
-    "lint:ci": "eslint 'src/**' --format junit -o test/reports/junit/js-lint-results.xml",
+    "lint:ci": "eslint 'src/**/*.ts' --format junit -o test/reports/junit/js-lint-results.xml",
     "postinstall": "[ \"$NODE_ENV\" == production ] && exit 0; yarn clean:build;",
     "prepublish": "NODE_ENV=production yarn build",
     "pretest": "yarn lint",
