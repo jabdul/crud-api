@@ -1,5 +1,5 @@
 import users from "./users/services";
 
-export default db => ({
+export default (db): any => ({
   users: users(db)
 });
