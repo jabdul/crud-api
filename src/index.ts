@@ -73,9 +73,9 @@ export interface CrudApiArgs {
   configOptions: object;
   configFiles: Array<string>;
   routes(): Function[];
-  plugins: any;
+  plugins: object[];
   postRegisterHook(app): Promise<void>;
-  swaggerOptions: any;
-  swaggerUiOptions: any;
-  loggerOptions: any;
+  swaggerOptions: object;
+  swaggerUiOptions: object;
+  loggerOptions: object;
 }
