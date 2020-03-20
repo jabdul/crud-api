@@ -118,7 +118,7 @@ describe('Users queries', () => {
         payload: { uuid: uuid },
       });
 
-      expect(findOneUser).toBeNull(0);
+      expect(findOneUser).toBeNull();
     });
   });
 });
