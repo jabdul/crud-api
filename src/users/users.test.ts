@@ -32,7 +32,7 @@ describe('Users', () => {
 
       expect(response.statusCode).toBe(201);
       expect(response.statusMessage).toBe('Created');
-      expect(response.headers['content-type']).toEqual('application/hal+json');
+      expect(response.headers['content-type-']).toEqual('application/hal+json');
 
       const user = parsedResponse(response);
       expect(user).toHaveProperty('firstname');

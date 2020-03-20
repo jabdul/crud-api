@@ -81,6 +81,18 @@
     "type": "git",
     "url": "git+ssh://git@github.com:jabdul/microservice-boilerplate.git#master"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn run test --onlyChanged",
+      "pre-push": "yarn run test --onlyChanged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js, tsx, ts}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
