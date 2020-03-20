@@ -1,17 +1,17 @@
-import fs from "fs";
-import path from "path";
-import Hapi from "@hapi/hapi";
-import Joi from "joi";
-import uuid from "uuid";
-import halson from "halson";
-import swaggered from "hapi-swaggered";
-import swaggeredUI from "hapi-swaggered-ui";
-import vision from "vision";
-import inert from "inert";
-import requireHttps from "hapi-require-https";
-import good from "good";
+import fs from 'fs';
+import path from 'path';
+import Hapi from '@hapi/hapi';
+import Joi from 'joi';
+import uuid from 'uuid';
+import halson from 'halson';
+import swaggered from 'hapi-swaggered';
+import swaggeredUI from 'hapi-swaggered-ui';
+import vision from 'vision';
+import inert from 'inert';
+import requireHttps from 'hapi-require-https';
+import good from 'good';
 
-import checkApplicationHealth from "./monitoring/health/routes";
+import checkApplicationHealth from './monitoring/health/routes';
 
 export default async ({
   dbConnect,
@@ -24,33 +24,31 @@ export default async ({
   swaggerOptions = {},
   swaggerUiOptions = {},
   loggerOptions = {},
-  serverOptions = {}
+  serverOptions = {},
 }): Promise<Hapi.Server> => {
-  const tls = config.get("server.secure") && {
-    key: fs.readFileSync(path.resolve(__dirname, config.get("server.tlsKey"))),
-    cert: fs.readFileSync(path.resolve(__dirname, config.get("server.tlsCert")))
+  const tls = config.get('server.secure') && {
+    key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
+    cert: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsCert'))),
   };
   const app = new Hapi.Server({
-    host: config.get("server.hostname"),
-    port: config.get("server.port"),
+    host: config.get('server.hostname'),
+    port: config.get('server.port'),
     tls,
     debug: {
-      request: ["error", "info", "warn"],
-      log: ["error", "info", "warn"]
+      request: ['error', 'info', 'warn'],
+      log: ['error', 'info', 'warn'],
     },
-    ...serverOptions
+    ...serverOptions,
   });
 
-  process.on("unhandledRejection", error => {
-    app.log(["error"], error);
+  process.on('unhandledRejection', error => {
+    app.log(['error'], error);
     process.exit(1);
   });
 
-  app.events.on("log", (event, tags) => {
+  app.events.on('log', (event, tags) => {
     if (tags.error) {
-      console.log(
-        `Server error: ${event.error ? event.error.stack : "unknown"}`
-      ); // eslint-disable-line no-console
+      console.log(`Server error: ${event.error ? event.error.stack : 'unknown'}`); // eslint-disable-line no-console
     }
   });
 
@@ -61,9 +59,9 @@ export default async ({
       { plugin: swaggered, options: swaggerOptions },
       { plugin: swaggeredUI, options: swaggerUiOptions },
       { plugin: good, options: loggerOptions },
-      { plugin: requireHttps, options: {} }
+      { plugin: requireHttps, options: {} },
     ],
-    ...plugins
+    ...plugins,
   ]);
 
   await postRegisterHook.call(this, app);
@@ -74,23 +72,22 @@ export default async ({
 
   try {
     app.method({
-      name: "services",
+      name: 'services',
       method: () => serve,
-      options: {}
+      options: {},
     });
 
     app.method({
-      name: "config",
+      name: 'config',
       method: () => config,
-      options: {}
+      options: {},
     });
 
     app.method({
-      name: "json",
+      name: 'json',
       method: () => halson,
-      options: {}
+      options: {},
     });
-
     [checkApplicationHealth, ...routes()].map(
       async route =>
         await app.route(
@@ -99,7 +96,7 @@ export default async ({
             config,
             validate: Joi,
             uuid,
-            json: halson
+            json: halson,
           })
         )
     );
@@ -108,7 +105,7 @@ export default async ({
     process.env.NODE_ENV !== 'test' && console.info('Server setup completed...'); // eslint-disable-line
     return app;
   } catch (error) {
-    app.log(["error"], error);
+    app.log(['error'], error);
     process.exit(1);
   }
 };

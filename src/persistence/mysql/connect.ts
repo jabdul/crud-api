@@ -1,11 +1,11 @@
-import { Config } from "knex";
+import { Config } from 'knex';
 
 export default (config): Config => ({
-  client: "mysql",
+  client: 'mysql',
   connection: {
-    host: config.get("mysql.host"),
-    user: config.get("mysql.user"),
-    password: config.get("mysql.pass"),
-    database: config.get("mysql.database")
-  }
+    host: config.get('mysql.host'),
+    user: config.get('mysql.user'),
+    password: config.get('mysql.pass'),
+    database: config.get('mysql.database'),
+  },
 });

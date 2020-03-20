@@ -1,20 +1,14 @@
-import { ServerRoute, RouteOptions } from "hapi";
-import { RouteArgs } from "src";
-export const ROUTE_NAME = "users";
+import { ServerRoute, RouteOptions } from 'hapi';
+import { RouteArgs } from 'src';
+export const ROUTE_NAME = 'users';
 
 const options = {
   log: { collect: true },
-  auth: false
+  auth: false,
 };
 
-export default ({
-  services,
-  config,
-  validate,
-  uuid,
-  json
-}: RouteArgs): ServerRoute => ({
-  method: "POST",
+export default ({ services, config, validate, uuid, json }: RouteArgs): ServerRoute => ({
+  method: 'POST',
   path: `/${ROUTE_NAME}`,
   options: {
     ...options,
@@ -22,7 +16,7 @@ export default ({
       failAction: async (request, h, err) => err, // eslint-disable-line
       headers: validate
         .object({
-          authorization: validate.string().optional()
+          authorization: validate.string().optional(),
           // 'host': validate.string().optional(),
           // 'accept-encoding': validate.string().optional(),
           // 'connection': validate.string().optional(),
@@ -43,14 +37,14 @@ export default ({
           .min(2)
           .max(64),
         meta: validate.object({
-          active: validate.boolean()
-        })
-      }
+          active: validate.boolean(),
+        }),
+      },
     },
-    tags: ["api"]
+    tags: ['api'],
   } as RouteOptions,
   handler: async (request, h) => {
-    request.log([`/${ROUTE_NAME}`], "Create new user");
+    request.log([`/${ROUTE_NAME}`], 'Create new user');
     return h
       .response(
         await services[ROUTE_NAME].create({
@@ -58,10 +52,10 @@ export default ({
           config,
           uuid,
           json,
-          log: request.log
+          log: request.log,
         })
       )
       .code(201)
-      .type("application/hal+json");
-  }
+      .type('application/hal+json');
+  },
 });

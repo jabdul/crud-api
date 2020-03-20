@@ -1,11 +1,11 @@
-import create, { ROUTE_NAME } from "./routes";
+import create, { ROUTE_NAME } from './routes';
 
 describe(`Routes: ${ROUTE_NAME}`, () => {
   describe(`GET /${ROUTE_NAME}`, () => {
     const router = create() as any; // eslint-disable-line @typescript-eslint/no-explicit-any
-    const responseData = JSON.stringify("OK");
+    const responseData = JSON.stringify('OK');
     const statusCode = 200;
-    const contentType = "application/json";
+    const contentType = 'application/json';
     let mockRequest = { log: null };
     let mockResponse = null;
     let mockData = null;
@@ -20,7 +20,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
       mockResponse = {
         response: mockData,
         code: mockStatusCode,
-        type: mockContentType
+        type: mockContentType,
       };
       mockData.mockImplementation(() => mockResponse);
       mockStatusCode.mockImplementation(() => mockResponse);
@@ -29,7 +29,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
     });
 
     it(`sets HTTP method POST on /${ROUTE_NAME} path`, () => {
-      expect(router.method).toBe("GET");
+      expect(router.method).toBe('GET');
       expect(router.path).toBe(`/${ROUTE_NAME}`);
     });
 
@@ -43,12 +43,12 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
       expect(mockContentType.mock.calls[0][0]).toBe(contentType);
     });
 
-    it("returns response data on success", async () => {
+    it('returns response data on success', async () => {
       await router.handler(mockRequest, mockResponse);
       expect(mockData.mock.calls[0][0]).toBe(responseData);
     });
 
-    it("logs tagged request", async () => {
+    it('logs tagged request', async () => {
       await router.handler(mockRequest, mockResponse);
       expect(mockRequest.log.mock.calls[0][0]).toEqual([`/${ROUTE_NAME}`]);
     });

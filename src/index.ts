@@ -1,12 +1,12 @@
-import setupConfig, { conf as env, dbConfig } from "./config";
-import serverFactory from "./server";
-import mysqlConnect from "./persistence/mysql";
-import mongooseConnect from "./persistence/mongoose";
-import Joi from "@hapi/joi";
-import { Config } from "convict";
-import { Server, ServerOptions } from "hapi";
-import { SchemaBuilder } from "knex";
-import { Connection } from "mongoose";
+import setupConfig, { conf as env, dbConfig } from './config';
+import serverFactory from './server';
+import mysqlConnect from './persistence/mysql';
+import mongooseConnect from './persistence/mongoose';
+import Joi from '@hapi/joi';
+import { Config } from 'convict';
+import { Server, ServerOptions } from 'hapi';
+import { SchemaBuilder } from 'knex';
+import { Connection } from 'mongoose';
 
 export const server = async ({
   dbConnect,
@@ -21,7 +21,7 @@ export const server = async ({
   postRegisterHook,
   swaggerOptions,
   swaggerUiOptions,
-  loggerOptions
+  loggerOptions,
 }: CrudApiArgs): Promise<Server> =>
   await serverFactory({
     dbConnect,
@@ -34,7 +34,7 @@ export const server = async ({
     postRegisterHook,
     swaggerOptions,
     swaggerUiOptions,
-    loggerOptions
+    loggerOptions,
   });
 
 const config = env;

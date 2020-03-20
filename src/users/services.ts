@@ -1,16 +1,10 @@
-import { ServiceArgs, Crud } from "src";
+import { ServiceArgs, Crud } from 'src';
 
-const create = async ({
-  db,
-  payload,
-  config,
-  uuid,
-  json /*, log */
-}: ServiceArgs): Promise<JSON> => {
+const create = async ({ db, payload, config, uuid, json /*, log */ }: ServiceArgs): Promise<JSON> => {
   const uid = uuid();
   const result = await db.users.create({
     payload: { ...payload, uuid: uid },
-    config
+    config,
   });
 
   if (!result) {
@@ -21,10 +15,10 @@ const create = async ({
   //   firstnam, last
   // }
 
-  return json(result._doc).addLink("self", `/users/${uid}`);
+  return json(result._doc).addLink('self', `/users/${uid}`);
 };
 
 export default (db): Crud<JSON> => ({
   create: async ({ payload, config, uuid, json, log }: ServiceArgs) =>
-    await create({ db, payload, config, uuid, json, log })
+    await create({ db, payload, config, uuid, json, log }),
 });

@@ -3,6 +3,7 @@
   "version": "1.4.9",
   "description": "A microservice boilerplate",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "yarn clean:build && tsc",
     "build:watch": "yarn run clean:build && yarn run build --watch src",
@@ -21,10 +22,6 @@
     "test:watch": "yarn test --watch",
     "validate": "npm ls"
   },
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
   "files": [
     "lib"
   ],
@@ -50,11 +47,12 @@
     "eslint-plugin-prettier": "3.1.2",
     "factory-girl": "5.0.4",
     "hapi-auth-jwt2": "8.1.0",
+    "husky": "4.2.3",
     "inert": "5.1.0",
     "jest": "25.1.0",
     "jest-junit": "10.0.0",
+    "lint-staged": "10.0.8",
     "nodemon": "2.0.2",
-    "precommit-hook-eslint": "3.0.0",
     "prettier": "1.19.1",
     "ts-jest": "25.2.1",
     "ts-node": "^8.6.2",
