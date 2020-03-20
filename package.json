@@ -90,7 +90,7 @@
   "lint-staged": {
     "**/*.{js, tsx, ts}": [
       "eslint --fix",
-      "jest --bail --findRelatedTests"
+      "yarn test"
     ]
   },
   "publishConfig": {
