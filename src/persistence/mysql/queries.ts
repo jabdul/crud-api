@@ -1,5 +1,6 @@
 import users from "./User/queries";
+import { Dict } from "src";
 
-export default (client): any => ({
+export default (client): Dict => ({
   users: users(client)
 });

@@ -41,33 +41,53 @@ const config = env;
 
 export { mysqlConnect, mongooseConnect, config, dbConfig };
 
+export type DbClient = Promise<Connection> | SchemaBuilder;
 interface Args {
-  payload?: any;
+  payload?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   config?: Config<object>;
 }
 
 interface LoggableArgs extends Args {
   uuid?: Function;
-  json?: any;
-  log?: any;
+  json?: Function;
+  log?: Function;
 }
 
 export interface ServiceArgs extends LoggableArgs {
-  db: any;
+  db: Dict;
 }
 
 export interface RouteArgs extends LoggableArgs {
-  services?: any;
+  services?: Dict;
   validate?: Joi;
 }
 
 export interface QueryArgs extends Args {
-  client: any;
+  client: DbClient;
 }
+
+interface CrudArgs extends Args {
+  db?: Dict;
+  client?: DbClient;
+  json?: Function;
+}
+
+export interface Crud<T> {
+  create?(CrudArgs): Promise<T>;
+  findAll?(CrudArgs): Promise<object | T[]>;
+  findById?(CrudArgs): Promise<T>;
+  removeById?(CrudApiArgs): Promise<void>;
+  updateById?(CrudApiArgs): Promise<object>;
+}
+
+export type Dict = { [k: string]: Crud<any> }; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+export type Schema = (client: DbClient) => Dict;
+
 export interface CrudApiArgs {
   services(db): object;
-  dbConnect(config: Config<{}>): Promise<Connection> | SchemaBuilder;
-  schema: any;
+  dbConnect(config: Config<{}>): DbClient;
+  schema: Schema;
   serverOptions: ServerOptions;
   config: object;
   configOptions: object;

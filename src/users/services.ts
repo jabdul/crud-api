@@ -1,4 +1,4 @@
-import { ServiceArgs } from "src";
+import { ServiceArgs, Crud } from "src";
 
 const create = async ({
   db,
@@ -24,11 +24,7 @@ const create = async ({
   return json(result._doc).addLink("self", `/users/${uid}`);
 };
 
-export interface Services {
-  create({ db, payload, config, json }: ServiceArgs): Promise<JSON>;
-}
-
-export default (db): Services => ({
+export default (db): Crud<JSON> => ({
   create: async ({ payload, config, uuid, json, log }: ServiceArgs) =>
     await create({ db, payload, config, uuid, json, log })
 });

@@ -27,7 +27,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
   validate.boolean.mockImplementation(() => validate);
 
   describe(`POST /${ROUTE_NAME}`, () => {
-    const router: any = create({ services, validate });
+    const router: any = create({ services, validate }); // eslint-disable-line @typescript-eslint/no-explicit-any
     const responseData = "Thanks for opening account Mr Abiodun Abdul!!!";
     const statusCode = 201;
     const contentType = "application/hal+json";

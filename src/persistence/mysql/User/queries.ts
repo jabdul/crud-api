@@ -1,6 +1,6 @@
-import { QueryArgs } from "src";
+import { QueryArgs, Crud } from "src";
 
-const create = async ({ client, payload }: QueryArgs): Promise<boolean> => {
+const create = async ({ client, payload }): Promise<boolean> => {
   const result = await client
     .table("users")
     .insert({
@@ -13,7 +13,6 @@ const create = async ({ client, payload }: QueryArgs): Promise<boolean> => {
   return result.length && Number.isFinite(result[0]);
 };
 
-export default (client): object => ({
-  create: async ({ payload, config }: QueryArgs) =>
-    await create({ client, payload, config })
+export default (client): Crud<boolean> => ({
+  create: async ({ payload }: QueryArgs) => await create({ client, payload })
 });
