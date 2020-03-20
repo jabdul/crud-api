@@ -83,13 +83,14 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && yarn run test --onlyChanged",
-      "pre-push": "yarn run test --lastCommit"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run test"
     }
   },
   "lint-staged": {
     "**/*.{js, tsx, ts}": [
-      "eslint --fix"
+      "eslint --fix",
+      "jest --bail --findRelatedTests"
     ]
   },
   "publishConfig": {
