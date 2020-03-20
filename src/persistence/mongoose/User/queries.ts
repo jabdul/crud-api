@@ -19,7 +19,7 @@ const findById = async ({ payload }: QueryArgs): Promise<UserI> => User.findOne(
 
 const updateById = async ({ payload }: QueryArgs): Promise<object> =>
   User.updateOne(
-    { uuid: payload.uuid },
+    { uuid: payload.uuidv },
     {
       $set: {
         ...pickBy(val => val !== undefined, {
