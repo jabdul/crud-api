@@ -12,4 +12,4 @@ export const close = (mongo: Mongoose): Promise<void> => mongo.disconnect();
 mongoose.set('useCreateIndex', true);
 mongoose.set('bufferCommands', false);
 
-export default async (config: Config<object>): Promise<Mongoose> => connect(mongoose, config);
+export default (config: Config<object>): Promise<Mongoose> => connect(mongoose, config);

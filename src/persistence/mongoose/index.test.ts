@@ -1,7 +1,7 @@
 import Mongoose from 'mongoose';
 
 import dbConnect, { close } from '.';
-import config from '../../config';
+import { dbConfig as config } from '../../config';
 
 describe('mongoose', () => {
   describe('.connect', () => {

@@ -3,16 +3,9 @@ import { pickBy, omit } from 'ramda';
 import User, { UserI } from './model';
 import { QueryArgs, Query, DbClient } from 'src';
 
-const create = async ({ payload }: QueryArgs): Promise<UserI> => {
-  const user = new User();
-
-  const { uuid, firstname, lastname, meta } = payload;
-  user.uuid = uuid;
-  user.firstname = firstname;
-  user.lastname = lastname;
-  user.meta = meta;
-
-  return await user.save();
+const create = ({ payload }: QueryArgs): Promise<UserI> => {
+  const user = new User({ ...payload });
+  return user.save();
 };
 
 const findById = async ({ payload }: QueryArgs): Promise<UserI> => User.findOne({ uuid: payload.uuid });
