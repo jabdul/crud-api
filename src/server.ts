@@ -12,6 +12,7 @@ import requireHttps from 'hapi-require-https';
 import good from 'good';
 
 import checkApplicationHealth from './monitoring/health/routes';
+import { ServerArgs } from 'src';
 
 export default async ({
   dbConnect,
@@ -25,7 +26,7 @@ export default async ({
   swaggerUiOptions = {},
   loggerOptions = {},
   serverOptions = {},
-}): Promise<Hapi.Server> => {
+}: ServerArgs): Promise<Hapi.Server> => {
   const tls = config.get('server.secure') && {
     key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
     cert: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsCert'))),

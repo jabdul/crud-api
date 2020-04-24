@@ -1,6 +1,6 @@
 import users from './User/queries';
-import { Dict } from 'src';
+import { Dict, DbClient } from 'src';
 
-export default (client): Dict => ({
+export default (client: DbClient): Dict => ({
   users: users(client),
 });

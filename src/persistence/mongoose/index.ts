@@ -1,14 +1,15 @@
-import mongoose, { Connection } from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
 
 import connect from './connect';
 import queries from './queries';
 import { DbClient, Dict } from '../../';
+import { Config } from 'convict';
 
 export const schema = (client: DbClient): Dict => queries(client);
 
-export const close = (mongo): Promise<void> => mongo.disconnect();
+export const close = (mongo: Mongoose): Promise<void> => mongo.disconnect();
 
 mongoose.set('useCreateIndex', true);
 mongoose.set('bufferCommands', false);
 
-export default async (config): Promise<Connection> => connect(mongoose, config);
+export default async (config: Config<object>): Promise<Mongoose> => connect(mongoose, config);

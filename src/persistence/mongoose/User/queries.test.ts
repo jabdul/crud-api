@@ -1,6 +1,6 @@
 import { factory } from 'factory-girl';
 
-import '../../../../test/factories/user'; // eslint-disable-line @typescript-eslint/no-unused-vars
+import '../../../../test/factories/user';
 import queries from './queries';
 
 import { mongooseConnect, dbConfig as config } from '../../../index';

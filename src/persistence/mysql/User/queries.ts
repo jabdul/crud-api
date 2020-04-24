@@ -1,4 +1,4 @@
-import { QueryArgs, Crud } from 'src';
+import { QueryArgs, Crud, DbClient } from 'src';
 
 const create = async ({ client, payload }): Promise<boolean> => {
   const result = await client
@@ -13,6 +13,6 @@ const create = async ({ client, payload }): Promise<boolean> => {
   return result.length && Number.isFinite(result[0]);
 };
 
-export default (client): Crud<boolean> => ({
+export default (client: DbClient): Crud<boolean> => ({
   create: async ({ payload }: QueryArgs) => await create({ client, payload }),
 });

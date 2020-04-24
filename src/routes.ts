@@ -1,3 +1,4 @@
 import createUser from './users/routes';
+import { Route } from 'src';
 
-export default (): Function[] => [createUser];
+export default (): Route[] => [createUser];

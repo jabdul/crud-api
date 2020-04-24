@@ -2,11 +2,11 @@ import setupConfig, { conf as env, dbConfig } from './config';
 import serverFactory from './server';
 import mysqlConnect from './persistence/mysql';
 import mongooseConnect from './persistence/mongoose';
-import Joi from '@hapi/joi';
+import * as Joi from '@hapi/joi';
 import { Config } from 'convict';
-import { Server, ServerOptions } from 'hapi';
+import { Server, ServerOptions, ServerRoute } from 'hapi';
 import { SchemaBuilder } from 'knex';
-import { Connection } from 'mongoose';
+import { Mongoose } from 'mongoose';
 
 export const server = async ({
   dbConnect,
@@ -41,7 +41,7 @@ const config = env;
 
 export { mysqlConnect, mongooseConnect, config, dbConfig };
 
-export type DbClient = Promise<Connection> | SchemaBuilder;
+export type DbClient = Promise<Mongoose> | SchemaBuilder;
 interface Args {
   payload?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   config?: Config<object>;
@@ -72,30 +72,44 @@ interface CrudArgs extends Args {
   json?: Function;
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Crud<T> {
   create?(CrudArgs): Promise<T>;
   findAll?(CrudArgs): Promise<object | T[]>;
   findById?(CrudArgs): Promise<T>;
-  removeById?(CrudApiArgs): Promise<void>;
-  updateById?(CrudApiArgs): Promise<object>;
+  removeById?(CrudApiArgs): Promise<T | object | any>;
+  updateById?(CrudApiArgs): Promise<T | object | any>;
 }
 
-export type Dict = { [k: string]: Crud<any> }; // eslint-disable-line @typescript-eslint/no-explicit-any
+export type Dict = { [k: string]: Crud<any> };
 
 export type Schema = (client: DbClient) => Dict;
 
-export interface CrudApiArgs {
-  services(db): object;
+export type Route = ({ services, config, validate, uuid, json }: RouteArgs) => ServerRoute;
+
+export type Service = (db: Dict) => Dict;
+
+export type Query<T> = Crud<T>;
+
+interface BaseArgs {
+  services: Service;
   dbConnect(config: Config<{}>): DbClient;
   schema: Schema;
   serverOptions: ServerOptions;
-  config: object;
-  configOptions: object;
-  configFiles: Array<string>;
-  routes(): Function[];
+  config: Config<object> | object;
+  routes(): Route[];
   plugins: object[];
   postRegisterHook(app): Promise<void>;
   swaggerOptions: object;
   swaggerUiOptions: object;
   loggerOptions: object;
+}
+
+export interface ServerArgs extends BaseArgs {
+  config: Config<object>;
+}
+
+export interface CrudApiArgs extends BaseArgs {
+  configOptions: object;
+  configFiles: Array<string>;
 }

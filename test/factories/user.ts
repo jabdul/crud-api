@@ -1,7 +1,7 @@
 import { factory } from 'factory-girl';
 
 import User from '../../src/persistence/mongoose/User/model'
-import './meta'; // eslint-disable-line no-unused-vars
+import './meta';
 
 export default factory.define('User', User, {
   firstname: 'test',

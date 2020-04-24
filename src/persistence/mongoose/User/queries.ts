@@ -1,7 +1,7 @@
 import { pickBy, omit } from 'ramda';
 
 import User, { UserI } from './model';
-import { QueryArgs } from 'src';
+import { QueryArgs, Query, DbClient } from 'src';
 
 const create = async ({ payload }: QueryArgs): Promise<UserI> => {
   const user = new User();
@@ -30,7 +30,7 @@ const updateById = async ({ payload }: QueryArgs): Promise<object> =>
     }
   );
 
-export default (client): object => ({
+export default (client: DbClient): Query<UserI> => ({
   create: async ({ payload, config }: QueryArgs) => await create({ client, payload, config }),
   findById: async ({ payload, config }: QueryArgs) => await findById({ client, payload, config }),
   updateById: async ({ payload, config }: QueryArgs) => await updateById({ client, payload, config }),

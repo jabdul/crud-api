@@ -1,6 +1,7 @@
-import { Connection } from 'mongoose';
+import { Config } from 'convict';
+import { Mongoose } from 'mongoose';
 
-export default async (Mongoose, config): Promise<Connection> => {
+export default async (mongoose: Mongoose, config: Config<object>): Promise<Mongoose> => {
   const dbConnectOptions = config.has('dbConnectOptions')
     ? {
         ...config.get('dbConnectOptions'),
@@ -20,5 +21,5 @@ export default async (Mongoose, config): Promise<Connection> => {
     useUnifiedTopology: true,
   };
 
-  return await Mongoose.connect(`${config.get('mongo.host')}`, opts);
+  return await mongoose.connect(`${config.get('mongo.host')}`, opts);
 };

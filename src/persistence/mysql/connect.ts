@@ -1,6 +1,7 @@
-import { Config } from 'knex';
+import { Config as KnexConfig } from 'knex';
+import { Config } from 'convict';
 
-export default (config): Config => ({
+export default (config: Config<object>): KnexConfig => ({
   client: 'mysql',
   connection: {
     host: config.get('mysql.host'),

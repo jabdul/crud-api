@@ -1,4 +1,4 @@
-import { ServiceArgs, Crud } from 'src';
+import { ServiceArgs, Crud, Dict } from 'src';
 
 const create = async ({ db, payload, config, uuid, json /*, log */ }: ServiceArgs): Promise<JSON> => {
   const uid = uuid();
@@ -18,7 +18,7 @@ const create = async ({ db, payload, config, uuid, json /*, log */ }: ServiceArg
   return json(result._doc).addLink('self', `/users/${uid}`);
 };
 
-export default (db): Crud<JSON> => ({
+export default (db: Dict): Crud<JSON> => ({
   create: async ({ payload, config, uuid, json, log }: ServiceArgs) =>
     await create({ db, payload, config, uuid, json, log }),
 });
