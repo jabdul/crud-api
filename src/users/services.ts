@@ -11,9 +11,6 @@ const create = async ({ db, payload, config, uuid, json /*, log */ }: ServiceArg
     // log(['users', 'error', 'database'], result);
     throw Error(result);
   }
-  // const {
-  //   firstnam, last
-  // }
 
   return json(result._doc).addLink('self', `/users/${uid}`);
 };
