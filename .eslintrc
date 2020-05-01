@@ -1,26 +1,30 @@
 {
-  "extends": "eslint:recommended",
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "env": {
     "node": true,
     "jest": true
   },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": ["error", {
+      "allowExpressions": true
+    }]
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   "plugins": [
-    "eslint-plugin-import",
-    "import",
     "jest",
+    "@typescript-eslint"
   ],
   "globals": {
     "Promise": true,
     "sandbox": true
-  },
-  "rules": {
-    "comma-dangle": 0,
-    "new-cap": [2, {
-      "capIsNewExceptions": ["Immutable.Map"]
-    }],
-    "quotes": [2, "single"],
-    "strict": 0,
-    "import/no-extraneous-dependencies": [error, { devDependencies: true }]
   }
 }
