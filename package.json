@@ -6,6 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "yarn clean:build && tsc",
+    "postbuild": "prettier --write lib/**/**/*.*s",
     "build:watch": "yarn run clean:build && yarn run build --watch src",
     "bootstrap": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/bootstrap.ts",
     "dev": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/index.ts",
@@ -38,6 +39,7 @@
     "@types/mongoose-paginate": "5.0.8",
     "@typescript-eslint/eslint-plugin": "2.20.0",
     "@typescript-eslint/parser": "2.20.0",
+    "@typescript-eslint/typescript-estree": "2.30.0",
     "concurrently": "3.5.1",
     "coveralls": "3.0.9",
     "eslint": "6.8.0",
