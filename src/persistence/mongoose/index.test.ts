@@ -5,7 +5,7 @@ import { dbConfig as config } from '../../config';
 
 describe('mongoose', () => {
   describe('.connect', () => {
-    it.skip('connects to mongodb', async () => {
+    it('connects to mongodb', async () => {
       const mongoose = await dbConnect(config);
 
       expect(mongoose).toEqual(Mongoose);

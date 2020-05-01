@@ -20,7 +20,7 @@ describe('Services: users', () => {
       expect(actual).toEqual(hal);
     });
 
-    it.skip('throws an error when new record creation fails', async () => {
+    it('throws an error when new record creation fails', async () => {
       const db = {
         users: {
           create: jest.fn().mockReturnValue(false),
@@ -28,8 +28,8 @@ describe('Services: users', () => {
       };
       const log = jest.fn();
       const users = services(db).users;
-      const actual = await users.create({ uuid, json, log });
-      expect(actual).toEqual(Error('Could not create record'));
+      await expect(users.create({ uuid, json, log })).rejects.toThrow();
+      await expect(users.create({ uuid, json, log })).rejects.toThrowError('false');
     });
   });
 });
