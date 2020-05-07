@@ -74,6 +74,7 @@
     "config",
     "coverage",
     "jest.config.js",
-    "test"
+    "test",
+    "./**/**/**/*.DS_Store"
   ]
 }
