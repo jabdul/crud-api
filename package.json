@@ -1,11 +1,12 @@
 {
   "name": "@ctt/crud-api",
-  "version": "1.6.6",
+  "version": "1.6.5",
   "description": "A microservice boilerplate",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "yarn clean:build && tsc",
+    "build": "yarn clean:build && tsc && yarn prettify:lib",
+    "prettify:lib": "prettier --write lib/**/**/*.*s",
     "build:watch": "yarn run clean:build && yarn run build --watch src",
     "bootstrap": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/bootstrap.ts",
     "dev": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/index.ts",
@@ -98,5 +99,9 @@
     "registry": "https://registry.npmjs.org/"
   },
   "author": "npm@craftturf.com",
-  "license": "SEE LICENSE IN <LICENSE>"
+  "license": "SEE LICENSE IN <LICENSE>",
+  "moduleFileExtensions": [
+    "ts",
+    "js"
+  ]
 }
