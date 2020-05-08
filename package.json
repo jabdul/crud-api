@@ -24,7 +24,17 @@
     "validate": "npm ls"
   },
   "files": [
-    "lib"
+    "lib",
+    "src",
+    "test",
+    "ecosystem.config.js",
+    "certs",
+    "config",
+    "jest.config.js",
+    ".eslintrc",
+    ".prettierignore",
+    ".prettierrc",
+    "tsconfig.json"
   ],
   "jest-junit": {
     "outputDirectory": "./test/reports/junit",
@@ -99,9 +109,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "author": "npm@craftturf.com",
-  "license": "SEE LICENSE IN <LICENSE>",
-  "moduleFileExtensions": [
-    "ts",
-    "js"
-  ]
+  "license": "SEE LICENSE IN <LICENSE>"
 }
