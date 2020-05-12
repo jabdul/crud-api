@@ -13,7 +13,6 @@
     "clean:build": "yarn clean && yarn build",
     "lint": "eslint 'src/**/**/*.ts'",
     "lint:ci": "eslint 'src/**/*.ts' --format junit -o test/reports/junit/js-lint-results.xml",
-    "postinstall": "[ \"$NODE_ENV\" == production ] && exit 0; yarn clean:build;",
     "prepublish": "NODE_ENV=production yarn clean:build",
     "pretest": "yarn lint",
     "start": "node lib/index.js",
