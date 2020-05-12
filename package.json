@@ -22,19 +22,6 @@
     "test:watch": "yarn test --watch",
     "validate": "npm ls"
   },
-  "files": [
-    "lib",
-    "src",
-    "test",
-    "ecosystem.config.js",
-    "certs",
-    "config",
-    "jest.config.js",
-    ".eslintrc",
-    ".prettierignore",
-    ".prettierrc",
-    "tsconfig.json"
-  ],
   "jest-junit": {
     "outputDirectory": "./test/reports/junit",
     "outputName": "./js-test-results.xml"
