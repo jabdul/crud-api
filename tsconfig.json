@@ -75,6 +75,7 @@
     "coverage",
     "jest.config.js",
     "test",
+    "lib",
     "./**/**/**/*.DS_Store"
   ]
 }
