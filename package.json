@@ -59,7 +59,6 @@
     "factory-girl": "5.0.4",
     "hapi-auth-jwt2": "8.1.0",
     "husky": "4.2.3",
-    "inert": "5.1.0",
     "jest": "25.1.0",
     "jest-junit": "10.0.0",
     "lint-staged": "10.0.8",
@@ -67,11 +66,12 @@
     "prettier": "1.19.1",
     "ts-jest": "25.2.1",
     "ts-node": "^8.6.2",
-    "typescript": "^3.8.2",
-    "vision": "5.3.3"
+    "typescript": "^3.8.2"
   },
   "dependencies": {
     "@hapi/hapi": "17.9.0",
+    "@hapi/inert": "^6.0.1",
+    "@hapi/vision": "^6.0.0",
     "convict": "4.3.1",
     "dotenv": "6.0.0",
     "good": "8.1.1",
