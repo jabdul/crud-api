@@ -4,7 +4,7 @@
   "description": "A microservice boilerplate",
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && yarn prettify:lib",
     "prettify:lib": "prettier --write 'lib/**/**/**.*s'",
     "build:watch": "yarn run clean:build && yarn run build --watch src",
     "bootstrap": "nodemon --delay 250ms --exec NODE_ENV=development ts-node -- src/bootstrap.ts",
@@ -14,6 +14,7 @@
     "lint": "eslint 'src/**/**/*.ts'",
     "lint:ci": "eslint 'src/**/*.ts' --format junit -o test/reports/junit/js-lint-results.xml",
     "prepublish": "NODE_ENV=production yarn clean:build",
+    "postinstall": "yarn clean:build",
     "pretest": "yarn lint",
     "start": "node lib/index.js",
     "test": "jest --runInBand",
