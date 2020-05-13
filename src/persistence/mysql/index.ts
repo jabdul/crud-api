@@ -2,7 +2,7 @@ import Knex from 'knex';
 import connect from './connect';
 import queries from './queries';
 import { Config } from 'convict';
-import { Dict, DbClient } from 'src';
+import { Dict, DbClient } from '../../';
 
 export const schema = (client: DbClient): Dict => queries(client);
 

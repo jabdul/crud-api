@@ -1,5 +1,5 @@
 import { ServerRoute, RouteOptions } from 'hapi';
-import { RouteArgs } from 'src';
+import { RouteArgs } from '../';
 export const ROUTE_NAME = 'users';
 
 const options = {

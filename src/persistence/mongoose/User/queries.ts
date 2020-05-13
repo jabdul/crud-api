@@ -1,7 +1,7 @@
 import { pickBy, omit } from 'ramda';
 
 import User, { UserI } from './model';
-import { QueryArgs, Query, DbClient } from 'src';
+import { QueryArgs, Query, DbClient } from '../../../';
 
 const create = ({ payload }: QueryArgs): Promise<UserI> => {
   const user = new User({ ...payload });

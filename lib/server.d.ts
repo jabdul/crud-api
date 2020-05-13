@@ -1,4 +1,4 @@
-import { ServerArgs } from 'src';
+import { ServerArgs } from './';
 declare const _default: ({
   dbConnect,
   schema,

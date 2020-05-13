@@ -1,4 +1,4 @@
-import { ServiceArgs, Crud, Dict } from 'src';
+import { ServiceArgs, Crud, Dict } from '../';
 
 const create = async ({ db, payload, config, uuid, json /*, log */ }: ServiceArgs): Promise<JSON> => {
   const uid = uuid();
