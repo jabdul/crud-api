@@ -15,7 +15,6 @@
     "lint": "eslint 'src/**/**/*.ts'",
     "lint:ci": "eslint 'src/**/*.ts' --format junit -o test/reports/junit/js-lint-results.xml",
     "prepublish": "NODE_ENV=production yarn clean:build",
-    "postinstall": "yarn clean:build",
     "pretest": "yarn lint",
     "start": "node lib/index.js",
     "test": "jest --runInBand",

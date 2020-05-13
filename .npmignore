@@ -1,2 +1,11 @@
 .circleci
 __mocks__
+src
+test
+*.xml
+.prettierrc
+.prettierignore
+jest.config.js
+.eslintrc
+certs
+config
