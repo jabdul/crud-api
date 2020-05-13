@@ -6,3 +6,4 @@ declare const _default: (
   config: Config<object>
 ) => Promise<typeof import('mongoose')>;
 export default _default;
+//# sourceMappingURL=connect.d.ts.map

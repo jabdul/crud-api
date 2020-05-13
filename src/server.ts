@@ -12,7 +12,7 @@ import requireHttps from 'hapi-require-https';
 import good from 'good';
 
 import checkApplicationHealth from './monitoring/health/routes';
-import { ServerArgs } from 'src';
+import { ServerArgs } from './';
 
 export default async ({
   dbConnect,

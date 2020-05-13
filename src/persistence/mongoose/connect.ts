@@ -11,7 +11,7 @@ export default async (mongoose: Mongoose, config: Config<object>): Promise<Mongo
   const opts = {
     ...{
       dbName: `${config.has('mongo.database') ? config.get('mongo.database') : config.get('service.name')}${
-        process.env.NODE_ENV !== 'production' ? '_' + process.env.NODE_ENV : ''
+        process.env.NODE_ENV === 'test' ? '_' + process.env.NODE_ENV : ''
       }`,
     },
     ...dbConnectOptions,

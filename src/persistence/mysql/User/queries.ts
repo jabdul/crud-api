@@ -1,4 +1,4 @@
-import { QueryArgs, Crud, DbClient } from 'src';
+import { QueryArgs, Crud, DbClient } from '../../../';
 
 const create = async ({ client, payload }): Promise<boolean> => {
   const result = await client
