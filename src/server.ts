@@ -6,10 +6,10 @@ import uuid from 'uuid';
 import halson from 'halson';
 import swaggered from 'hapi-swaggered';
 import swaggeredUI from 'hapi-swaggered-ui';
-import vision from 'vision';
-import inert from 'inert';
+import vision from '@hapi/vision';
+import inert from '@hapi/inert';
 import requireHttps from 'hapi-require-https';
-import good from 'good';
+import pino from 'hapi-pino';
 
 import checkApplicationHealth from './monitoring/health/routes';
 import { ServerArgs } from './';
@@ -59,7 +59,7 @@ export default async ({
       vision,
       { plugin: swaggered, options: swaggerOptions },
       { plugin: swaggeredUI, options: swaggerUiOptions },
-      { plugin: good, options: loggerOptions },
+      { plugin: pino, options: loggerOptions },
       { plugin: requireHttps, options: {} },
     ],
     ...plugins,

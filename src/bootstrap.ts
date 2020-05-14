@@ -55,30 +55,10 @@ const application = (): Promise<Server> =>
         validatorUrl: null,
       },
     },
-    loggerOptions: {
-      ops: {
-        interval: 1000,
-      },
-      reporters: {
-        console: [
-          {
-            module: 'good-squeeze',
-            name: 'Squeeze',
-            args: [
-              {
-                log: '*',
-                response: '*',
-                error: '*',
-                request: { include: ['hapi'], exclude: 'sensitive' },
-              },
-            ],
-          },
-          {
-            module: 'good-console',
-          },
-          'stdout',
-        ],
-      },
+    loggerOptions:{
+      prettyPrint: process.env.NODE_ENV !== 'production',
+      // Redact Authorization headers, see https://getpino.io/#/docs/redaction
+      redact: ['req.headers.authorization']
     },
     serverOptions: {},
   });
