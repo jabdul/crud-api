@@ -1,6 +1,6 @@
 {
   "name": "@ctt/crud-api",
-  "version": "1.6.26",
+  "version": "1.6.24",
   "description": "A microservice boilerplate",
   "main": "lib/index.js",
   "scripts": {
