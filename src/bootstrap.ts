@@ -56,9 +56,23 @@ const application = (): Promise<Server> =>
       },
     },
     loggerOptions: {
-      prettyPrint: process.env.NODE_ENV !== 'production',
-      // Redact Authorization headers, see https://getpino.io/#/docs/redaction
-      redact: ['req.headers.authorization'],
+      redact: {
+        paths: [
+          'req.headers.authorization',
+          '*.password',
+          'pid',
+          'hostname',
+          'app',
+          'responseTime',
+          'req.id',
+          'req.method',
+          'req.headers',
+          'req.remoteAddress',
+          'req.remotePort',
+          'res',
+        ],
+        remove: true,
+      },
     },
     serverOptions: {},
   });

@@ -57,7 +57,19 @@ export default async ({
       vision,
       { plugin: swaggered, options: swaggerOptions },
       { plugin: swaggeredUI, options: swaggerUiOptions },
-      { plugin: pino, options: loggerOptions },
+      {
+        plugin: pino,
+        options: {
+          prettyPrint: process.env.NODE_ENV !== 'production',
+          redact: {
+            paths: ['req.headers.authorization', '*.password'],
+            remove: true,
+          },
+          logPayload: true,
+          ignorePaths: ['/monitoring/healthz'],
+          ...loggerOptions,
+        },
+      },
       { plugin: requireHttps, options: {} },
     ],
     ...plugins,
