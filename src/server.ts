@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Hapi from '@hapi/hapi';
-import Joi from 'joi';
-import uuid from 'uuid';
-import halson from 'halson';
+import Joi from '@hapi/joi';
 import swaggered from 'hapi-swaggered';
 import swaggeredUI from 'hapi-swaggered-ui';
 import vision from '@hapi/vision';
@@ -83,12 +81,6 @@ export default async ({
       method: () => config,
       options: {},
     });
-
-    app.method({
-      name: 'json',
-      method: () => halson,
-      options: {},
-    });
     [checkApplicationHealth, ...routes()].map(
       async route =>
         await app.route(
@@ -96,8 +88,6 @@ export default async ({
             services: serve,
             config,
             validate: Joi,
-            uuid,
-            json: halson,
           })
         )
     );

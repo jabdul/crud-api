@@ -1,23 +1,21 @@
 import services from '../services';
 
 describe('Services: users', () => {
+  const user = {
+    firstname: 'Bolatan',
+    lastname: 'Ibrahim',
+    email: 'bolatan.ibrahim@craftturf.com',
+  };
   describe('.create', () => {
-    const uid = 'dfa7fd57-5d6b-4563-b60e-6c9f78f19579';
-    const uuid = jest.fn().mockReturnValue(uid);
-    const hal = {"_links": {"self": {"href": `/users/${uid}`}}}; // eslint-disable-line
-    const json = jest.fn(() => ({
-      addLink: jest.fn().mockReturnValue(hal),
-    }));
-
-    it('returns hal-json formatted record for newly created user', async () => {
+    it('returns actual record for newly created user', async () => {
       const db = {
         users: {
-          create: jest.fn().mockReturnValue(true),
+          create: jest.fn().mockReturnValue(user),
         },
       };
       const users = services(db).users;
-      const actual = await users.create({ uuid, json });
-      expect(actual).toEqual(hal);
+      const actual = await users.create({ payload: user });
+      expect(actual).toEqual(user);
     });
 
     it('throws an error when new record creation fails', async () => {
@@ -28,8 +26,8 @@ describe('Services: users', () => {
       };
       const log = jest.fn();
       const users = services(db).users;
-      await expect(users.create({ uuid, json, log })).rejects.toThrow();
-      await expect(users.create({ uuid, json, log })).rejects.toThrowError('false');
+      await expect(users.create({ log, payload: user })).rejects.toThrow();
+      await expect(users.create({ log, payload: user })).rejects.toThrowError('false');
     });
   });
 });

@@ -7,7 +7,7 @@ const options = {
   auth: false,
 };
 
-export default ({ services, config, validate, uuid, json }: RouteArgs): ServerRoute => ({
+export default ({ services, config, validate }: RouteArgs): ServerRoute => ({
   method: 'POST',
   path: `/${ROUTE_NAME}`,
   options: {
@@ -50,12 +50,10 @@ export default ({ services, config, validate, uuid, json }: RouteArgs): ServerRo
         await services[ROUTE_NAME].create({
           payload: request.payload,
           config,
-          uuid,
-          json,
           log: request.log,
         })
       )
       .code(201)
-      .type('application/hal+json');
+      .type('application/json');
   },
 });

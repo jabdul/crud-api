@@ -1,9 +1,8 @@
 import { ServiceArgs, Crud, Dict } from '../';
 
-const create = async ({ db, payload, config, uuid, json /*, log */ }: ServiceArgs): Promise<JSON> => {
-  const uid = uuid();
+const create = async ({ db, payload, config /*, log */ }: ServiceArgs): Promise<JSON> => {
   const result = await db.users.create({
-    payload: { ...payload, uuid: uid },
+    payload: { ...payload },
     config,
   });
 
@@ -12,10 +11,9 @@ const create = async ({ db, payload, config, uuid, json /*, log */ }: ServiceArg
     throw Error(result);
   }
 
-  return json(result._doc).addLink('self', `/users/${uid}`);
+  return result;
 };
 
 export default (db: Dict): Crud<JSON> => ({
-  create: async ({ payload, config, uuid, json, log }: ServiceArgs) =>
-    await create({ db, payload, config, uuid, json, log }),
+  create: async ({ payload, config, log }: ServiceArgs) => await create({ db, payload, config, log }),
 });

@@ -48,8 +48,6 @@ interface Args {
 }
 
 interface LoggableArgs extends Args {
-  uuid?: Function;
-  json?: Function;
   log?: Function;
 }
 
@@ -69,7 +67,6 @@ export interface QueryArgs extends Args {
 interface CrudArgs extends Args {
   db?: Dict;
   client?: DbClient;
-  json?: Function;
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -85,7 +82,7 @@ export type Dict = { [k: string]: Crud<any> };
 
 export type Schema = (client: DbClient) => Dict;
 
-export type Route = ({ services, config, validate, uuid, json }: RouteArgs) => ServerRoute;
+export type Route = ({ services, config, validate }: RouteArgs) => ServerRoute;
 
 export type Service = (db: Dict) => Dict;
 
