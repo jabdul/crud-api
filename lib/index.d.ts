@@ -171,10 +171,10 @@ interface Args {
   payload?: any;
   config?: Config<object>;
 }
+export declare type CrudJson = (shema: object) => (payload: object) => string;
 interface LoggableArgs extends Args {
-  uuid?: Function;
-  json?: Function;
   log?: Function;
+  json?: CrudJson;
 }
 export interface ServiceArgs extends LoggableArgs {
   db: Dict;
@@ -197,7 +197,7 @@ export declare type Dict = {
   [k: string]: Crud<any>;
 };
 export declare type Schema = (client: DbClient) => Dict;
-export declare type Route = ({ services, config, validate, uuid, json }: RouteArgs) => ServerRoute;
+export declare type Route = ({ services, config, validate }: RouteArgs) => ServerRoute;
 export declare type Service = (db: Dict) => Dict;
 export declare type Query<T> = Crud<T>;
 interface BaseArgs {

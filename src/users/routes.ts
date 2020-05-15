@@ -7,7 +7,7 @@ const options = {
   auth: false,
 };
 
-export default ({ services, config, validate, uuid, json }: RouteArgs): ServerRoute => ({
+export default ({ services, config, validate, json }: RouteArgs): ServerRoute => ({
   method: 'POST',
   path: `/${ROUTE_NAME}`,
   options: {
@@ -45,17 +45,17 @@ export default ({ services, config, validate, uuid, json }: RouteArgs): ServerRo
   } as RouteOptions,
   handler: async (request, h) => {
     request.log([`/${ROUTE_NAME}`], 'Create new user');
+    request.logger.info(request.path || `/${ROUTE_NAME}`);
     return h
       .response(
         await services[ROUTE_NAME].create({
           payload: request.payload,
           config,
-          uuid,
-          json,
           log: request.log,
+          json,
         })
       )
       .code(201)
-      .type('application/hal+json');
+      .type('application/json');
   },
 });

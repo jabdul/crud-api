@@ -13,13 +13,14 @@ $ yarn add @ctt/crud-api
 ## bootstrapping
 To create a new CRUD service API, simply bootstrap the application by injecting the dependencies as depicted in the example below.
 
-```javascript
+```ts
 import { server, mysqlConnect, mongooseConnect, config } from '@ctt/crud-api';
 import { schema as mongooseSchema } from './persistence/mongoose/schema';
 import routes from './routes';
 import services from './services';
+import { Server } from 'hapi';
 
-server({
+const application = (): Promise<Server> => server({
   dbConnect: mongooseConnect,   // Connect to db
   schema: mongooseSchema,       // Load the queries and models
   config,                       // Application configuration
@@ -43,6 +44,17 @@ server({
     }
   },
 });
+```
+
+Then start the app as shown in the example below
+
+```ts
+(async (): Promise<void> => {
+  const app = await application();
+
+  await app.start();
+  app.log('App runninng on', app.info.uri);
+})();
 ```
 
 ## setting up environment variables
@@ -211,7 +223,7 @@ export const create = async ({
   payload,    // request payload
   config,     // app config
   uuid,       // universal unique id generator
-  json,       // used by services to create HAL+JSON format resource response payload
+  payload
 }) => {
   ...
 };
@@ -253,3 +265,35 @@ options: {
   ...
 },
 ```
+
+### logging and monitoring
+
+The application has been configured with [hapi-pino](https://github.com/pinojs/hapi-pino) high performant logger. You can provide options as follows:
+
+```ts
+server({
+  ...,
+  loggerOptions: {
+    redact: {
+      paths: [
+        'req.headers.authorization',
+        '*.password',
+        'pid',
+        'hostname',
+        'app',
+        'responseTime',
+        'req.id',
+        'req.method',
+        'req.headers',
+        'req.remoteAddress',
+        'req.remotePort',
+        'res',
+      ],
+      remove: true,
+    },
+  },
+});
+
+```
+
+For full list of options available, please check the official [documentation](https://github.com/pinojs/hapi-pino#options)

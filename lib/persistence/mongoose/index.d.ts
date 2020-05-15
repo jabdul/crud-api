@@ -1,4 +1,3 @@
-/// <reference types="mongoose-paginate" />
 import mongoose from 'mongoose';
 import { DbClient, Dict } from '../../';
 import { Config } from 'convict';

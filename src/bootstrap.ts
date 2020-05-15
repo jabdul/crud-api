@@ -56,28 +56,22 @@ const application = (): Promise<Server> =>
       },
     },
     loggerOptions: {
-      ops: {
-        interval: 1000,
-      },
-      reporters: {
-        console: [
-          {
-            module: 'good-squeeze',
-            name: 'Squeeze',
-            args: [
-              {
-                log: '*',
-                response: '*',
-                error: '*',
-                request: { include: ['hapi'], exclude: 'sensitive' },
-              },
-            ],
-          },
-          {
-            module: 'good-console',
-          },
-          'stdout',
+      redact: {
+        paths: [
+          'req.headers.authorization',
+          '*.password',
+          'pid',
+          'hostname',
+          'app',
+          'responseTime',
+          'req.id',
+          'req.method',
+          'req.headers',
+          'req.remoteAddress',
+          'req.remotePort',
+          'res',
         ],
+        remove: true,
       },
     },
     serverOptions: {},
@@ -88,7 +82,7 @@ const application = (): Promise<Server> =>
     const app = await application();
 
     await app.start();
-    console.log(`App runninng on ${app.info.uri}`); // eslint-disable-line
+    app.log('App runninng on', app.info.uri);
   })();
 
 export default application;

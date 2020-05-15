@@ -1,5 +1,4 @@
 /// <reference types="mongoose" />
-/// <reference types="mongoose-paginate" />
 import { Config } from 'convict';
 declare const _default: (
   mongoose: typeof import('mongoose'),

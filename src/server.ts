@@ -1,15 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import Hapi from '@hapi/hapi';
-import Joi from 'joi';
-import uuid from 'uuid';
-import halson from 'halson';
+import Joi from '@hapi/joi';
 import swaggered from 'hapi-swaggered';
 import swaggeredUI from 'hapi-swaggered-ui';
-import vision from 'vision';
-import inert from 'inert';
+import vision from '@hapi/vision';
+import inert from '@hapi/inert';
 import requireHttps from 'hapi-require-https';
-import good from 'good';
+import pino from 'hapi-pino';
+import json from 'fast-json-stringify';
 
 import checkApplicationHealth from './monitoring/health/routes';
 import { ServerArgs } from './';
@@ -59,7 +58,19 @@ export default async ({
       vision,
       { plugin: swaggered, options: swaggerOptions },
       { plugin: swaggeredUI, options: swaggerUiOptions },
-      { plugin: good, options: loggerOptions },
+      {
+        plugin: pino,
+        options: {
+          prettyPrint: process.env.NODE_ENV !== 'production',
+          redact: {
+            paths: ['req.headers.authorization', '*.password'],
+            remove: true,
+          },
+          logPayload: true,
+          ignorePaths: ['/monitoring/healthz'],
+          ...loggerOptions,
+        },
+      },
       { plugin: requireHttps, options: {} },
     ],
     ...plugins,
@@ -83,12 +94,12 @@ export default async ({
       method: () => config,
       options: {},
     });
-
     app.method({
       name: 'json',
-      method: () => halson,
+      method: () => json,
       options: {},
     });
+
     [checkApplicationHealth, ...routes()].map(
       async route =>
         await app.route(
@@ -96,8 +107,7 @@ export default async ({
             services: serve,
             config,
             validate: Joi,
-            uuid,
-            json: halson,
+            json,
           })
         )
     );
