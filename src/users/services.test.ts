@@ -24,10 +24,9 @@ describe('Services: users', () => {
           create: jest.fn().mockReturnValue(false),
         },
       };
-      const log = jest.fn();
       const users = services(db).users;
-      await expect(users.create({ log, payload: user })).rejects.toThrow();
-      await expect(users.create({ log, payload: user })).rejects.toThrowError('false');
+      await expect(users.create({ payload: user })).rejects.toThrow();
+      await expect(users.create({ payload: user })).rejects.toThrowError('false');
     });
   });
 });

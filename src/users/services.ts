@@ -1,6 +1,6 @@
 import { ServiceArgs, Crud, Dict } from '../';
 
-const create = async ({ db, payload, config /*, log */ }: ServiceArgs): Promise<JSON> => {
+const create = async ({ db, payload, config }: ServiceArgs): Promise<JSON> => {
   const result = await db.users.create({
     payload: { ...payload },
     config,
@@ -15,5 +15,5 @@ const create = async ({ db, payload, config /*, log */ }: ServiceArgs): Promise<
 };
 
 export default (db: Dict): Crud<JSON> => ({
-  create: async ({ payload, config, log }: ServiceArgs) => await create({ db, payload, config, log }),
+  create: async ({ payload, config }: ServiceArgs) => await create({ db, payload, config }),
 });
