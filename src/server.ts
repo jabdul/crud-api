@@ -8,6 +8,7 @@ import vision from '@hapi/vision';
 import inert from '@hapi/inert';
 import requireHttps from 'hapi-require-https';
 import pino from 'hapi-pino';
+import json from 'fast-json-stringify';
 
 import checkApplicationHealth from './monitoring/health/routes';
 import { ServerArgs } from './';
@@ -93,6 +94,12 @@ export default async ({
       method: () => config,
       options: {},
     });
+    app.method({
+      name: 'json',
+      method: () => json,
+      options: {},
+    });
+
     [checkApplicationHealth, ...routes()].map(
       async route =>
         await app.route(
@@ -100,6 +107,7 @@ export default async ({
             services: serve,
             config,
             validate: Joi,
+            json,
           })
         )
     );

@@ -6,6 +6,9 @@ describe('Services: users', () => {
     lastname: 'Ibrahim',
     email: 'bolatan.ibrahim@craftturf.com',
   };
+
+  const json = jest.fn().mockReturnValue(() => user);
+
   describe('.create', () => {
     it('returns actual record for newly created user', async () => {
       const db = {
@@ -14,7 +17,7 @@ describe('Services: users', () => {
         },
       };
       const users = services(db).users;
-      const actual = await users.create({ payload: user });
+      const actual = await users.create({ payload: user, json });
       expect(actual).toEqual(user);
     });
 
@@ -25,8 +28,8 @@ describe('Services: users', () => {
         },
       };
       const users = services(db).users;
-      await expect(users.create({ payload: user })).rejects.toThrow();
-      await expect(users.create({ payload: user })).rejects.toThrowError('false');
+      await expect(users.create({ payload: user, json })).rejects.toThrow();
+      await expect(users.create({ payload: user, json })).rejects.toThrowError('false');
     });
   });
 });

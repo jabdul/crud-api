@@ -47,8 +47,10 @@ interface Args {
   config?: Config<object>;
 }
 
+export type CrudJson = (shema: object) => (payload: object) => string;
 interface LoggableArgs extends Args {
   log?: Function;
+  json?: CrudJson;
 }
 
 export interface ServiceArgs extends LoggableArgs {

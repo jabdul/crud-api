@@ -7,7 +7,7 @@ const options = {
   auth: false,
 };
 
-export default ({ services, config, validate }: RouteArgs): ServerRoute => ({
+export default ({ services, config, validate, json }: RouteArgs): ServerRoute => ({
   method: 'POST',
   path: `/${ROUTE_NAME}`,
   options: {
@@ -52,6 +52,7 @@ export default ({ services, config, validate }: RouteArgs): ServerRoute => ({
           payload: request.payload,
           config,
           log: request.log,
+          json,
         })
       )
       .code(201)

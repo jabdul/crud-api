@@ -61,6 +61,7 @@
     "@hapi/vision": "5.5.2",
     "convict": "4.3.1",
     "dotenv": "6.0.0",
+    "fast-json-stringify": "2.0.0",
     "hapi-pino": "8.0.1",
     "hapi-require-https": "3.0.0",
     "hapi-swaggered": "3.1.0",
