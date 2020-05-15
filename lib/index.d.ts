@@ -171,8 +171,10 @@ interface Args {
   payload?: any;
   config?: Config<object>;
 }
+export declare type CrudJson = (shema: object) => (payload: object) => string;
 interface LoggableArgs extends Args {
   log?: Function;
+  json?: CrudJson;
 }
 export interface ServiceArgs extends LoggableArgs {
   db: Dict;
