@@ -82,7 +82,7 @@ const application = (): Promise<Server> =>
     const app = await application();
 
     await app.start();
-    console.log(`App runninng on ${app.info.uri}`); // eslint-disable-line
+    app.log('App runninng on', app.info.uri);
   })();
 
 export default application;
