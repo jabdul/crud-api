@@ -57,5 +57,20 @@ describe('Users', () => {
       expect(response.statusMessage).toBe('Bad Request');
       expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
     });
+
+    it('throw error when something else went wrong', async () => {
+      const payload = await factory.attrs('User');
+
+      const db = await app.db;
+      await db.disconnect();
+      const response = await app.inject({
+        method: 'POST',
+        url,
+        payload,
+      });
+
+      expect(response.statusCode).toBe(500);
+      expect(response.statusMessage).toBe('Internal Server Error');
+    });
   });
 });
