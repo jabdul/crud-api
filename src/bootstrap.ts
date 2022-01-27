@@ -22,7 +22,7 @@ const application = (): Promise<Server> =>
     config: env,
     configFiles: [path.resolve(__dirname, `../config/${String(process.env.NODE_ENV)}.json`)],
     configOptions: {
-      dbConnectOptions: { useNewUrlParser: true, useFindAndModify: false },
+      dbConnectOptions: { useNewUrlParser: true },
     },
     routes,
     services,
