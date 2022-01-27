@@ -5,6 +5,7 @@ import { ROUTE_NAME } from './routes';
 import '../../test/factories/user';
 
 let app = null;
+let db = null;
 const url = `/${ROUTE_NAME}`;
 
 const parsedResponse = ({ payload }): JSON => JSON.parse(payload);
@@ -12,12 +13,12 @@ const parsedResponse = ({ payload }): JSON => JSON.parse(payload);
 describe('Users', () => {
   beforeAll(async () => {
     app = await application();
+    db = await app.db;
     await app.start();
   });
 
   afterAll(async () => {
-    const db = await app.db;
-    await db.disconnect();
+    db.readyState == 1 && (await db.disconnect());
     await app.stop({ timeout: 10 });
   });
 
@@ -61,8 +62,8 @@ describe('Users', () => {
     it('throw error when something else went wrong', async () => {
       const payload = await factory.attrs('User');
 
-      const db = await app.db;
       await db.disconnect();
+
       const response = await app.inject({
         method: 'POST',
         url,
