@@ -24,12 +24,15 @@ export const MetaSchema: Schema = new mongoose.Schema(
   { _id: false }
 );
 
-const UserSchema = new mongoose.Schema({
-  uuid: { type: String, default: uuid.v4 },
-  firstname: { type: String, required: true },
-  lastname: { type: String, required: true },
-  meta: { type: MetaSchema },
-});
+const UserSchema = new mongoose.Schema(
+  {
+    uuid: { type: String, default: uuid.v4 },
+    firstname: { type: String, required: true },
+    lastname: { type: String, required: true },
+    meta: { type: MetaSchema },
+  },
+  { bufferCommands: false }
+);
 
 type User = mongoose.Model<UserI>;
 
