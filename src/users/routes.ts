@@ -45,7 +45,7 @@ export default ({ services, config, validate, json }: RouteArgs): ServerRoute =>
   } as RouteOptions,
   handler: async (request, h) => {
     request.log([`/${ROUTE_NAME}`], 'Create new user');
-    request.logger.info(request.path || `/${ROUTE_NAME}`);
+    request.log([request.path || `/${ROUTE_NAME}`]);
     return h
       .response(
         await services[ROUTE_NAME].create({
