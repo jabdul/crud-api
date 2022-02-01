@@ -1,4 +1,4 @@
-import { ServerRoute, RouteOptions } from 'hapi';
+import { ServerRoute, RouteOptions } from '@hapi/hapi';
 import { RouteArgs } from '../';
 export const ROUTE_NAME = 'users';
 
@@ -26,7 +26,7 @@ export default ({ services, config, validate, json }: RouteArgs): ServerRoute =>
           // 'accept-language': validate.string().optional()
         })
         .unknown(),
-      payload: {
+      payload: validate.object({
         firstname: validate
           .string()
           .min(2)
@@ -39,7 +39,7 @@ export default ({ services, config, validate, json }: RouteArgs): ServerRoute =>
         meta: validate.object({
           active: validate.boolean(),
         }),
-      },
+      }),
     },
     tags: ['api'],
   } as RouteOptions,

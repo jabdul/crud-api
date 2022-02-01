@@ -6,7 +6,7 @@ import { conf as env } from './config';
 import { schema as mongooseSchema } from './persistence/mongoose';
 import routes from './routes';
 import services from './services';
-import { Server } from 'hapi';
+import { Server } from '@hapi/hapi';
 
 import './env';
 
@@ -46,15 +46,15 @@ const application = (): Promise<Server> =>
         version: '0.0.1',
       },
     },
-    swaggerUiOptions: {
-      title: 'CRUD API',
-      path: '/docs',
-      authorization: false,
-      auth: false,
-      swaggerOptions: {
-        validatorUrl: null,
-      },
-    },
+    // swaggerUiOptions: {
+    //   title: 'CRUD API',
+    //   path: '/docs',
+    //   authorization: false,
+    //   auth: false,
+    //   swaggerOptions: {
+    //     validatorUrl: null,
+    //   },
+    // },
     loggerOptions: {
       redact: {
         paths: [

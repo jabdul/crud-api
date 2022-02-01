@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import Hapi from '@hapi/hapi';
-import Joi from '@hapi/joi';
-import swaggered from 'hapi-swaggered';
-import swaggeredUI from 'hapi-swaggered-ui';
+import Joi from 'joi';
+import hapiSwagger from 'hapi-swagger';
+
 import vision from '@hapi/vision';
 import inert from '@hapi/inert';
 import requireHttps from 'hapi-require-https';
@@ -11,7 +11,9 @@ import pino from 'hapi-pino';
 import json from 'fast-json-stringify';
 
 import checkApplicationHealth from './monitoring/health/routes';
-import { ServerArgs } from './';
+import { DbClient, Dict, ServerArgs } from './';
+
+type ServerType = Hapi.Server & { db?: void | typeof import('mongoose'); schema?: Dict };
 
 export default async ({
   dbConnect,
@@ -22,15 +24,14 @@ export default async ({
   plugins = [],
   postRegisterHook,
   swaggerOptions = {},
-  swaggerUiOptions = {},
   loggerOptions = {},
   serverOptions = {},
-}: ServerArgs): Promise<Hapi.Server> => {
+}: ServerArgs): Promise<ServerType> => {
   const tls = config.get('server.secure') && {
     key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
     cert: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsCert'))),
   };
-  const app = new Hapi.Server({
+  const app: ServerType = new Hapi.Server({
     host: config.get('server.hostname'),
     port: config.get('server.port'),
     tls,
@@ -48,7 +49,12 @@ export default async ({
 
   app.events.on('log', (event, tags) => {
     if (tags.error) {
-      console.log(`Server error: ${event.error ? event.error.stack : 'unknown'}`); // eslint-disable-line no-console
+      if (event.error) {
+        const error = event.error as Error;
+        console.log('Server error: ', error.stack); // eslint-disable-line no-console
+      } else {
+        console.log(`Server error: unknown`); // eslint-disable-line no-console
+      }
     }
   });
 
@@ -56,8 +62,8 @@ export default async ({
     ...[
       inert,
       vision,
-      { plugin: swaggered, options: swaggerOptions },
-      { plugin: swaggeredUI, options: swaggerUiOptions },
+      { plugin: hapiSwagger, options: swaggerOptions },
+      // { plugin: swaggeredUI, options: swaggerUiOptions },
       {
         plugin: pino,
         options: {
@@ -79,7 +85,8 @@ export default async ({
   await postRegisterHook.call(this, app);
 
   app.db = await dbConnect(config);
-  app.schema = schema(app.db);
+  const databaseClient = app.db as unknown;
+  app.schema = schema(databaseClient as DbClient);
   const serve = services(app.schema);
 
   try {
