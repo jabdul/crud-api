@@ -1,4 +1,4 @@
-import { ServerRoute } from 'hapi';
+import { ServerRoute } from '@hapi/hapi';
 import { RouteArgs } from '../';
 export declare const ROUTE_NAME = "users";
 declare const _default: ({ services, config, validate, json }: RouteArgs) => ServerRoute;

@@ -2,9 +2,9 @@ import setupConfig, { conf as env, dbConfig } from './config';
 import serverFactory from './server';
 import mysqlConnect from './persistence/mysql';
 import mongooseConnect from './persistence/mongoose';
-import * as Joi from '@hapi/joi';
+import Joi from 'joi';
 import { Config } from 'convict';
-import { Server, ServerOptions, ServerRoute } from 'hapi';
+import { Server, ServerOptions, ServerRoute } from '@hapi/hapi';
 import { SchemaBuilder } from 'knex';
 import { Mongoose } from 'mongoose';
 
@@ -20,7 +20,7 @@ export const server = async ({
   plugins,
   postRegisterHook,
   swaggerOptions,
-  swaggerUiOptions,
+  // swaggerUiOptions,
   loggerOptions,
 }: CrudApiArgs): Promise<Server> =>
   await serverFactory({
@@ -33,7 +33,7 @@ export const server = async ({
     plugins,
     postRegisterHook,
     swaggerOptions,
-    swaggerUiOptions,
+    // swaggerUiOptions,
     loggerOptions,
   });
 
@@ -59,7 +59,7 @@ export interface ServiceArgs extends LoggableArgs {
 
 export interface RouteArgs extends LoggableArgs {
   services?: Dict;
-  validate?: Joi;
+  validate?: typeof Joi;
 }
 
 export interface QueryArgs extends Args {
@@ -100,7 +100,7 @@ interface BaseArgs {
   plugins: object[];
   postRegisterHook(app): Promise<void>;
   swaggerOptions: object;
-  swaggerUiOptions: object;
+  // swaggerUiOptions: object;
   loggerOptions: object;
 }
 

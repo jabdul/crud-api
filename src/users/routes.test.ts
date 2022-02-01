@@ -6,7 +6,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
       create: jest.fn().mockReturnValue('Thanks for opening account Mr Abiodun Abdul!!!'),
     },
   };
-  const validate = {
+  const validate: any = {
     string: jest.fn(),
     min: jest.fn(),
     max: jest.fn(),

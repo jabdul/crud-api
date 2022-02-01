@@ -1,12 +1,12 @@
 import { dbConfig } from './config';
 import mysqlConnect from './persistence/mysql';
 import mongooseConnect from './persistence/mongoose';
-import * as Joi from '@hapi/joi';
+import Joi from 'joi';
 import { Config } from 'convict';
-import { Server, ServerOptions, ServerRoute } from 'hapi';
+import { Server, ServerOptions, ServerRoute } from '@hapi/hapi';
 import { SchemaBuilder } from 'knex';
 import { Mongoose } from 'mongoose';
-export declare const server: ({ dbConnect, schema, serverOptions, config, configOptions, configFiles, routes, services, plugins, postRegisterHook, swaggerOptions, swaggerUiOptions, loggerOptions, }: CrudApiArgs) => Promise<Server>;
+export declare const server: ({ dbConnect, schema, serverOptions, config, configOptions, configFiles, routes, services, plugins, postRegisterHook, swaggerOptions, loggerOptions, }: CrudApiArgs) => Promise<Server>;
 declare const config: {
     mongo: {
         host: {
@@ -167,7 +167,7 @@ export interface ServiceArgs extends LoggableArgs {
 }
 export interface RouteArgs extends LoggableArgs {
     services?: Dict;
-    validate?: Joi;
+    validate?: typeof Joi;
 }
 export interface QueryArgs extends Args {
     client: DbClient;
@@ -196,7 +196,6 @@ interface BaseArgs {
     plugins: object[];
     postRegisterHook(app: any): Promise<void>;
     swaggerOptions: object;
-    swaggerUiOptions: object;
     loggerOptions: object;
 }
 export interface ServerArgs extends BaseArgs {
