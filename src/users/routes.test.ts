@@ -59,9 +59,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
 
     it('sets validation on request payload', () => {
       const payload = router.options.validate.payload;
-      // console.log('The Payload', payload);
       expect(payload).toBeDefined();
-      // expect(payload.lastname).toBeDefined();
     });
 
     it(`sets response HTTP status code to ${statusCode} on success`, async () => {

@@ -13,7 +13,7 @@ import json from 'fast-json-stringify';
 import checkApplicationHealth from './monitoring/health/routes';
 import { DbClient, Dict, ServerArgs } from './';
 
-type ServerType = Hapi.Server & { db?: void | typeof import('mongoose'); schema?: Dict };
+type ServerType = Hapi.Server & { db?: DbClient; schema?: Dict };
 
 export default async ({
   dbConnect,
@@ -63,7 +63,6 @@ export default async ({
       inert,
       vision,
       { plugin: hapiSwagger, options: swaggerOptions },
-      // { plugin: swaggeredUI, options: swaggerUiOptions },
       {
         plugin: pino,
         options: {
@@ -84,9 +83,12 @@ export default async ({
 
   await postRegisterHook.call(this, app);
 
-  app.db = await dbConnect(config);
-  const databaseClient = app.db as unknown;
-  app.schema = schema(databaseClient as DbClient);
+  const dbConnection: unknown = await dbConnect(config);
+
+  app.db = dbConnection as DbClient;
+
+  app.schema = schema(app.db);
+
   const serve = services(app.schema);
 
   try {
