@@ -18,7 +18,6 @@ export declare const server: ({
   plugins,
   postRegisterHook,
   swaggerOptions,
-  swaggerUiOptions,
   loggerOptions,
 }: CrudApiArgs) => Promise<Server>;
 declare const config: {
@@ -210,7 +209,6 @@ interface BaseArgs {
   plugins: object[];
   postRegisterHook(app: any): Promise<void>;
   swaggerOptions: object;
-  swaggerUiOptions: object;
   loggerOptions: object;
 }
 export interface ServerArgs extends BaseArgs {

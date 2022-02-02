@@ -20,7 +20,6 @@ export const server = async ({
   plugins,
   postRegisterHook,
   swaggerOptions,
-  // swaggerUiOptions,
   loggerOptions,
 }: CrudApiArgs): Promise<Server> =>
   await serverFactory({
@@ -33,7 +32,6 @@ export const server = async ({
     plugins,
     postRegisterHook,
     swaggerOptions,
-    // swaggerUiOptions,
     loggerOptions,
   });
 
@@ -100,7 +98,6 @@ interface BaseArgs {
   plugins: object[];
   postRegisterHook(app): Promise<void>;
   swaggerOptions: object;
-  // swaggerUiOptions: object;
   loggerOptions: object;
 }
 
