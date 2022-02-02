@@ -37,24 +37,19 @@ const application = (): Promise<Server> =>
     },
     swaggerOptions: {
       auth: false,
-      tags: {
-        users: 'Operation for handling user records',
-      },
+      tags: [
+        {
+          description: 'Operation for handling user records',
+          name: 'users',
+        },
+      ],
       info: {
         title: 'Microservice CRUD API Server',
         description: "Powering Craft Turf's microservice projects",
         version: '0.0.1',
       },
     },
-    // swaggerUiOptions: {
-    //   title: 'CRUD API',
-    //   path: '/docs',
-    //   authorization: false,
-    //   auth: false,
-    //   swaggerOptions: {
-    //     validatorUrl: null,
-    //   },
-    // },
+
     loggerOptions: {
       redact: {
         paths: [
