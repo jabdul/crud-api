@@ -1,4 +1,4 @@
-import convict from 'convict';
+import convict, { Config } from 'convict';
 export declare const conf: {
   mongo: {
     host: {
@@ -143,7 +143,7 @@ export declare const conf: {
     };
   };
 };
-declare const loadConfig: (appConfig: {}, configFiles: any, options?: {}) => convict.Config<object>;
+declare const loadConfig: (appConfig: {}, configFiles: any, options?: {}) => Config<object>;
 export declare const dbConfig: convict.Config<object>;
 export default loadConfig;
 //# sourceMappingURL=config.d.ts.map

@@ -89,12 +89,12 @@ describe('Users queries', () => {
       });
 
       expect(updateUser).toBeDefined();
-      expect(updateUser).toHaveProperty('nModified');
-      expect(updateUser).toHaveProperty('n');
-      expect(updateUser).toHaveProperty('ok');
-      expect(updateUser['nModified']).toEqual(1);
-      expect(updateUser['n']).toEqual(1);
-      expect(updateUser['ok']).toEqual(1);
+      expect(updateUser).toHaveProperty('acknowledged');
+      expect(updateUser).toHaveProperty('modifiedCount');
+      expect(updateUser).toHaveProperty('matchedCount');
+      expect(updateUser['acknowledged']).toEqual(true);
+      expect(updateUser['modifiedCount']).toEqual(1);
+      expect(updateUser['matchedCount']).toEqual(1);
 
       const findOneUser = await userQueries.findById({
         payload: { uuid: user.uuid },

@@ -9,7 +9,6 @@ export const schema = (client: DbClient): Dict => queries(client);
 
 export const close = (mongo: Mongoose): Promise<void> => mongo.disconnect();
 
-mongoose.set('useCreateIndex', true);
 mongoose.set('bufferCommands', false);
 
 export default (config: Config<object>): Promise<Mongoose> => connect(mongoose, config);

@@ -1,3 +1,4 @@
+import Hapi from '@hapi/hapi';
 import { ServerArgs } from './';
 declare const _default: ({
   dbConnect,
@@ -11,6 +12,6 @@ declare const _default: ({
   swaggerUiOptions,
   loggerOptions,
   serverOptions,
-}: ServerArgs) => Promise<any>;
+}: ServerArgs) => Promise<Hapi.Server>;
 export default _default;
 //# sourceMappingURL=server.d.ts.map

@@ -13,6 +13,6 @@ interface UserFields {
 export interface UserI extends UserFields, Document {}
 export declare const MetaSchema: Schema;
 declare type User = mongoose.Model<UserI>;
-declare const User: mongoose.Model<UserI, {}>;
+declare const User: mongoose.Model<UserI, {}, {}, {}>;
 export default User;
 //# sourceMappingURL=model.d.ts.map
