@@ -30,7 +30,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
     const responseData = 'Thanks for opening account Mr Abiodun Abdul!!!';
     const statusCode = 201;
     const contentType = 'application/json';
-    let mockRequest = { log: null, logger: null };
+    let mockRequest = { log: null };
     let mockResponse = null;
     let mockData = null;
     let mockStatusCode = null;
@@ -49,7 +49,7 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
       mockData.mockImplementation(() => mockResponse);
       mockStatusCode.mockImplementation(() => mockResponse);
       mockContentType.mockImplementation(() => mockResponse);
-      mockRequest = { log: jest.fn(), logger: { info: jest.fn() } };
+      mockRequest = { log: jest.fn() };
     });
 
     it(`sets HTTP method POST on /${ROUTE_NAME} path`, () => {
@@ -80,11 +80,6 @@ describe(`Routes: ${ROUTE_NAME}`, () => {
     it('logs tagged request', async () => {
       await router.handler(mockRequest, mockResponse);
       expect(mockRequest.log.mock.calls[0][0]).toEqual([`/${ROUTE_NAME}`]);
-    });
-
-    it('logs tagged request with pino', async () => {
-      await router.handler(mockRequest, mockResponse);
-      expect(mockRequest.logger.info.mock.calls[0][0]).toEqual(`/${ROUTE_NAME}`);
     });
   });
 });
