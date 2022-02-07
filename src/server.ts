@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import Hapi from '@hapi/hapi';
+import { Server } from '@hapi/hapi';
 import Joi from 'joi';
 import hapiSwagger from 'hapi-swagger';
 
@@ -11,9 +11,7 @@ import pino from 'hapi-pino';
 import json from 'fast-json-stringify';
 
 import checkApplicationHealth from './monitoring/health/routes';
-import { DbClient, Dict, ServerArgs } from './';
-
-type ServerType = Hapi.Server & { db?: DbClient; schema?: Dict };
+import { CrudServer, DbClient, ServerArgs } from './';
 
 export default async ({
   dbConnect,
@@ -26,12 +24,12 @@ export default async ({
   swaggerOptions = {},
   loggerOptions = {},
   serverOptions = {},
-}: ServerArgs): Promise<ServerType> => {
+}: ServerArgs): Promise<CrudServer> => {
   const tls = config.get('server.secure') && {
     key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
     cert: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsCert'))),
   };
-  const app: ServerType = new Hapi.Server({
+  const app: CrudServer = new Server({
     host: config.get('server.hostname'),
     port: config.get('server.port'),
     tls,
