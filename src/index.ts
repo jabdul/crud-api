@@ -96,7 +96,7 @@ interface BaseArgs {
   config: Config<object> | object;
   routes(): Route[];
   plugins: object[];
-  postRegisterHook(app): Promise<void>;
+  postRegisterHook?(app): Promise<void>;
   swaggerOptions: object;
   loggerOptions: object;
 }
