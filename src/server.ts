@@ -81,7 +81,7 @@ export default async ({
     ...plugins,
   ]);
 
-  await postRegisterHook.call(this, app);
+  await postRegisterHook?.call(this, app);
 
   const dbConnection: unknown = await dbConnect(config);
 
