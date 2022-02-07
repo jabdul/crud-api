@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/convict": "4.2.1",
+    "@types/hapi-pino": "5.2.0",
     "@types/joi": "14.3.4",
     "@types/node": "16.11.7",
     "@types/hapi__hapi": "20.0.10",
