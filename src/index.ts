@@ -21,7 +21,7 @@ export const server = async ({
   postRegisterHook,
   swaggerOptions,
   loggerOptions,
-}: CrudApiArgs): Promise<Server> =>
+}: CrudApiArgs): Promise<CrudServer> =>
   await serverFactory({
     dbConnect,
     schema,
@@ -59,6 +59,8 @@ export interface RouteArgs extends LoggableArgs {
   services?: Dict;
   validate?: typeof Joi;
 }
+
+export type CrudServer = Server & { db?: DbClient; schema?: Dict };
 
 export interface QueryArgs extends Args {
   client: DbClient;
