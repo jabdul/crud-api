@@ -1,12 +1,11 @@
 import * as path from 'path';
 import hapiAuthJwt2 from 'hapi-auth-jwt2';
-import { server, mongooseConnect } from './'; // eslint-disable-line no-unused-vars
+import { server, mongooseConnect, CrudServer } from './'; // eslint-disable-line no-unused-vars
 // import { schema as mysqlSchema } from './persistence/mysql';
 import { conf as env } from './config';
 import { schema as mongooseSchema } from './persistence/mongoose';
 import routes from './routes';
 import services from './services';
-import { Server } from '@hapi/hapi';
 
 import './env';
 
@@ -15,7 +14,7 @@ const validate = async (/* payload, request*/): Promise<object> => {
   return { isValid: true };
 };
 
-const application = (): Promise<Server> =>
+const application = (): Promise<CrudServer> =>
   server({
     dbConnect: mongooseConnect,
     schema: mongooseSchema,

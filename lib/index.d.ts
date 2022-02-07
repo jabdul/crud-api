@@ -19,7 +19,7 @@ export declare const server: ({
   postRegisterHook,
   swaggerOptions,
   loggerOptions,
-}: CrudApiArgs) => Promise<Server>;
+}: CrudApiArgs) => Promise<CrudServer>;
 declare const config: {
   mongo: {
     host: {
@@ -182,6 +182,10 @@ export interface RouteArgs extends LoggableArgs {
   services?: Dict;
   validate?: typeof Joi;
 }
+export declare type CrudServer = Server & {
+  db?: DbClient;
+  schema?: Dict;
+};
 export interface QueryArgs extends Args {
   client: DbClient;
 }
@@ -207,7 +211,7 @@ interface BaseArgs {
   config: Config<object> | object;
   routes(): Route[];
   plugins: object[];
-  postRegisterHook(app: any): Promise<void>;
+  postRegisterHook?(app: any): Promise<void>;
   swaggerOptions: object;
   loggerOptions: object;
 }

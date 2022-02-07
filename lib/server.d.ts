@@ -1,9 +1,4 @@
-import Hapi from '@hapi/hapi';
-import { Dict, ServerArgs } from './';
-declare type ServerType = Hapi.Server & {
-  db?: void | typeof import('mongoose');
-  schema?: Dict;
-};
+import { CrudServer, ServerArgs } from './';
 declare const _default: ({
   dbConnect,
   schema,
@@ -15,6 +10,6 @@ declare const _default: ({
   swaggerOptions,
   loggerOptions,
   serverOptions,
-}: ServerArgs) => Promise<ServerType>;
+}: ServerArgs) => Promise<CrudServer>;
 export default _default;
 //# sourceMappingURL=server.d.ts.map
