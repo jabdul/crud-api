@@ -22,6 +22,7 @@ const application = (): Promise<CrudServer> =>
     configFiles: [path.resolve(__dirname, `../config/${String(process.env.NODE_ENV)}.json`)],
     configOptions: {
       dbConnectOptions: { useNewUrlParser: true },
+      dbModifiers: { createIndex: true },
     },
     routes,
     services,
