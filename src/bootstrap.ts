@@ -49,7 +49,7 @@ const application = (): Promise<CrudServer> =>
         version: '0.0.1',
       },
     },
-
+    dockerized: true,
     loggerOptions: {
       redact: {
         paths: [
