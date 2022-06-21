@@ -24,13 +24,14 @@ export default async ({
   swaggerOptions = {},
   loggerOptions = {},
   serverOptions = {},
+  dockerized,
 }: ServerArgs): Promise<CrudServer> => {
   const tls = config.get('server.secure') && {
     key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
     cert: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsCert'))),
   };
   const app: CrudServer = new Server({
-    host: config.get('server.hostname'),
+    host: dockerized ? config.get('dockerizedHostname') : config.get('server.hostname'),
     port: config.get('server.port'),
     tls,
     debug: {

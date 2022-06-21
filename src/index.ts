@@ -21,6 +21,7 @@ export const server = async ({
   postRegisterHook,
   swaggerOptions,
   loggerOptions,
+  dockerized = false,
 }: CrudApiArgs): Promise<CrudServer> =>
   await serverFactory({
     dbConnect,
@@ -33,6 +34,7 @@ export const server = async ({
     postRegisterHook,
     swaggerOptions,
     loggerOptions,
+    dockerized,
   });
 
 const config = env;
@@ -101,6 +103,7 @@ interface BaseArgs {
   postRegisterHook?(app): Promise<void>;
   swaggerOptions: object;
   loggerOptions: object;
+  dockerized?: boolean;
 }
 
 export interface ServerArgs extends BaseArgs {
