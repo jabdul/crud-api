@@ -25,6 +25,7 @@ export default async ({
   loggerOptions = {},
   serverOptions = {},
   dockerized,
+  intializers,
 }: ServerArgs): Promise<CrudServer> => {
   const tls = config.get('server.secure') && {
     key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
@@ -119,6 +120,8 @@ export default async ({
           })
         )
     );
+
+    intializers.length && await Promise.all(intializers.map(init => init(app)));
 
     // Not needed in test env
     process.env.NODE_ENV !== 'test' && console.info('Server setup completed...'); // eslint-disable-line
