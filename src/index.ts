@@ -22,6 +22,7 @@ export const server = async ({
   swaggerOptions,
   loggerOptions,
   dockerized = false,
+  intializers = [],
 }: CrudApiArgs): Promise<CrudServer> =>
   await serverFactory({
     dbConnect,
@@ -35,6 +36,7 @@ export const server = async ({
     swaggerOptions,
     loggerOptions,
     dockerized,
+    intializers,
   });
 
 const config = env;
@@ -104,6 +106,7 @@ interface BaseArgs {
   swaggerOptions: object;
   loggerOptions: object;
   dockerized?: boolean;
+  intializers?: ((app?: CrudServer) => Promise<void>)[];
 }
 
 export interface ServerArgs extends BaseArgs {
