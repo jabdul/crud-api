@@ -6,230 +6,215 @@ import { Config } from 'convict';
 import { Server, ServerOptions, ServerRoute } from '@hapi/hapi';
 import { SchemaBuilder } from 'knex';
 import { Mongoose } from 'mongoose';
-export declare const server: ({
-  dbConnect,
-  schema,
-  serverOptions,
-  config,
-  configOptions,
-  configFiles,
-  routes,
-  services,
-  plugins,
-  postRegisterHook,
-  swaggerOptions,
-  loggerOptions,
-  dockerized,
-  intializers,
-}: CrudApiArgs) => Promise<CrudServer>;
+export declare const server: ({ dbConnect, schema, serverOptions, config, configOptions, configFiles, routes, services, plugins, postRegisterHook, swaggerOptions, loggerOptions, dockerized, intializers, }: CrudApiArgs) => Promise<CrudServer>;
 declare const config: {
-  mongo: {
-    host: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
+    mongo: {
+        host: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        database: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        user: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        pass: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
     };
-    database: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
+    env: {
+        doc: string;
+        format: string[];
+        default: string;
+        env: string;
     };
-    user: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
+    dockerizedHostname: {
+        doc: string;
+        format: StringConstructor;
+        default: string;
+        env: string;
     };
-    pass: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-  };
-  env: {
-    doc: string;
-    format: string[];
-    default: string;
-    env: string;
-  };
-  dockerizedHostname: {
-    doc: string;
-    format: StringConstructor;
-    default: string;
-    env: string;
-  };
-  server: {
-    hostname: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-    port: {
-      doc: string;
-      format: string;
-      default: number;
-      env: string;
-      arg: string;
-    };
-    tlsCert: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-    tlsKey: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-    tlsCa: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-    secure: {
-      doc: string;
-      format: BooleanConstructor;
-      default: boolean;
-      env: string;
-      arg: string;
+    server: {
+        hostname: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        port: {
+            doc: string;
+            format: string;
+            default: number;
+            env: string;
+            arg: string;
+        };
+        tlsCert: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        tlsKey: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        tlsCa: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        secure: {
+            doc: string;
+            format: BooleanConstructor;
+            default: boolean;
+            env: string;
+            arg: string;
+        };
+        db: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
     };
     db: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
+        dump: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
     };
-  };
-  db: {
-    dump: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
+    mysql: {
+        host: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        database: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        user: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        pass: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
     };
-  };
-  mysql: {
-    host: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
+    jwt: {
+        secret: {
+            doc: string;
+            format: StringConstructor;
+            default: string;
+            env: string;
+            arg: string;
+        };
+        expires: {
+            doc: string;
+            format: NumberConstructor;
+            default: number;
+            env: string;
+            arg: string;
+        };
     };
-    database: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-    user: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-    pass: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-  };
-  jwt: {
-    secret: {
-      doc: string;
-      format: StringConstructor;
-      default: string;
-      env: string;
-      arg: string;
-    };
-    expires: {
-      doc: string;
-      format: NumberConstructor;
-      default: number;
-      env: string;
-      arg: string;
-    };
-  };
 };
 export { mysqlConnect, mongooseConnect, config, dbConfig };
 export declare type DbClient = Promise<Mongoose> | SchemaBuilder;
 interface Args {
-  payload?: any;
-  config?: Config<object>;
+    payload?: any;
+    config?: Config<object>;
 }
 export declare type CrudJson = (shema: object) => (payload: object) => string;
 interface LoggableArgs extends Args {
-  log?: Function;
-  json?: CrudJson;
+    log?: Function;
+    json?: CrudJson;
 }
 export interface ServiceArgs extends LoggableArgs {
-  db: Dict;
+    db: Dict;
 }
 export interface RouteArgs extends LoggableArgs {
-  services?: Dict;
-  validate?: typeof Joi;
+    services?: Dict;
+    validate?: typeof Joi;
 }
 export declare type CrudServer = Server & {
-  db?: DbClient;
-  schema?: Dict;
+    db?: DbClient;
+    schema?: Dict;
 };
 export interface QueryArgs extends Args {
-  client: DbClient;
+    client: DbClient;
 }
 export interface Crud<T> {
-  create?(CrudArgs: any): Promise<T>;
-  findAll?(CrudArgs: any): Promise<object | T[]>;
-  findById?(CrudArgs: any): Promise<T>;
-  removeById?(CrudApiArgs: any): Promise<T | object | any>;
-  updateById?(CrudApiArgs: any): Promise<T | object | any>;
+    create?(CrudArgs: any): Promise<T>;
+    findAll?(CrudArgs: any): Promise<object | T[]>;
+    findById?(CrudArgs: any): Promise<T>;
+    removeById?(CrudApiArgs: any): Promise<T | object | any>;
+    updateById?(CrudApiArgs: any): Promise<T | object | any>;
 }
 export declare type Dict = {
-  [k: string]: Crud<any>;
+    [k: string]: Crud<any>;
 };
 export declare type Schema = (client: DbClient) => Dict;
 export declare type Route = ({ services, config, validate }: RouteArgs) => ServerRoute;
 export declare type Service = (db: Dict) => Dict;
 export declare type Query<T> = Crud<T>;
 interface BaseArgs {
-  services: Service;
-  dbConnect(config: Config<{}>): DbClient;
-  schema: Schema;
-  serverOptions: ServerOptions;
-  config: Config<object> | object;
-  routes(): Route[];
-  plugins: object[];
-  postRegisterHook?(app: any): Promise<void>;
-  swaggerOptions: object;
-  loggerOptions: object;
-  dockerized?: boolean;
-  intializers?: ((app?: CrudServer) => Promise<void>)[];
+    services: Service;
+    dbConnect(config: Config<{}>): DbClient;
+    schema: Schema;
+    serverOptions: ServerOptions;
+    config: Config<object> | object;
+    routes(): Route[];
+    plugins: object[];
+    postRegisterHook?(app: any): Promise<void>;
+    swaggerOptions: object;
+    loggerOptions: object;
+    dockerized?: boolean;
+    intializers?: ((app?: CrudServer) => Promise<void>)[];
 }
 export interface ServerArgs extends BaseArgs {
-  config: Config<object>;
+    config: Config<object>;
 }
 export interface CrudApiArgs extends BaseArgs {
-  configOptions: object;
-  configFiles: Array<string>;
+    configOptions: object;
+    configFiles: Array<string>;
 }
 //# sourceMappingURL=index.d.ts.map
