@@ -8,7 +8,7 @@ import { Server, ServerOptions, ServerRoute } from '@hapi/hapi';
 import { SchemaBuilder } from 'knex';
 import { Mongoose } from 'mongoose';
 
-export const server = async ({
+export const server = ({
   dbConnect,
   schema,
   serverOptions,
@@ -23,12 +23,13 @@ export const server = async ({
   loggerOptions,
   dockerized = false,
   intializers = [],
+  configObject = null,
 }: CrudApiArgs): Promise<CrudServer> =>
-  await serverFactory({
+  serverFactory({
     dbConnect,
     schema,
     serverOptions,
-    config: setupConfig(config, configFiles, configOptions),
+    config: setupConfig(config, configFiles, configOptions, configObject),
     routes,
     services,
     plugins,
@@ -116,4 +117,5 @@ export interface ServerArgs extends BaseArgs {
 export interface CrudApiArgs extends BaseArgs {
   configOptions: object;
   configFiles: Array<string>;
+  configObject?: Config<object>;
 }
