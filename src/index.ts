@@ -23,13 +23,12 @@ export const server = ({
   loggerOptions,
   dockerized = false,
   intializers = [],
-  configObject = null,
 }: CrudApiArgs): Promise<CrudServer> =>
   serverFactory({
     dbConnect,
     schema,
     serverOptions,
-    config: setupConfig(config, configFiles, configOptions, configObject),
+    config: setupConfig(config, configFiles, configOptions),
     routes,
     services,
     plugins,
@@ -107,7 +106,7 @@ interface BaseArgs {
   swaggerOptions: object;
   loggerOptions: object;
   dockerized?: boolean;
-  intializers?: ((app?: CrudServer) => Promise<void>)[];
+  intializers?: ((app?: CrudServer, config?: Config<object>) => Promise<void>)[];
 }
 
 export interface ServerArgs extends BaseArgs {
@@ -117,5 +116,4 @@ export interface ServerArgs extends BaseArgs {
 export interface CrudApiArgs extends BaseArgs {
   configOptions: object;
   configFiles: Array<string>;
-  configObject?: Config<object>;
 }

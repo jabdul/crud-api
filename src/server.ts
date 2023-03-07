@@ -121,7 +121,7 @@ export default async ({
         )
     );
 
-    intializers.length && (await Promise.all(intializers.map(init => init(app))));
+    intializers.length && (await Promise.all(intializers.map(init => init(app, config))));
 
     // Not needed in test env
     process.env.NODE_ENV !== 'test' && console.info('Server setup completed...'); // eslint-disable-line
