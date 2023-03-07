@@ -163,7 +163,7 @@ const convictLoader = ({
   configObject = null,
 }): Config<object> => {
   const mergedConfig = { ...(appConfig || {}), ...(base || {}) };
-  const configurator = configObject.load || convict;
+  const configurator = configObject?.load || convict;
   const config = configurator(mergedConfig).load(options);
   return configFiles ? config.loadFile(configFiles) : config;
 };
