@@ -21,7 +21,6 @@ export declare const server: ({
   loggerOptions,
   dockerized,
   intializers,
-  configObject,
 }: CrudApiArgs) => Promise<CrudServer>;
 declare const config: {
   mongo: {
@@ -224,7 +223,7 @@ interface BaseArgs {
   swaggerOptions: object;
   loggerOptions: object;
   dockerized?: boolean;
-  intializers?: ((app?: CrudServer) => Promise<void>)[];
+  intializers?: ((app?: CrudServer, config?: Config<object>) => Promise<void>)[];
 }
 export interface ServerArgs extends BaseArgs {
   config: Config<object>;
@@ -232,6 +231,5 @@ export interface ServerArgs extends BaseArgs {
 export interface CrudApiArgs extends BaseArgs {
   configOptions: object;
   configFiles: Array<string>;
-  configObject?: Config<object>;
 }
 //# sourceMappingURL=index.d.ts.map

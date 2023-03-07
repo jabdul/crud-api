@@ -155,26 +155,17 @@ export const conf = {
   ...mongoConfig,
 };
 
-const convictLoader = ({
-  appConfig = null,
-  base = null,
-  configFiles = null,
-  options = {},
-  configObject = null,
-}): Config<object> => {
-  const mergedConfig = { ...(appConfig || {}), ...(base || {}) };
-  const configurator = configObject?.load || convict;
-  const config = configurator(mergedConfig).load(options);
+const convictLoader = ({ appConfig = null, base = null, configFiles = null, options = {} }): Config<object> => {
+  const config = convict({ ...(appConfig || {}), ...(base || {}) }).load(options);
   return configFiles ? config.loadFile(configFiles) : config;
 };
 
-const loadConfig = (appConfig = {}, configFiles, options = {}, configObject = null): Config<object> =>
+const loadConfig = (appConfig = {}, configFiles, options = {}): Config<object> =>
   convictLoader({
     appConfig,
     configFiles,
     base: conf,
     options,
-    configObject,
   });
 
 export const dbConfig = convictLoader({ base: mongoConfig });
