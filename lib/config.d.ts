@@ -149,7 +149,7 @@ export declare const conf: {
         };
     };
 };
-declare const loadConfig: (appConfig: {}, configFiles: any, options?: {}) => Config<object>;
+declare const loadConfig: (appConfig: {}, configFiles: any, options?: {}, configObject?: any) => Config<object>;
 export declare const dbConfig: convict.Config<object>;
 export default loadConfig;
 //# sourceMappingURL=config.d.ts.map

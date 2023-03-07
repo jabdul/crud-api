@@ -6,7 +6,7 @@ import { Config } from 'convict';
 import { Server, ServerOptions, ServerRoute } from '@hapi/hapi';
 import { SchemaBuilder } from 'knex';
 import { Mongoose } from 'mongoose';
-export declare const server: ({ dbConnect, schema, serverOptions, config, configOptions, configFiles, routes, services, plugins, postRegisterHook, swaggerOptions, loggerOptions, dockerized, intializers, }: CrudApiArgs) => Promise<CrudServer>;
+export declare const server: ({ dbConnect, schema, serverOptions, config, configOptions, configFiles, routes, services, plugins, postRegisterHook, swaggerOptions, loggerOptions, dockerized, intializers, configObject, }: CrudApiArgs) => Promise<CrudServer>;
 declare const config: {
     mongo: {
         host: {
@@ -216,5 +216,6 @@ export interface ServerArgs extends BaseArgs {
 export interface CrudApiArgs extends BaseArgs {
     configOptions: object;
     configFiles: Array<string>;
+    configObject?: Config<object>;
 }
 //# sourceMappingURL=index.d.ts.map
