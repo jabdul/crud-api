@@ -2,9 +2,9 @@ import setupConfig, { conf as env, dbConfig } from './config';
 import serverFactory from './server';
 import mysqlConnect from './persistence/mysql';
 import mongooseConnect from './persistence/mongoose';
-import * as Joi from '@hapi/joi';
+import Joi from 'joi';
 import { Config } from 'convict';
-import { Server, ServerOptions, ServerRoute } from 'hapi';
+import { Server, ServerOptions, ServerRoute } from '@hapi/hapi';
 import { SchemaBuilder } from 'knex';
 import { Mongoose } from 'mongoose';
 
@@ -20,9 +20,10 @@ export const server = async ({
   plugins,
   postRegisterHook,
   swaggerOptions,
-  swaggerUiOptions,
   loggerOptions,
-}: CrudApiArgs): Promise<Server> =>
+  dockerized = false,
+  intializers = [],
+}: CrudApiArgs): Promise<CrudServer> =>
   await serverFactory({
     dbConnect,
     schema,
@@ -33,8 +34,9 @@ export const server = async ({
     plugins,
     postRegisterHook,
     swaggerOptions,
-    swaggerUiOptions,
     loggerOptions,
+    dockerized,
+    intializers,
   });
 
 const config = env;
@@ -59,8 +61,10 @@ export interface ServiceArgs extends LoggableArgs {
 
 export interface RouteArgs extends LoggableArgs {
   services?: Dict;
-  validate?: Joi;
+  validate?: typeof Joi;
 }
+
+export type CrudServer = Server & { db?: DbClient; schema?: Dict };
 
 export interface QueryArgs extends Args {
   client: DbClient;
@@ -98,10 +102,11 @@ interface BaseArgs {
   config: Config<object> | object;
   routes(): Route[];
   plugins: object[];
-  postRegisterHook(app): Promise<void>;
+  postRegisterHook?(app): Promise<void>;
   swaggerOptions: object;
-  swaggerUiOptions: object;
   loggerOptions: object;
+  dockerized?: boolean;
+  intializers?: ((app?: CrudServer) => Promise<void>)[];
 }
 
 export interface ServerArgs extends BaseArgs {

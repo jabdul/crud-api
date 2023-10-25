@@ -1,1 +1,1 @@
-{"version":3,"file":"routes.d.ts","sourceRoot":"","sources":["../../../src/monitoring/health/routes.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAgB,MAAM,MAAM,CAAC;AACjD,eAAO,MAAM,UAAU,uBAAuB,CAAC;8BAO5B,WAAW;AAA9B,wBAcG"}
+{"version":3,"file":"routes.d.ts","sourceRoot":"","sources":["../../../src/monitoring/health/routes.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAgB,MAAM,YAAY,CAAC;AACvD,eAAO,MAAM,UAAU,uBAAuB,CAAC;8BAO5B,WAAW;AAA9B,wBAcG"}
