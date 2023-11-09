@@ -1,4 +1,5 @@
 import { Config } from 'convict';
-declare const _default: (config: Config<object>) => Function;
+import { Mongoose } from 'mongoose';
+declare const _default: (mongoose: Mongoose, config: Config<object>) => Promise<Mongoose>;
 export default _default;
 //# sourceMappingURL=connect.d.ts.map

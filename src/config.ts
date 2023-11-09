@@ -40,12 +40,6 @@ export const conf = {
     default: 'development',
     env: 'NODE_ENV',
   },
-  dockerizedHostname: {
-    doc: 'The hostname of the dockerized server',
-    format: String,
-    default: '0.0.0.0',
-    env: 'DOCKERIZED_HOSTNAME',
-  },
   server: {
     hostname: {
       doc: 'Microservice hostname',

@@ -1,7 +1,7 @@
 import { Config } from 'convict';
 import { ConnectOptions, Mongoose } from 'mongoose';
 
-export default (config: Config<object>): Function => (mongoose: Mongoose): Promise<Mongoose> => {
+export default (mongoose: Mongoose, config: Config<object>): Promise<Mongoose> => {
   const dbConnectOptions = config.has('dbConnectOptions')
     ? {
         ...config.get('dbConnectOptions'),
@@ -18,8 +18,6 @@ export default (config: Config<object>): Function => (mongoose: Mongoose): Promi
     bufferCommands: false,
     connectTimeoutMS: 10000,
     useUnifiedTopology: true,
-    autoCreate: false,
-    autoIndex: false,
   };
 
   return mongoose.connect(config.get('mongo.host'), opts);

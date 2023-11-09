@@ -1,4 +1,4 @@
-import { ServerRoute, RouteOptions } from '@hapi/hapi';
+import { ServerRoute, RouteOptions } from 'hapi';
 export const ROUTE_NAME = 'monitoring/healthz';
 
 const options = {
