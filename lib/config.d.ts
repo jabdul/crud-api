@@ -36,6 +36,12 @@ export declare const conf: {
     default: string;
     env: string;
   };
+  dockerizedHostname: {
+    doc: string;
+    format: StringConstructor;
+    default: string;
+    env: string;
+  };
   server: {
     hostname: {
       doc: string;

@@ -1,12 +1,11 @@
 import * as path from 'path';
 import hapiAuthJwt2 from 'hapi-auth-jwt2';
-import { server, mongooseConnect } from './'; // eslint-disable-line no-unused-vars
+import { server, mongooseConnect, CrudServer } from './'; // eslint-disable-line no-unused-vars
 // import { schema as mysqlSchema } from './persistence/mysql';
 import { conf as env } from './config';
 import { schema as mongooseSchema } from './persistence/mongoose';
 import routes from './routes';
 import services from './services';
-import { Server } from 'hapi';
 
 import './env';
 
@@ -15,7 +14,7 @@ const validate = async (/* payload, request*/): Promise<object> => {
   return { isValid: true };
 };
 
-const application = (): Promise<Server> =>
+const application = (): Promise<CrudServer> =>
   server({
     dbConnect: mongooseConnect,
     schema: mongooseSchema,
@@ -23,6 +22,7 @@ const application = (): Promise<Server> =>
     configFiles: [path.resolve(__dirname, `../config/${String(process.env.NODE_ENV)}.json`)],
     configOptions: {
       dbConnectOptions: { useNewUrlParser: true },
+      dbModifiers: { createIndex: true },
     },
     routes,
     services,
@@ -37,24 +37,19 @@ const application = (): Promise<Server> =>
     },
     swaggerOptions: {
       auth: false,
-      tags: {
-        users: 'Operation for handling user records',
-      },
+      tags: [
+        {
+          description: 'Operation for handling user records',
+          name: 'users',
+        },
+      ],
       info: {
         title: 'Microservice CRUD API Server',
         description: "Powering Craft Turf's microservice projects",
         version: '0.0.1',
       },
     },
-    swaggerUiOptions: {
-      title: 'CRUD API',
-      path: '/docs',
-      authorization: false,
-      auth: false,
-      swaggerOptions: {
-        validatorUrl: null,
-      },
-    },
+    dockerized: true,
     loggerOptions: {
       redact: {
         paths: [

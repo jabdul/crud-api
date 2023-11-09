@@ -27,22 +27,19 @@ const application = (): Promise<Server> => server({
   routes,                       // Application Routing
   services,                     // Service response formatter
   swaggerOptions: {             // Swagger options
-    tags: {
-      'users': 'Operation for handling user records'
-    },
+    tags: [
+       {
+          description: 'Operation for handling user records',
+          name: 'users',
+      }
+    ],
     info: {
       title: 'Microservice CRUD API Server',
       description: 'Powering Craft Turf\'s microservice projects',
       version: '0.0.1'
     }
   },
-  swaggerUiOptions: {             // Swagger UI options
-    title: 'My API',
-    path: '/docs',
-    swaggerOptions: {
-      validatorUrl: null
-    }
-  },
+
 });
 ```
 
@@ -159,8 +156,7 @@ export const createUser = ({
   services,     // Service response formatter
   config,       // Application configuration
   validate,     // joi validator
-  uuid,         // universal unique id generator
-  json,         // used by services to create HAL+JSON format resource response payload
+  json,        // Composite type  (schema: object) => (payload: object) => string;
 }) => ({
   ...
 });
@@ -168,9 +164,7 @@ export const createUser = ({
 
 Find out more about the passed in features:
 - Application configuration using [convict](https://github.com/mozilla/node-convict)
-- Object schema validation with [joi](https://github.com/hapijs/joi)
-- A HAL+JSON resource object creator using [halson](https://github.com/seznam/halson)
-- [uuid](https://github.com/kelektiv/node-uuid), a universal unique id generator
+- Object schema validation with [joi](https://github.com/sideway/joi)
 
 
 ### plugins
@@ -222,8 +216,7 @@ export const create = async ({
   db,         // db connector
   payload,    // request payload
   config,     // app config
-  uuid,       // universal unique id generator
-  payload
+  client
 }) => {
   ...
 };
@@ -231,28 +224,25 @@ export const create = async ({
 
 ### swagger
 
-Automatically expose the API features using [hapi-swaggered](https://github.com/z0mt3c/hapi-swaggered) and [hapi-swaggered-ui](https://github.com/z0mt3c/hapi-swaggered-ui)
-
+Automatically expose the API features using [hapi-swagger](https://github.com/glennjones/hapi-swagger)
+For full list of options available, please check the official [documentation](https://github.com/glennjones/hapi-swagger/blob/master/optionsreference.md)
 ```js
 server({
   ...
   swaggerOptions: {             // Swagger options
-    tags: {
-      'users': 'Operation for handling user records'
-    },
+    tags: [
+       {
+          description: 'Operation for handling user records',
+          name: 'users',
+      }
+    ],
     info: {
       title: 'Microservice CRUD API Server',
       description: 'Powering Craft Turf\'s microservice projects',
       version: '0.0.1'
     }
   },
-  swaggerUiOptions: {             // Swagger UI options
-    title: 'My API',
-    path: '/docs',
-    swaggerOptions: {
-      validatorUrl: null
-    }
-  },
+
 });
 ```
 

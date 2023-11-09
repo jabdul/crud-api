@@ -1,5 +1,4 @@
-import Hapi from '@hapi/hapi';
-import { ServerArgs } from './';
+import { CrudServer, ServerArgs } from './';
 declare const _default: ({
   dbConnect,
   schema,
@@ -9,9 +8,10 @@ declare const _default: ({
   plugins,
   postRegisterHook,
   swaggerOptions,
-  swaggerUiOptions,
   loggerOptions,
   serverOptions,
-}: ServerArgs) => Promise<Hapi.Server>;
+  dockerized,
+  intializers,
+}: ServerArgs) => Promise<CrudServer>;
 export default _default;
 //# sourceMappingURL=server.d.ts.map
