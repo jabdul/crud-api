@@ -34,8 +34,6 @@ const UserSchema = new mongoose.Schema(
   { bufferCommands: false }
 );
 
-// UserSchema.index({ firstname: 1, lastname: 1 });
-
 type User = mongoose.Model<UserI>;
 
 const User = mongoose.model<UserI>('Users', UserSchema);

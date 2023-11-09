@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { Server } from '@hapi/hapi';
-import Joi from 'joi';
-import hapiSwagger from 'hapi-swagger';
-
+import Hapi from '@hapi/hapi';
+import Joi from '@hapi/joi';
+import swaggered from 'hapi-swaggered';
+import swaggeredUI from 'hapi-swaggered-ui';
 import vision from '@hapi/vision';
 import inert from '@hapi/inert';
 import requireHttps from 'hapi-require-https';
@@ -11,7 +11,7 @@ import pino from 'hapi-pino';
 import json from 'fast-json-stringify';
 
 import checkApplicationHealth from './monitoring/health/routes';
-import { CrudServer, DbClient, ServerArgs } from './';
+import { ServerArgs } from './';
 
 export default async ({
   dbConnect,
@@ -22,17 +22,16 @@ export default async ({
   plugins = [],
   postRegisterHook,
   swaggerOptions = {},
+  swaggerUiOptions = {},
   loggerOptions = {},
   serverOptions = {},
-  dockerized,
-  intializers,
-}: ServerArgs): Promise<CrudServer> => {
+}: ServerArgs): Promise<Hapi.Server> => {
   const tls = config.get('server.secure') && {
     key: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsKey'))),
     cert: fs.readFileSync(path.resolve(__dirname, config.get('server.tlsCert'))),
   };
-  const app: CrudServer = new Server({
-    host: dockerized ? config.get('dockerizedHostname') : config.get('server.hostname'),
+  const app = new Hapi.Server({
+    host: config.get('server.hostname'),
     port: config.get('server.port'),
     tls,
     debug: {
@@ -49,12 +48,7 @@ export default async ({
 
   app.events.on('log', (event, tags) => {
     if (tags.error) {
-      if (event.error) {
-        const error = event.error as Error;
-        console.log('Server error: ', error.stack); // eslint-disable-line no-console
-      } else {
-        console.log(`Server error: unknown`); // eslint-disable-line no-console
-      }
+      console.log(`Server error: ${event.error ? event.error.stack : 'unknown'}`); // eslint-disable-line no-console
     }
   });
 
@@ -62,7 +56,8 @@ export default async ({
     ...[
       inert,
       vision,
-      { plugin: hapiSwagger, options: swaggerOptions },
+      { plugin: swaggered, options: swaggerOptions },
+      { plugin: swaggeredUI, options: swaggerUiOptions },
       {
         plugin: pino,
         options: {
@@ -81,14 +76,10 @@ export default async ({
     ...plugins,
   ]);
 
-  await postRegisterHook?.call(this, app);
+  await postRegisterHook.call(this, app);
 
-  const dbConnection: unknown = await dbConnect(config);
-
-  app.db = dbConnection as DbClient;
-
+  app.db = await dbConnect(config);
   app.schema = schema(app.db);
-
   const serve = services(app.schema);
 
   try {
@@ -120,8 +111,6 @@ export default async ({
           })
         )
     );
-
-    intializers.length && (await Promise.all(intializers.map(init => init(app))));
 
     // Not needed in test env
     process.env.NODE_ENV !== 'test' && console.info('Server setup completed...'); // eslint-disable-line
