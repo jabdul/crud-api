@@ -1,5 +1,5 @@
 {
-  "name": "@ctt/crud-api",
+  "name": "@berryhealth/crud-api",
   "version": "1.8.9",
   "description": "A microservice boilerplate",
   "main": "lib/index.js",
@@ -74,7 +74,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:jabdul/crud-api.git#master"
+    "url": "git+ssh://git@github.com:berry-health-ltd/crud-api.git#master"
   },
   "husky": {
     "hooks": {

@@ -7,14 +7,14 @@ A CRUD microservice module exposing key features of a RESTful API as injected de
 ## Installation
 
 ```sh
-$ yarn add @ctt/crud-api
+$ yarn add @berryhealth/crud-api
 ```
 
 ## bootstrapping
 To create a new CRUD service API, simply bootstrap the application by injecting the dependencies as depicted in the example below.
 
 ```ts
-import { server, mysqlConnect, mongooseConnect, config } from '@ctt/crud-api';
+import { server, mysqlConnect, mongooseConnect, config } from '@berryhealth/crud-api';
 import { schema as mongooseSchema } from './persistence/mongoose/schema';
 import routes from './routes';
 import services from './services';
@@ -74,7 +74,7 @@ MYSQL_DB=mydb
 MONGO_DB=mydb
 ```
 
-You can console log `process.env` to find out available environment variables. You can also inspect the imported `config` object from `@ctt/crud-api`.
+You can console log `process.env` to find out available environment variables. You can also inspect the imported `config` object from `@berryhealth/crud-api`.
 
 ## APIs
 
@@ -83,7 +83,7 @@ Details of each of the exposed APIs will now be explained.
 ### database connectors
 
 ```js
-import { mysqlConnect, mongooseConnect, server } from '@ctt/crud-api';
+import { mysqlConnect, mongooseConnect, server } from '@berryhealth/crud-api';
 
 server({
   ...
